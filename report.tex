@@ -27,7 +27,8 @@ This is the introduction.
 \subsection{System Components}
 \begin{itemize}
 \item Lamp/Projector: L
-\item Robot: R1, R2, R3
+\item Outer Robots: R1, R2
+\item Inner Robot: R3
 \item Inner Doors: DI1, DI2
 \item Outer Doors: DO1, DO2
 \item Input Stacks: I1, I2
@@ -37,7 +38,7 @@ This is the introduction.
 
 \subsection{Sequence}
 Initial Conditions: All Doors are closed. Lamp is off. Robots R1 and R2 are near the Input Stacks. Robot R3 waits at Lamp. Airlocks A1, A2 are closed. Input Stacks are not empty and Output Stacks are not full.
-\subsubsection {Rx Sequence, x = 1,2 }
+\subsubsection {R1,R2 Sequence  x = 1,2 }
 \begin{itemize}
 \item Check if Ix Stack not empty
 \item Robot Rx moves to Ix
@@ -55,7 +56,7 @@ Initial Conditions: All Doors are closed. Lamp is off. Robots R1 and R2 are near
 \item GOTO 1
 \end{itemize}
 
-\subsubsection {R3's Sequence}
+\subsubsection {Inner Robot's Sequence}
 \begin{itemize}
 \item Detect wafer at Ax
 \item Check if DOx is closed
@@ -65,18 +66,14 @@ Initial Conditions: All Doors are closed. Lamp is off. Robots R1 and R2 are near
 \item Close DIx
 \item Robot R3 places wafer on Lamp L
 \item Lamp L turns on
-\end{itemize}
-
-\subsubsection {From Lamp to Airlock}
-\begin{itemize}
-\item Detect completed wafer on Lamp L
+\item Detect completed wafer on Lamp L [Assumption: Lamp has turned off]
 \item Check if DOx is closed
 \item Open DIx
 \item R3 moves to DIx
-\item Pick wafer at Ax
+\item Place wafer at Ax
 \item Close DIx
-\item Robot R3 places wafer on Lamp L
-\item Lamp L turns on
+\item Open DOx
+\item GOTO 1
 \end{itemize}
 
 \subsection{Functional Requirements}
@@ -84,8 +81,5 @@ Initial Conditions: All Doors are closed. Lamp is off. Robots R1 and R2 are near
 \section{Interactions} 
 
 \section{Architecture}
-
-\section{Results}
-Here are our results. Referring to section \ref{sec1} on page \pageref{sec1}
 
 \end{document}
