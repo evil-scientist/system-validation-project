@@ -27,18 +27,18 @@ This is the introduction.
 \subsection{System Components}
 \begin{itemize}
 \item Lamp/Projector: L
-\item Outer Robots: R1, R2
-\item Inner Robot: R3
 \item Inner Doors: DI1, DI2
 \item Outer Doors: DO1, DO2
 \item Input Stacks: I1, I2
 \item Output Stacks: O1, O2
 \item Airlocks: A1, A2
+\item Outer Robots: R1, R2
+\item Inner Robot: R3
 \end{itemize}
 
 \subsection{Sequence}
 Initial Conditions: All Doors are closed. Lamp is off. Robots R1 and R2 are near the Input Stacks. Robot R3 waits at Lamp. Airlocks A1, A2 are closed. Input Stacks are not empty and Output Stacks are not full.
-\subsubsection {R1,R2 Sequence  x = 1,2 }
+\subsubsection {I/O Retrieval Sequence }
 \begin{itemize}
 \item Check if Ix Stack not empty
 \item Robot Rx moves to Ix
@@ -56,7 +56,7 @@ Initial Conditions: All Doors are closed. Lamp is off. Robots R1 and R2 are near
 \item GOTO 1
 \end{itemize}
 
-\subsubsection {Inner Robot's Sequence}
+\subsubsection {Printing Sequence}
 \begin{itemize}
 \item Detect wafer at Ax
 \item Check if DOx is closed
@@ -76,6 +76,44 @@ Initial Conditions: All Doors are closed. Lamp is off. Robots R1 and R2 are near
 \item GOTO 1
 \end{itemize}
 
+\subsection{System Requirements}
+These are the individual component's constraints:
+\begin{enumerate}
+\item Lamp L
+	\begin{itemize}
+	\item The Lamp should be undisturbed during printing.
+	\item The Lamp will be turned off after completion of printing.	
+	\end{itemize}
+\item Inner Doors: DI1, DI2
+	\begin{itemize}
+	\item The Inner Doors may be opened only if the Outer Doors are closed.
+	\end{itemize}
+
+\item Outer Doors: DO1, DO2 
+	\begin{itemize}
+	\item The Outer Doors may be opened only if the Inner Doors are closed.
+	\end{itemize}
+
+\item Output Stacks: O1, O2
+	\begin{itemize}
+	\item No Wafer shall be put on a full Output Stack.  
+	\end{itemize}
+
+\item Outer Robots: R1, R2
+	\begin{itemize}
+	\item The Outer Robots will pick up a wafer from its corresponding Input stack.
+	\item The Outer Robots will place the Input wafer on its corresponding Airlock.
+	\item The Outer Robots will pick up a finished wafer from its corresponding Airlock.
+	\item The Outer Robots will place the finished wafer on its corresponding Output stack.
+	\item The Outer Robots will pickup the next Input wafer only after delivering a finished wafer to its' corresponding Output Stack.
+	\end{itemize}
+
+\item Inner Robot: R3
+	\begin{itemize}
+	\item The Inner Robot
+	\end{itemize}
+
+\end{enumerate}
 \subsection{Functional Requirements}
 
 \section{Interactions} 
