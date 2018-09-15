@@ -24,11 +24,62 @@ This is the introduction.
 
 \section{Requirements}
 
-\subsection{Global Requirements}
-\label{sec1}
+\subsection{System Components}
+\begin{itemize}
+\item Lamp/Projector: L
+\item Robot: R1, R2, R3
+\item Inner Doors: DI1, DI2
+\item Outer Doors: DO1, DO2
+\item Input Stacks: I1, I2
+\item Output Stacks: O1, O2
+\item Airlocks: A1, A2
+\end{itemize}
+
+\subsection{Sequence}
+Initial Conditions: All Doors are closed. Lamp is off. Robots R1 and R2 are near the Input Stacks. Robot R3 waits at Lamp. Airlocks A1, A2 are closed. Input Stacks are not empty and Output Stacks are not full.
+\subsubsection {Rx Sequence, x = 1,2 }
+\begin{itemize}
+\item Check if Ix Stack not empty
+\item Robot Rx moves to Ix
+\item Robot Rx picks up the wafer at Ix 
+\item Open the Outer Door DOx
+\item Move to DOx
+\item Place wafer at Ax
+\item Close DOx
+\item Wait till DOx opens
+\item Check if Ox Stack not full
+\item Pick (finished)wafer from Ax
+\item Close DOx
+\item Move to Ox
+\item Place (finished)wafer at Ox
+\item GOTO 1
+\end{itemize}
+
+\subsubsection {R3's Sequence}
+\begin{itemize}
+\item Detect wafer at Ax
+\item Check if DOx is closed
+\item Open DIx
+\item R3 moves to DIx
+\item Pick wafer at Ax
+\item Close DIx
+\item Robot R3 places wafer on Lamp L
+\item Lamp L turns on
+\end{itemize}
+
+\subsubsection {From Lamp to Airlock}
+\begin{itemize}
+\item Detect completed wafer on Lamp L
+\item Check if DOx is closed
+\item Open DIx
+\item R3 moves to DIx
+\item Pick wafer at Ax
+\item Close DIx
+\item Robot R3 places wafer on Lamp L
+\item Lamp L turns on
+\end{itemize}
 
 \subsection{Functional Requirements}
-\label{sec1}
 
 \section{Interactions} 
 
