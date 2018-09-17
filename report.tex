@@ -36,6 +36,17 @@ This is the introduction.
 \item Inner Robot: R3
 \end{itemize}
 
+\subsection{Functional Requirements}
+\begin{itemize}
+\item The wafers move along the production line from their Initial state (on the Input Stack), are printed on by the Lamp and reach the Final state (on the Output stack).
+\item As long as the Output Stack is not full, wafers keep moving along the production line.
+\end{itemize}
+
+\subsection{Safety Requirements}
+\begin{itemize}
+\item Both the Inner and Outer Doors of an Airlock MUST NOT be open at the same time.
+\end{itemize}
+
 \subsection{Sequence}
 Initial Conditions: All Doors are closed. Lamp is off. Robots R1 and R2 are near the Input Stacks. Robot R3 waits at Lamp. Airlocks A1, A2 are closed. Input Stacks are not empty and Output Stacks are not full.
 \subsubsection {I/O Retrieval Sequence }
@@ -118,13 +129,6 @@ These are the individual component's constraints:
 	\end{itemize}
 
 \end{enumerate}
-\subsection{Functional Requirements}
-\begin{itemize}
-\item The wafers move along the production line from their Initial state (on the Input Stack), are printed on by the Lamp and reach the Final state (on the Output stack).
-\item As long as the Output Stack is not full, wafers keep moving along the production line.
-\end{itemize}
-
-
 
 \section{Interactions} 
 
