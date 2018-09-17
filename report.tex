@@ -132,12 +132,17 @@ These are the individual component's constraints:
 
 
 \section{Interactions} 
-\subsection {User Inputs}
-\item PickupWafer(
+\subsection {Signals to Actuators}
+\item PickupWafer(Rx, Pick)
+\item PlaceOnAirlock(Rx, Put)
 \item openInnerDoor(DIx, Open)
 \item closeInnerDoor(DIx, Close)
-\item openOuterrDoor(DOx, Open)
+\item openOuterDoor(DOx, Open)
 \item closeOuterDoor(DOx, Close)
+\item PickFromAirlock(R3, Pick)
+\item PlaceOnLamp(R3, Put)
+\item PickFromLamp(R3, Pick)
+\item PutWafer(Rx, Put)
 
 \subsection {Sensors}
 \subsection {Signals}
