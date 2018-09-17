@@ -132,8 +132,12 @@ These are the individual component's constraints:
 
 
 \section{Interactions} 
-\subsection {Signals to Actuators}
+\subsection {Commands to Actuators}
+The following are the commands given by the controller to the actuators of the system. The meaning can be interpreted as:
+Function( Target actuator, Command/Action)
 \begin{itemize}
+\item MoveToStacks(Rx, Move1)
+\item MoveToAirlock(Rx, Move2)
 \item PickupWafer(Rx, Pick)
 \item PlaceOnAirlock(Rx, Put)
 \item OpenInnerDoor(DIx, Open)
@@ -144,9 +148,20 @@ These are the individual component's constraints:
 \item PlaceOnLamp(R3, Put)
 \item PickFromLamp(R3, Pick)
 \item PutWafer(Rx, Put)
+\item ReachPosition( Rx, Reach:a)            [a : I/O stack index]
 \end{itemize}
-\subsection {Sensors}
-\subsection {Signals}
+
+\subsection {Reading Sensors}
+The following are the commands used by the controller to read the current data from the sensors of the system. The meaning can be interpreted as:
+Function( Target sensor, Return Value by sensor)
+\begin{itemize}
+\item SenseInputStack(Ix, a)              [ a is stack index with wafer; a=0 if empty stack] 
+\item SenseOutputStack(Ox, a)          [ a is stack index corresponding to empty position; a=0 if full stack]
+\item SenseLamp(L, a)	                  [ a : busy, completedPrinting]	
+\item SenseAirlock(Ax, a)                    [ a : WaferPresent, WaferAbsent]  // if wafer present close outer door, open inner door; 												   else inner door remains closed, and outer remains 													   open?? optimisation?? 
+\end{itemize}
+
+
 
 
 
