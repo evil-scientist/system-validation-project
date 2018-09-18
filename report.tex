@@ -149,17 +149,17 @@ Function( Target actuator, Command/Action)
 \item PlaceOnLamp(R3, Put)
 \item PickFromLamp(R3, Pick)
 \item PutWafer(Rx, Put)
-\item ReachPosition( Rx, Reach:a)            [a : I/O stack index]
+\item ReachPosition(Rx, Reach:a)            [a : I/O stack index]
 \end{itemize}
 
 \subsection {Reading Sensors}
-The following are the commands used by the controller to read the current data from the sensors of the system. The meaning can be interpreted as:
-Function( Target sensor, Return Value by sensor)
+The following are the commands used by the controller to read the data provided by the sensors of the system. The meaning can be interpreted as:
+Function(Target sensor, Return Value by sensor)
 \begin{itemize}
-\item SenseInputStack(Ix, a)              [ a is stack index with wafer; a=0 if empty stack] 
-\item SenseOutputStack(Ox, a)          [ a is stack index corresponding to empty position; a=0 if full stack]
-\item SenseLamp(L, a)	                  [ a : busy, completedPrinting]	
-\item SenseAirlock(Ax, a)                    [ a : WaferPresent, WaferAbsent]  // if wafer present close outer door, open inner door; 												   else inner door remains closed, and outer remains 													   open?? optimisation?? 
+\item CheckInputStack(Ix, a)              [ a is stack index with wafer; a=0 if empty stack] 
+\item CheckOutputStack(Ox, a)          [ a is stack index corresponding to empty position; a=0 if full stack]
+\item CheckLamp(L, a)	                  [ a : busy, completedPrinting]	
+\item CheckAirlock(Ax, a)                    [ a : WaferPresent, WaferAbsent]  // if wafer present close outer door, open inner door; 												   else inner door remains closed, and outer remains 													   open?? optimisation?? 
 \end{itemize}
 
 
