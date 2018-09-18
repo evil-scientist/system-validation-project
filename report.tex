@@ -20,7 +20,8 @@
 \maketitle
 
 \section{Introduction}
-This is the introduction.
+This is a project done as part of TU Delft's IN4387 System Validation course. The project concerns designing, modelling and validating a controller for a Transfer system in an Industrial Silicon Wafer production plant.
+The system consists of a UV Lamp that projects a design onto a wafer inside a vacuum chamber. The wafers are transferred to the Lamp via two Airlocks. The wafers are handled by robots from their initial position on Input stacks to their final position on Output stacks.
 
 \section{Requirements}
 
@@ -38,19 +39,22 @@ The system consists of the following physical components:
 \end{itemize}
 
 \subsection{Functional Requirements}
-\textbf{Overall requirements of the System:}
+\subsubsection{Overall requirements of the System:}
 \begin{itemize}
-\item The wafers move along the production line from their Initial state (on the Input Stack), are printed on by the Lamp and reach the Final state (on the Output stack).
-\item As long as the Output Stack is not full, wafers keep moving along the production line.
-\item Both the Inner and Outer Doors of an Airlock MUST NOT be open at the same time. \textbf{(Safety)}
+\item The wafers move along the production line from their Initial state (on the Input Stacks), are printed on by the Lamp and reach the Final state (on the Output stacks).
+\item As long as the Output Stacks are not full, wafers keep moving along the production line.
+\item Both the Inner and Outer Doors of an Airlock MUST NOT be open at the same time.\textbf{ (Safety)}
+\item Doors must not be closed while the robot is picking up/placing a wafer in the Airlock\textbf{ (Safety)}
+\item Doors must not get stuck\textbf{(Safety)}
+\item Robots must not stop before reaching their destinations\textbf{ (Safety)}
 \end{itemize}
 
-\subsubsection{System Component Requirements}
-These are the individual component's requirements:
+\subsubsection{System Component Requirements:}
+These are the individual component requirements:
 \begin{enumerate}
 \item Lamp L
 	\begin{itemize}
-	\item The Lamp should be undisturbed during printing\textbf{ (Safety)}
+	\item The Lamp should be undisturbed during printing.\textbf{ (Safety)}
 	\item The Lamp will turn off after completion of printing.	
 	\end{itemize}
 \item Inner Doors: DI1, DI2
@@ -129,7 +133,6 @@ Initial Conditions: All Doors are closed. Lamp is off. Robots R1 and R2 are near
 \item Open DOx
 \item GOTO 1
 \end{itemize}
-\fi
 \subsection{System Requirements}
 These are the individual component's constraints:
 \begin{enumerate}
@@ -172,16 +175,16 @@ These are the individual component's constraints:
 	\end{itemize}
 
 \end{enumerate}
-
+\fi
 
 \section{Interactions} 
 \subsection {Commands to Actuators}
-The following are the commands given by the controller to the actuators of the system. The meaning can be interpreted as:
-Command( Target actuator, optional parameters)
+The following are the commands given by the controller to the actuators of the system. The meaning can be interpreted as:\\
+\textbf{Command( Target actuator, optional parameters)}
 \begin{itemize}
-\item MoveTo(x, d) 									       						[x : R1, R2, R3 ; D: Lamp, Airlocks, Input/Output Stacks]		Move to assigned destination.	
-\item PickupWafer(x, d)															[x : R1, R2, R3 ; D: Lamp, Airlocks, Input Stacks] 					Picks up the wafer.
-\item PlaceWafer(x, d) 															[x : R1, R2, R3 ; D: Lamp, Airlocks, Output Stacks]					Places the wafer.
+\item MoveTo(x, D) [x : R1, R2, R3 ; D: Lamp, Airlocks, Input/Output Stacks]		Move to assigned destination.	
+\item PickupWafer(x, D)															[x : R1, R2, R3 ; D: Lamp, Airlocks, Input Stacks] 					Picks up the wafer.
+\item PlaceWafer(x, D) 															[x : R1, R2, R3 ; D: Lamp, Airlocks, Output Stacks]					Places the wafer.
 \item OpenDoor(x) 																[x : DI1, DI2, DO1, DO2]  														Opens the corresponding door.
 \item CloseDoor(x) 																[x : DI1, DI2, DO1, DO2]														Closes the corresponding door.
 
@@ -189,13 +192,13 @@ Command( Target actuator, optional parameters)
 \end{itemize}
 
 \subsection {Reading Sensors}
-The following are the commands used by the controller to read the data provided by the sensors of the system. The meaning can be interpreted as:
-Command(Target sensor, Return Value by sensor)
+The following are the commands used by the controller to read the data provided by the sensors of the system. The meaning can be interpreted as://
+\textbf{Command(Target sensor, Return Value by sensor)}
 \begin{itemize}
-\item CheckInputStack(Ix, a)              [ a: Present, Absent] 
-\item CheckOutputStack(Ox, a)          [ a: Full, Empty]
-\item CheckLamp(L, a)	                  [ a: Busy, CompletedPrinting]	
-\item CheckAirlock(Ax, a)                    [ a : WaferPresent, WaferAbsent]  // if wafer present close outer door, open inner door;  else inner door remains closed, and outer remains open?? optimisation?? 
+\item CheckInputStack(x, a)              [x: I1,I2 ; a: Present, Absent] 
+\item CheckOutputStack(x, a)          [x: O1,O2 ; a: Full, Empty]
+\item CheckLamp(L, a)	                  [L: Lamp ; a: Busy, CompletedPrinting]	
+\item CheckAirlock(x, a)                    [x: A1,A2 ; a : WaferPresent, WaferAbsent]  % if wafer present close outer door, open inner door;  else inner door remains closed, and outer remains open?? optimisation?? 
 \end{itemize}
 
 \section{Architecture}
