@@ -157,15 +157,18 @@ Function( Target actuator, Command/Action)
 The following are the commands used by the controller to read the data provided by the sensors of the system. The meaning can be interpreted as:
 Function(Target sensor, Return Value by sensor)
 \begin{itemize}
+<<<<<<< HEAD
 \item CheckInputStack(Ix, a)              [ a: Present, Absent] 
 \item CheckOutputStack(Ox, a)          [ a: Full, Empty]
 \item CheckLamp(L, a)	                  [ a: Busy, CompletedPrinting]	
 \item CheckAirlock(Ax, a)                    [ a : WaferPresent, WaferAbsent]  // if wafer present close outer door, open inner door; 												   else inner door remains closed, and outer remains 													   open?? optimisation?? 
+=======
+\item CheckInputStack(Ix, a)              [ a is stack index with wafer; a=0 if empty stack] 
+\item CheckOutputStack(Ox, a)          [ a is stack index corresponding to empty position; a=0 if full stack]
+\item CheckLamp(L, a)	                  [ a : busy, completedPrinting]	
+\item CheckAirlock(Ax, a)                    [ a : WaferPresent, WaferAbsent]  // if wafer present close outer door, open inner door; else inner door remains closed, and outer remains open?? optimisation?? 
+>>>>>>> 2cd77d06f8cd71cd48a27e32fc85778efe9f0dc3
 \end{itemize}
-
-
-
-
 
 \section{Architecture}
 
