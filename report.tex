@@ -1,4 +1,6 @@
 \documentclass[a4paper,12pt]{article}
+\usepackage{graphicx}
+
 \begin{document}
 
 \title{System Validation Project Report}
@@ -179,7 +181,8 @@ These are the individual component's constraints:
 
 \section{Interactions} 
 \subsection {Commands to Actuators}
-The following are the commands given by the controller to the actuators of the system. The meaning can be interpreted as:\\
+The following are the commands given by the controller to the actuators of the system. The meaning can be interpreted as: \bigskip
+
 \textbf{Command( Target actuator, optional parameters)}
 \begin{itemize}
 \item MoveTo(x, D) [x : R1, R2, R3 ; D: Lamp, Airlocks, Input/Output Stacks]		Move to assigned destination.	
@@ -188,11 +191,11 @@ The following are the commands given by the controller to the actuators of the s
 \item OpenDoor(x) 																[x : DI1, DI2, DO1, DO2]  														Opens the corresponding door.
 \item CloseDoor(x) 																[x : DI1, DI2, DO1, DO2]														Closes the corresponding door.
 
-            
 \end{itemize}
-
+\bigskip
 \subsection {Reading Sensors}
-The following are the commands used by the controller to read the data provided by the sensors of the system. The meaning can be interpreted as://
+The following are the commands used by the controller to read the data provided by the sensors of the system. The meaning can be interpreted as: \bigskip
+
 \textbf{Command(Target sensor, Return Value by sensor)}
 \begin{itemize}
 \item CheckInputStack(x, a)              [x: I1,I2 ; a: Present, Absent] 
@@ -200,7 +203,13 @@ The following are the commands used by the controller to read the data provided 
 \item CheckLamp(L, a)	                  [L: Lamp ; a: Busy, CompletedPrinting]	
 \item CheckAirlock(x, a)                    [x: A1,A2 ; a : WaferPresent, WaferAbsent]  % if wafer present close outer door, open inner door;  else inner door remains closed, and outer remains open?? optimisation?? 
 \end{itemize}
-
+\newpage
 \section{Architecture}
+\begin{figure}[h!]
+  \includegraphics[width=\linewidth]{Architecture.jpg}
+  \caption{Architecture Diagram of System}
+  \label{fig:arch1}
+\end{figure}
+Figure \ref{fig:arch1} shows the Architecture of the system described above with five parallel controllers containing the various entities (Sensors and Actuators) they control. The Dashed lines represent sensor information while the solid lines represent Actuating signals.
 
 \end{document}
