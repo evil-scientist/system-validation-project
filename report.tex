@@ -153,23 +153,14 @@ Function( Target actuator, Command/Action)
 \end{itemize}
 
 \subsection {Reading Sensors}
-<<<<<<< HEAD
 The following are the commands used by the controller to read the data provided by the sensors of the system. The meaning can be interpreted as:
 Function(Target sensor, Return Value by sensor)
-=======
-The following are the commands used by the controller to read the current data from the sensors of the system. The meaning can be interpreted as:\\
-Function( Target sensor, Return Value by sensor)
->>>>>>> 3cd02d5d8f45f0fb66121b618a5098e1aea0039a
 \begin{itemize}
 \item CheckInputStack(Ix, a)              [ a is stack index with wafer; a=0 if empty stack] 
 \item CheckOutputStack(Ox, a)          [ a is stack index corresponding to empty position; a=0 if full stack]
 \item CheckLamp(L, a)	                  [ a : busy, completedPrinting]	
-\item CheckAirlock(Ax, a)                    [ a : WaferPresent, WaferAbsent]  // if wafer present close outer door, open inner door; 												   else inner door remains closed, and outer remains 													   open?? optimisation?? 
+\item CheckAirlock(Ax, a)                    [ a : WaferPresent, WaferAbsent]  // if wafer present close outer door, open inner door; else inner door remains closed, and outer remains open?? optimisation?? 
 \end{itemize}
-
-
-
-
 
 \section{Architecture}
 
