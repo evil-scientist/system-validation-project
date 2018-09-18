@@ -136,11 +136,11 @@ These are the individual component's constraints:
 The following are the commands given by the controller to the actuators of the system. The meaning can be interpreted as:
 Command( Target actuator, optional parameters)
 \begin{itemize}
-\item MoveTo(x, d) 									       						[x : R1, R2, R3 ; D: Lamp, Airlocks, Input/Output Stacks]			
-\item PickupWafer(x, d)															[x : R1, R2, R3 ; D: Lamp, Airlocks, Input Stacks] 	
-\item PlaceWafer(x, d) 															[x : R1, R2, R3 ; D: Lamp, Airlocks, Output Stacks]
-\item OpenDoor(x) 																[x : DI1, DI2, DO1, DO2]  
-\item CloseDoor(x) 																[x : DI1, DI2, DO1, DO2]
+\item MoveTo(x, d) 									       						[x : R1, R2, R3 ; D: Lamp, Airlocks, Input/Output Stacks]		Move to assigned destination.	
+\item PickupWafer(x, d)															[x : R1, R2, R3 ; D: Lamp, Airlocks, Input Stacks] 					Picks up the wafer.
+\item PlaceWafer(x, d) 															[x : R1, R2, R3 ; D: Lamp, Airlocks, Output Stacks]					Places the wafer.
+\item OpenDoor(x) 																[x : DI1, DI2, DO1, DO2]  														Opens the corresponding door.
+\item CloseDoor(x) 																[x : DI1, DI2, DO1, DO2]														Closes the corresponding door.
 
             
 \end{itemize}
@@ -149,7 +149,6 @@ Command( Target actuator, optional parameters)
 The following are the commands used by the controller to read the data provided by the sensors of the system. The meaning can be interpreted as:
 Command(Target sensor, Return Value by sensor)
 \begin{itemize}
-<<<<<<< HEAD
 \item CheckInputStack(Ix, a)              [ a: Present, Absent] 
 \item CheckOutputStack(Ox, a)          [ a: Full, Empty]
 \item CheckLamp(L, a)	                  [ a: Busy, CompletedPrinting]	
