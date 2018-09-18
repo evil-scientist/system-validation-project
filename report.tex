@@ -25,6 +25,7 @@ This is the introduction.
 \section{Requirements}
 
 \subsection{System Components}
+The system consists of the following physical components:
 \begin{itemize}
 \item Lamp/Projector: L
 \item Inner Doors: DI1, DI2
@@ -37,16 +38,58 @@ This is the introduction.
 \end{itemize}
 
 \subsection{Functional Requirements}
+\textbf{Overall requirements of the System:}
 \begin{itemize}
 \item The wafers move along the production line from their Initial state (on the Input Stack), are printed on by the Lamp and reach the Final state (on the Output stack).
 \item As long as the Output Stack is not full, wafers keep moving along the production line.
+\item Both the Inner and Outer Doors of an Airlock MUST NOT be open at the same time. \textbf{(Safety)}
 \end{itemize}
 
-\subsection{Safety Requirements}
-\begin{itemize}
-\item Both the Inner and Outer Doors of an Airlock MUST NOT be open at the same time.
-\end{itemize}
+\subsubsection{System Component Requirements}
+These are the individual component's requirements:
+\begin{enumerate}
+\item Lamp L
+	\begin{itemize}
+	\item The Lamp should be undisturbed during printing\textbf{ (Safety)}
+	\item The Lamp will turn off after completion of printing.	
+	\end{itemize}
+\item Inner Doors: DI1, DI2
+	\begin{itemize}
+	\item The Inner Doors may be opened ONLY if the Outer Doors are closed. \textbf{ (Safety)}
+	\end{itemize}
 
+\item Outer Doors: DO1, DO2 
+	\begin{itemize}
+	\item The Outer Doors may be opened ONLY if the Inner Doors are closed. \textbf{ (Safety)}
+	\end{itemize}
+
+\item Output Stacks: O1, O2
+	\begin{itemize}
+	\item No Wafer shall be put on a full Output Stack.\textbf{ (Safety)}
+	\end{itemize}
+
+\item Outer Robots: R1, R2
+	\begin{itemize}
+	\item The Outer Robots will pick up a wafer from its corresponding Input stack.
+	\item The Outer Robots will place the Input wafer on its corresponding Airlock.
+	\item The Outer Robots will pick up a finished wafer from its corresponding Airlock.
+	\item The Outer Robots will place the finished wafer on its corresponding Output stack.
+	\item The Outer Robots will pickup the next Input wafer ONLY after delivering a finished wafer to it's corresponding Output Stack.\textbf{ (Safety)}
+	\end{itemize}
+
+\item Inner Robot: R3
+	\begin{itemize}
+	\item The Inner Robot will pick up a detected Input wafer from an Airlock.
+	\item The Inner Robot will place the Input wafer on the Lamp ONLY when the Lamp's stack is empty.\textbf{ (Safety)}
+	\item The Inner Robot will pick up a finished wafer from the Lamp.
+	\item The Inner Robot will place the finished wafer on its corresponding Airlock.
+	\item The Inner Robot will pickup the next Input wafer ONLY after delivering a finished wafer to it's corresponding Airlock.\textbf{ (Safety)}
+	\end{itemize}
+
+\end{enumerate}
+
+% Maybe need this Later
+\iffalse
 \subsection{Sequence}
 Initial Conditions: All Doors are closed. Lamp is off. Robots R1 and R2 are near the Input Stacks. Robot R3 waits at Lamp. Airlocks A1, A2 are closed. Input Stacks are not empty and Output Stacks are not full.
 \subsubsection {I/O Retrieval Sequence }
@@ -86,7 +129,7 @@ Initial Conditions: All Doors are closed. Lamp is off. Robots R1 and R2 are near
 \item Open DOx
 \item GOTO 1
 \end{itemize}
-
+\fi
 \subsection{System Requirements}
 These are the individual component's constraints:
 \begin{enumerate}
