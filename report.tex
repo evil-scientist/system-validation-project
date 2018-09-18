@@ -134,40 +134,26 @@ These are the individual component's constraints:
 \section{Interactions} 
 \subsection {Commands to Actuators}
 The following are the commands given by the controller to the actuators of the system. The meaning can be interpreted as:
-Function( Target actuator, Command/Action)
+Command( Target actuator, optional parameters)
 \begin{itemize}
-\item MoveTo(Rx, MovetoD)                   x:1,2,3 ; D: Lamp, Airlocks, I/O Stacks
-\item MoveToAirlock(Rx, Move)
-\item MoveToAirlock1(R3, Move
-\item PickupWafer(Rx, Pick)
-\item PlaceOnAirlock(Rx, Put)
-\item PickFromAirlock(Rx, Pick)
-\item OpenInnerDoor(DIx, Open)
-\item CloseInnerDoor(DIx, Close)
-\item OpenOuterDoor(DOx, Open)
-\item CloseOuterDoor(DOx, Close)
-\item PickFromAirlock(R3, Pick)
-\item PlaceOnLamp(R3, Put)
-\item PickFromLamp(R3, Pick)
-\item PutWafer(Rx, Put)
-\item ReachPosition(Rx, Reach)            
+\item MoveTo(x, d) 									       						[x : R1, R2, R3 ; D: Lamp, Airlocks, Input/Output Stacks]			
+\item PickupWafer(x, d)															[x : R1, R2, R3 ; D: Lamp, Airlocks, Input Stacks] 	
+\item PlaceWafer(x, d) 															[x : R1, R2, R3 ; D: Lamp, Airlocks, Output Stacks]
+\item OpenDoor(x) 																[x : DI1, DI2, DO1, DO2]  
+\item CloseDoor(x) 																[x : DI1, DI2, DO1, DO2]
+
+            
 \end{itemize}
 
 \subsection {Reading Sensors}
 The following are the commands used by the controller to read the data provided by the sensors of the system. The meaning can be interpreted as:
-Function(Target sensor, Return Value by sensor)
+Command(Target sensor, Return Value by sensor)
 \begin{itemize}
 <<<<<<< HEAD
 \item CheckInputStack(Ix, a)              [ a: Present, Absent] 
 \item CheckOutputStack(Ox, a)          [ a: Full, Empty]
 \item CheckLamp(L, a)	                  [ a: Busy, CompletedPrinting]	
 \item CheckAirlock(Ax, a)                    [ a : WaferPresent, WaferAbsent]  // if wafer present close outer door, open inner door; 												   else inner door remains closed, and outer remains 													   open?? optimisation?? 
-=======
-\item CheckInputStack(Ix, a)              [ a is stack index with wafer; a=0 if empty stack] 
-\item CheckOutputStack(Ox, a)          [ a is stack index corresponding to empty position; a=0 if full stack]
-\item CheckLamp(L, a)	                  [ a : busy, completedPrinting]	
-\item CheckAirlock(Ax, a)                    [ a : WaferPresent, WaferAbsent]  // if wafer present close outer door, open inner door; else inner door remains closed, and outer remains open?? optimisation?? 
->>>>>>> 2cd77d06f8cd71cd48a27e32fc85778efe9f0dc3
 \end{itemize}
 
 \section{Architecture}
