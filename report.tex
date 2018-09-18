@@ -133,11 +133,12 @@ These are the individual component's constraints:
 
 \section{Interactions} 
 \subsection {Commands to Actuators}
-The following are the commands given by the controller to the actuators of the system. The meaning can be interpreted as:\\
+The following are the commands given by the controller to the actuators of the system. The meaning can be interpreted as:
 Function( Target actuator, Command/Action)
 \begin{itemize}
-\item MoveToStacks(Rx, Move1)
-\item MoveToAirlock(Rx, Move2)
+\item MoveTo(Rx, MovetoD)                   x:1,2,3 ; D: Lamp, Airlocks, I/O Stacks
+\item MoveToAirlock(Rx, Move)
+\item MoveToAirlock1(R3, Move
 \item PickupWafer(Rx, Pick)
 \item PlaceOnAirlock(Rx, Put)
 \item PickFromAirlock(Rx, Pick)
@@ -149,21 +150,16 @@ Function( Target actuator, Command/Action)
 \item PlaceOnLamp(R3, Put)
 \item PickFromLamp(R3, Pick)
 \item PutWafer(Rx, Put)
-\item ReachPosition(Rx, Reach:a)            [a : I/O stack index]
+\item ReachPosition(Rx, Reach)            
 \end{itemize}
 
 \subsection {Reading Sensors}
-<<<<<<< HEAD
 The following are the commands used by the controller to read the data provided by the sensors of the system. The meaning can be interpreted as:
 Function(Target sensor, Return Value by sensor)
-=======
-The following are the commands used by the controller to read the current data from the sensors of the system. The meaning can be interpreted as:\\
-Function( Target sensor, Return Value by sensor)
->>>>>>> 3cd02d5d8f45f0fb66121b618a5098e1aea0039a
 \begin{itemize}
-\item CheckInputStack(Ix, a)              [ a is stack index with wafer; a=0 if empty stack] 
-\item CheckOutputStack(Ox, a)          [ a is stack index corresponding to empty position; a=0 if full stack]
-\item CheckLamp(L, a)	                  [ a : busy, completedPrinting]	
+\item CheckInputStack(Ix, a)              [ a: Present, Absent] 
+\item CheckOutputStack(Ox, a)          [ a: Full, Empty]
+\item CheckLamp(L, a)	                  [ a: Busy, CompletedPrinting]	
 \item CheckAirlock(Ax, a)                    [ a : WaferPresent, WaferAbsent]  // if wafer present close outer door, open inner door; 												   else inner door remains closed, and outer remains 													   open?? optimisation?? 
 \end{itemize}
 
