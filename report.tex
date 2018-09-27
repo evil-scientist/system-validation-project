@@ -1,7 +1,7 @@
 \documentclass[a4paper,12pt]{article}
 \usepackage{graphicx}
 \usepackage{rotating}
-%\usepackage{bbding}
+\usepackage{bbding}
 \begin{document}
 
 \title{System Validation Project Report}
@@ -195,9 +195,9 @@ The commands are valid for the combinations of target Actuators and Destinations
 \begin{tabular}{l|l|l|l|l|l|l|l|}
 \cline{2-8}
                          & Lamp & Airlock1 & Airlock2 & Input1 & Input2 & Output1 & Output2 \\ \hline
-\multicolumn{1}{|l|}{Robot1} &   &   & Y   & Y  &    & Y  &    \\ \hline
-\multicolumn{1}{|l|}{Robot2} &   &    & Y  &    & Y  &    & Y  \\ \hline
-\multicolumn{1}{|l|}{Robot3} & Y & Y  & Y  &    &    &    &    \\ \hline
+\multicolumn{1}{|l|}{Robot1} &   & \Checkmark  &   & \Checkmark  &    & \Checkmark   &    \\ \hline
+\multicolumn{1}{|l|}{Robot2} &   &    & \Checkmark  &    & \Checkmark  &    & \Checkmark  \\ \hline
+\multicolumn{1}{|l|}{Robot3} & \Checkmark & \Checkmark   & \Checkmark  &    &    &    &    \\ \hline
 \end{tabular}%
 }
 \end{table}
@@ -220,5 +220,14 @@ The following are the commands used by the controller to read the data provided 
   \label{fig:arch1}
 \end{figure}
 Figure \ref{fig:arch1} shows the Architecture of the system described above with five parallel controllers along with the various entities (Sensors and Actuators) they control.
+
+The following is the controller:
+\begin{enumerate}
+\item Controller 1
+\begin{itemize}
+\item R1, ,  
+\end{itemize}
+\end{enumerate}
+
 
 \end{document}
