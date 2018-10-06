@@ -1,0 +1,64 @@
+<<<<<<< HEAD
+
+sort Destination = struct A1| A2| I1| I2| O1|O2|lamp;
+     StackState = struct empty | full ;
+	  door = struct DI1 | DI2 | DO1 | DO2 ;
+
+act MoveTo: Destination;
+	 PickupWafer;
+	 PlaceWafer;
+	openDoor : door;
+         closeDoor : door;
+
+	 
+
+
+proc
+
+% IO handler 1
+
+GetProcess1 = (MoveTo(A1) + MoveTo(I1)). PickupWafer. PutProcess1;
+PutProcess1 = (MoveTo(O1)+ MoveTo(A1)) .  PlaceWafer .GetProcess1;
+
+% IO handler 2
+GetProcess2 =( MoveTo(A2) + MoveTo(I2) ). PickupWafer. PutProcess2;
+PutProcess2 = (MoveTo(O2)+ MoveTo(A2)) .  PlaceWafer .GetProcess2;
+
+% Lamp Chamber Handler
+GetProcess3 = (MoveTo(A1) + MoveTo(A2) + MoveTo(lamp)).PickupWafer.PutProcess3;
+PutProcess3 = (MoveTo(A1) + MoveTo(A2) + MoveTo(lamp)).PlaceWafer. GetProcess3;
+
+% Airlock
+AL = sum d: door . openDoor(d) + sum d: door . closeDoor(d);
+
+init GetProcess1 ||GetProcess2 || GetProcess3;
+=======
+
+sort Destinations = struct A1| A2| I1| I2| O1|O2|lamp;
+     StackState = struct empty | full ;
+
+act Moveto: Destinations,
+	 PickupWafer,
+	 PlaceWafer;
+
+	 
+
+
+proc
+
+% IO handler 1
+GetProcess1 = (StackState != empty )->( MoveTo(A1) + MoveTo(I1) ). PickupWafer. PutProcess1;
+PutProcess1 = (MoveTo(O1)+ MoveTo(A1)) .  PlaceWafer .GetProcess1;
+
+% IO handler 2
+GetProcess2 =( MoveTo(A2) + MoveTo(I2) ). PickupWafer. PutProcess2;
+PutProcess2 = (MoveTo(O2)+ MoveTo(A2)) .  PlaceWafer .GetProcess2;
+
+% Lamp Chamber Handler
+GetProcess3 = (MoveTo(A1) + MoveTo(A2) + MoveTo(lamp)).PickupWafer.PutProcess3;
+PutProcess3 = (MoveTo(A1) + MoveTo(A2) + MoveTo(lamp)).PlaceWafer. GetProcess3;
+
+% Airlock
+AL = sum
+
+>>>>>>> 00425912db30dd0c710bdcd4e782823f319a84f5
