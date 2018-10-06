@@ -1,17 +1,20 @@
-<<<<<<< HEAD
-
-sort Destination = struct A1| A2| I1| I2| O1|O2|lamp;
-     StackState = struct empty | full ;
-	  door = struct DI1 | DI2 | DO1 | DO2 ;
+sort Destination = struct A1 | A2 | I1 | I2 | O1 | O2 | lamp;
+     IOHandlerID = struct IOH1 | IOH2;
+		 OperationType = struct Get | Put;
+		 IPStackState = struct Empty | NonEmpty;
+		 OPStackState = struct Full | NonFull;
+	   Door = struct DI1 | DI2 | DO1 | DO2;		
+		 DoorState = struct Open | Closed;
+		 CycleType = Input | Output;
 
 act MoveTo: Destination;
-	 PickupWafer;
-	 PlaceWafer;
-	openDoor : door;
-         closeDoor : door;
-
-	 
-
+	  PickupWafer;
+	  PlaceWafer;
+	  SetDoor : Door # DoorState;
+% Communication: Open Door: IOHandler to Airlock
+% Sense example: sense_barrierOpen, sense_barrierClosed : BarrierID #sensorState;
+	  CheckIPStack1State : StackState;
+		recieveDoorState : DoorState;
 
 proc
 
@@ -29,36 +32,36 @@ GetProcess3 = (MoveTo(A1) + MoveTo(A2) + MoveTo(lamp)).PickupWafer.PutProcess3;
 PutProcess3 = (MoveTo(A1) + MoveTo(A2) + MoveTo(lamp)).PlaceWafer. GetProcess3;
 
 % Airlock
-AL = sum d: door . openDoor(d) + sum d: door . closeDoor(d);
+AL = sum d: Door . SetDoor(d, open) + sum d: Door . SetDoor(d, closed);
 
-init GetProcess1 ||GetProcess2 || GetProcess3;
-=======
+init GetProcess1 || GetProcess2 || GetProcess3;
 
-sort Destinations = struct A1| A2| I1| I2| O1|O2|lamp;
-     StackState = struct empty | full ;
+IOHandler1(Operation : OperationType, Cycle : CycleType) =
+% Input Cycle
+((Cycle == Input) && (Operation == Get)) -> CheckIPStack1State(Empty)
+.IOHandler1(Operation = Get)
++ ((Cycle == Input) && (Operation == Get)) -> CheckIPStack1State(NonEmpty).MoveTo(I1)
+.PickupWafer.IOHandler1(Operation = Put)
++ ((Cycle == Input) && (Operation == Put)) -> recieveDoorState(Closed)
+.IOHandler1(Operation = Put)
++ ((Cycle == Input) && (Operation == Put)) -> recieveDoorState(Open)
+.MoveTo(A1).PlaceWafer.IOHandler1(Cycle = Output, Operation = Get)
+% Output Cycle
++ ((Cycle == Output) && (Operation == Get)) -> receiveDoorState(Closed)
+.IOHandler1(Operation = Get)
+% MoveTo here may be redundant
++ ((Cycle == Output) && (Operation == Get)) -> receiveDoorState(Open).MoveTo(A1)
+.PickupWafer.IOHandler1(Operation = Put)
++ ((Cycle == Output) && (Operation == Put)) -> CheckOPStack1State(Full)
+.IOHandler1(Operation = Put)
++ ((Cycle == Output) && (Operation == Put)) -> CheckOPStack1State(NonFull)
+.MoveTo(O1).PlaceWafer.IOHandler1(Cycle = Input, Operation = Get);
+ 
 
-act Moveto: Destinations,
-	 PickupWafer,
-	 PlaceWafer;
-
-	 
 
 
-proc
 
-% IO handler 1
-GetProcess1 = (StackState != empty )->( MoveTo(A1) + MoveTo(I1) ). PickupWafer. PutProcess1;
-PutProcess1 = (MoveTo(O1)+ MoveTo(A1)) .  PlaceWafer .GetProcess1;
 
-% IO handler 2
-GetProcess2 =( MoveTo(A2) + MoveTo(I2) ). PickupWafer. PutProcess2;
-PutProcess2 = (MoveTo(O2)+ MoveTo(A2)) .  PlaceWafer .GetProcess2;
 
-% Lamp Chamber Handler
-GetProcess3 = (MoveTo(A1) + MoveTo(A2) + MoveTo(lamp)).PickupWafer.PutProcess3;
-PutProcess3 = (MoveTo(A1) + MoveTo(A2) + MoveTo(lamp)).PlaceWafer. GetProcess3;
 
-% Airlock
-AL = sum
 
->>>>>>> 00425912db30dd0c710bdcd4e782823f319a84f5
