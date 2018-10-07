@@ -1,0 +1,123 @@
+sort DestinationID = struct A1 | A2 | I1 | I2 | O1 | O2 | lamp;
+		 StackID = struct IP1 | IP2 | OP1 | OP2;
+     IOHandlerID = struct IOH1 | IOH2;
+		 OperationType = struct Get | Put;
+		 IPStackState = struct Empty | NonEmpty;
+		 OPStackState = struct Full | NonFull;
+	   DoorID = struct DI1 | DI2 | DO1 | DO2;		
+		 DoorState = struct Open | Closed;
+		 CycleType = struct Input | Output;
+
+act MoveTo: DestinationID;
+	  PickupWafer;
+	  PlaceWafer;
+
+	  CheckIPStackState : StackID # IPStackState;
+	  CheckOPStackState : StackID # OPStackState;
+
+	  receiveDoorState : DoorID # DoorState;
+	  sendDoorState : DoorID # DoorState;
+		commDoorState : DoorID # DoorState;
+
+	  receiveDoorRequest : DoorID # DoorState;
+		sendDoorRequest : DoorID # DoorState;
+		commDoorRequest : DoorID # DoorState;
+
+		OpenDoor : DoorID;
+
+proc
+
+IOHandler1(Operation : OperationType, Cycle : CycleType) =
+% Input Cycle
+((Cycle == Input) && (Operation == Get)) -> CheckIPStackState(IP1,Empty)
+.IOHandler1(Operation = Get)
++ ((Cycle == Input) && (Operation == Get)) -> CheckIPStackState(IP1,NonEmpty).MoveTo(I1)
+.PickupWafer.IOHandler1(Operation = Put)
++ ((Cycle == Input) && (Operation == Put)) -> receiveDoorState(DO1,Closed)
+.sendDoorRequest(DO1,Open).IOHandler1(Operation = Put)
++ ((Cycle == Input) && (Operation == Put)) -> receiveDoorState(DO1,Open)
+.MoveTo(A1).PlaceWafer.AirlockChamber1Controller(WaferPresent = true).IOHandler1(Cycle = Output, Operation = Get) % Check if possible to call different process from here
+% Output Cycle
++ ((Cycle == Output) && (Operation == Get)) -> receiveDoorState(DO1,Closed)
+.sendDoorRequest(DO1,Open).IOHandler1(Operation = Get)
++ ((Cycle == Output) && (Operation == Get)) -> receiveDoorState(DO1,Open).MoveTo(A1)
+.PickupWafer.IOHandler1(Operation = Put)
++ ((Cycle == Output) && (Operation == Put)) -> CheckOPStackState(OP1,Full)
+.IOHandler1(Operation = Put)
++ ((Cycle == Output) && (Operation == Put)) -> CheckOPStackState(OP1,NonFull)
+.MoveTo(O1).PlaceWafer.IOHandler1(Cycle = Input, Operation = Get);
+
+
+IOHandler2(Operation : OperationType, Cycle : CycleType) =
+% Input Cycle
+((Cycle == Input) && (Operation == Get)) -> CheckIPStackState(IP2,Empty)
+.IOHandler2(Operation = Get)
++ ((Cycle == Input) && (Operation == Get)) -> CheckIPStackState(IP2,NonEmpty).MoveTo(I2)
+.PickupWafer.IOHandler2(Operation = Put)
++ ((Cycle == Input) && (Operation == Put)) -> receiveDoorState(DO2,Closed)
+.sendDoorRequest(DO2,Open).IOHandler2(Operation = Put)
++ ((Cycle == Input) && (Operation == Put)) -> receiveDoorState(DO2,Open)
+.MoveTo(A2).PlaceWafer.IOHandler2(Cycle = Output, Operation = Get)
+% Output Cycle
++ ((Cycle == Output) && (Operation == Get)) -> receiveDoorState(DO2,Closed)
+.sendDoorRequest(DO2,Open).IOHandler2(Operation = Get)
++ ((Cycle == Output) && (Operation == Get)) -> receiveDoorState(DO2,Open).MoveTo(A2)
+.PickupWafer.IOHandler2(Operation = Put)
++ ((Cycle == Output) && (Operation == Put)) -> CheckOPStackState(OP2,Full)
+.IOHandler2(Operation = Put)
++ ((Cycle == Output) && (Operation == Put)) -> CheckOPStackState(OP2,NonFull)
+.MoveTo(O2).PlaceWafer.IOHandler2(Cycle = Input, Operation = Get);
+
+
+
+AirlockChamber1Controller(WaferPresent : Bool, OuterDoor1State : DoorState, InnerDoor1State : DoorState) =
+((OuterDoor1State == Closed) && (InnerDoor1State == Open)) -> receiveDoorRequest(DO1,Open)
+.AirlockChamber1Controller(InnerDoor1State = Open)
++ ((OuterDoor1State == Closed) && (InnerDoor1State == Closed)) -> receiveDoorRequest(DO1,Open)
+.OpenDoor(DO1).AirlockChamber1Controller(OuterDoor1State = Open)
++ ((OuterDoor1State == Open) && (InnerDoor1State == Closed)) -> receiveDoorRequest(DI1,Open)
+.AirlockChamber1Controller(OuterDoor1State = Open)
++ ((OuterDoor1State == Closed) && (InnerDoor1State == Closed)) -> receiveDoorRequest(DI1,Open)
+.OpenDoor(DI1).AirlockChamber1Controller(InnerDoor1State = Open)
++ sendDoorState(DO1,OuterDoor1State)
++ sendDoorState(DI1,InnerDoor1State);
+
+
+AirlockChamber2Controller(OuterDoor2State : DoorState, InnerDoor2State : DoorState) =
+((OuterDoor2State == Closed) && (InnerDoor2State == Open)) -> receiveDoorRequest(DO2,Open)
+.AirlockChamber2Controller(InnerDoor2State = Open)
++ ((OuterDoor2State == Closed) && (InnerDoor2State == Closed)) -> receiveDoorRequest(DO2,Open)
+.OpenDoor(DO2).AirlockChamber2Controller(OuterDoor2State = Open)
++ ((OuterDoor2State == Open) && (InnerDoor2State == Closed)) -> receiveDoorRequest(DI2,Open)
+.AirlockChamber2Controller(OuterDoor2State = Open)
++ ((OuterDoor2State == Closed) && (InnerDoor2State == Closed)) -> receiveDoorRequest(DI2,Open)
+.OpenDoor(DI2).AirlockChamber2Controller(InnerDoor2State = Open)
++ sendDoorState(DO2,OuterDoor2State)
++ sendDoorState(DI2,InnerDoor2State);
+
+WaferProductionHandler() = 
+
+init 
+
+			allow(
+						{MoveTo,
+	  				 PickupWafer,
+	  				 PlaceWafer,
+ 	    			 CheckIPStackState,
+	  				 CheckOPStackState,
+						 OpenDoor,
+
+						 commDoorState,
+
+						 commDoorRequest},
+
+			comm(
+						{receiveDoorState | sendDoorState -> commDoorState,
+
+	 					 receiveDoorRequest | sendDoorRequest -> commDoorRequest},
+
+						 IOHandler1(Get, Input) || IOHandler2(Get, Input) || AirlockChamber1Controller(Closed, Closed) || AirlockChamber2Controller(Closed, Closed)
+
+					 )
+					 );
+
