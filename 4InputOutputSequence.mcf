@@ -1,0 +1,1 @@
+[true*] forall IP : IPStackID . [ MoveTo(MapIPDestination(IP)).(!MoveTo(CorrespondingOPDestination(IP)))*.MoveTo(MapIPDestination(IP)) ] false

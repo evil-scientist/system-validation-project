@@ -1,5 +1,6 @@
-sort DestinationID = struct A1 | A2 | I1 | I2 | O1 | O2 | Lamp;
-		  StackID = struct IP1 | IP2 | OP1 | OP2;
+sort DestinationID = struct A1 | A2 | I1 | I2 | O1 | O2 | Lamp | Null;
+		  IPStackID = struct IP1 | IP2;
+			OPStackID = struct OP1 | OP2;
 		  AirlockID = struct AL1 | AL2 | None;
      IOHandlerID = struct IOH1 | IOH2;
 		  OperationType = struct Get | Put;
@@ -12,11 +13,27 @@ sort DestinationID = struct A1 | A2 | I1 | I2 | O1 | O2 | Lamp;
 		  WaferType = struct New | Finished | NoWafer;
 
 map CorrespondingDoor : DoorID -> DoorID;
+	  CorrespondingOPDestination : IPStackID -> DestinationID;		
+	  MapOPDestination : OPStackID -> DestinationID;
+		MapIPDestination : IPStackID -> DestinationID;
+		MapAirlock : AirlockID -> DestinationID;
 
 eqn CorrespondingDoor(DO1) = DI1;
 		CorrespondingDoor(DI1) = DO1;
 		CorrespondingDoor(DO2) = DI2;
 		CorrespondingDoor(DI2) = DO2;
+
+		CorrespondingOPDestination(IP1) = O1;
+		CorrespondingOPDestination(IP2) = O2;
+
+		MapOPDestination(OP1) = O1;
+		MapOPDestination(OP2) = O2;
+		MapIPDestination(IP1) = I1;
+		MapIPDestination(IP2) = I2;
+
+		MapAirlock(AL1) = A1;
+		MapAirlock(AL2) = A2;
+		MapAirlock(None) = Null;
 
 act MoveTo: DestinationID;
 	  PickupWafer;
@@ -25,8 +42,8 @@ act MoveTo: DestinationID;
 		OpenDoor : DoorID;
 		CloseDoor : DoorID;
 
-	  CheckIPStackState : StackID # IPStackState;
-	  CheckOPStackState : StackID # OPStackState;
+	  CheckIPStackState : IPStackID # IPStackState;
+	  CheckOPStackState : OPStackID # OPStackState;
 		CheckLampState : LampState;
 
 	  receiveDoorState : DoorID # DoorState;
