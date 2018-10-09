@@ -11,6 +11,13 @@ sort DestinationID = struct A1 | A2 | I1 | I2 | O1 | O2 | Lamp;
 		  CycleType = struct Input | Output;
 		  WaferType = struct New | Finished | NoWafer;
 
+map CorrespondingDoor : DoorID -> DoorID;
+
+eqn CorrespondingDoor(DO1) = DI1;
+		CorrespondingDoor(DI1) = DO1;
+		CorrespondingDoor(DO2) = DI2;
+		CorrespondingDoor(DI2) = DO2;
+
 act MoveTo: DestinationID;
 	  PickupWafer;
 	  PlaceWafer;

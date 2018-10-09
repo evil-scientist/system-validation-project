@@ -1,0 +1,1 @@
+[true*] forall d : DoorID . [ OpenDoor(d).(!CloseDoor(d))*.OpenDoor(CorrespondingDoor(d)) ] false
