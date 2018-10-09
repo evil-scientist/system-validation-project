@@ -119,9 +119,8 @@ init
 						 CloseDoor,
 
 						 commInnerDoorState,
-						 %commOuterDoorState,
-						 
-commDoorRequest,
+						 commOuterDoorState,
+						 commDoorRequest,
 						 commWaferStatus,
 						 commWaferPresence},
 
