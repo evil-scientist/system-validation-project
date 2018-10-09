@@ -1,0 +1,138 @@
+sort DestinationID = struct A1 | A2 | I1 | I2 | O1 | O2 | Lamp;
+		  StackID = struct IP1 | IP2 | OP1 | OP2;
+		  AirlockID = struct AL1 | AL2 | None;
+     IOHandlerID = struct IOH1 | IOH2;
+		  OperationType = struct Get | Put;
+		  IPStackState = struct Empty | NonEmpty;
+		  OPStackState = struct Full | NonFull;
+	    DoorID = struct DI1 | DI2 | DO1 | DO2;		
+		  DoorState = struct Open | Closed;
+			LampState = struct Incomplete | Complete;
+		  CycleType = struct Input | Output;
+		  WaferType = struct New | Finished | NoWafer;
+
+act MoveTo: DestinationID;
+	  PickupWafer;
+	  PlaceWafer;
+
+		OpenDoor : DoorID;
+		CloseDoor : DoorID;
+
+	  CheckIPStackState : StackID # IPStackState;
+	  CheckOPStackState : StackID # OPStackState;
+		CheckLampState : LampState;
+
+	  receiveInnerDoorState : DoorID # DoorState;
+	  sendInnerDoorState : DoorID # DoorState;
+		commInnerDoorState : DoorID # DoorState;
+
+	  receiveOuterDoorState : DoorID # DoorState;
+	  sendOuterDoorState : DoorID # DoorState;
+		commOuterDoorState : DoorID # DoorState;
+
+	  receiveDoorRequest : DoorID # DoorState;
+		sendDoorRequest : DoorID # DoorState;
+		commDoorRequest : DoorID # DoorState;
+
+	  receiveWaferStatus : AirlockID # WaferType;
+		sendWaferStatus : AirlockID # WaferType;
+		commWaferStatus : AirlockID # WaferType;
+
+	  receiveWaferPresence : AirlockID # WaferType;
+		sendWaferPresence : AirlockID # WaferType;
+		commWaferPresence : AirlockID # WaferType;
+
+
+proc
+
+IOHandler1(Operation : OperationType, Cycle : CycleType) =
+% Input Cycle
+((Cycle == Input) && (Operation == Get)) -> CheckIPStackState(IP1,Empty).IOHandler1(Operation = Get)
+
++ ((Cycle == Input) && (Operation == Get)) -> CheckIPStackState(IP1,NonEmpty).MoveTo(I1).PickupWafer.IOHandler1(Operation = Put)
+
++ ((Cycle == Input) && (Operation == Put)) -> receiveOuterDoorState(DO1,Closed).sendDoorRequest(DO1,Open).IOHandler1(Operation = Put)
+
++ ((Cycle == Input) && (Operation == Put)) -> receiveOuterDoorState(DO1,Open).MoveTo(A1).PlaceWafer.sendWaferStatus(AL1,New).IOHandler1(Cycle = Output, Operation = Get)
+
+% Output Cycle
+%Check -----------------------------------------------------------------------------------------
++ ((Cycle == Output) && (Operation == Get)) -> receiveWaferPresence(AL1,NoWafer).IOHandler1(Operation = Get)
+
++ ((Cycle == Output) && (Operation == Get)) -> receiveWaferPresence(AL1,Finished).receiveOuterDoorState(DO1,Closed).sendDoorRequest(DO1,Open).IOHandler1(Operation = Get)
+
++ ((Cycle == Output) && (Operation == Get)) -> receiveWaferPresence(AL1,Finished).receiveOuterDoorState(DO1,Open).MoveTo(A1).PickupWafer.IOHandler1(Operation = Put)
+
+%Check -----------------------------------------------------------------------------------------
++ ((Cycle == Output) && (Operation == Put)) -> CheckOPStackState(OP1,Full).IOHandler1(Operation = Put)
+
++ ((Cycle == Output) && (Operation == Put)) -> CheckOPStackState(OP1,NonFull).MoveTo(O1).PlaceWafer.IOHandler1(Cycle = Input, Operation = Get);
+
+
+AirlockChamber1Controller(WaferPresence : WaferType, OuterDoorState : DoorState, InnerDoorState : DoorState) =
+
+((OuterDoorState == Closed) && (InnerDoorState == Open)) -> receiveDoorRequest(DO1,Open).AirlockChamber1Controller(InnerDoorState = Open)
+
++ ((OuterDoorState == Closed) && (InnerDoorState == Closed)) -> receiveDoorRequest(DO1,Open).OpenDoor(DO1).AirlockChamber1Controller(OuterDoorState = Open)
+
++ ((OuterDoorState == Open) && (InnerDoorState == Closed)) -> receiveDoorRequest(DI1,Open).AirlockChamber1Controller(OuterDoorState = Open)
+
++ ((OuterDoorState == Closed) && (InnerDoorState == Closed)) -> receiveDoorRequest(DI1,Open).OpenDoor(DI1).AirlockChamber1Controller(InnerDoorState = Open)
+
+%Check -----------------------------------------------------------------------------------------
++ ((OuterDoorState == Open) && (InnerDoorState == Closed)) -> receiveWaferStatus(AL1,New).CloseDoor(DO1).AirlockChamber1Controller(WaferPresence = New, OuterDoorState = Closed)
+
++ ((OuterDoorState == Closed) && (InnerDoorState == Open)) -> receiveWaferStatus(AL1,Finished).CloseDoor(DI1).AirlockChamber1Controller(WaferPresence = Finished, InnerDoorState = Closed)
+
+%Check -----------------------------------------------------------------------------------------
+
++sendOuterDoorState(DO1,OuterDoorState).AirlockChamber1Controller()
+
++sendInnerDoorState(DI1,InnerDoorState).AirlockChamber1Controller()
+
++sendWaferPresence(AL1,WaferPresence).AirlockChamber1Controller();
+
+LampWaferHandler(Cycle : CycleType, CurrentAirlock : AirlockID) = 
+% Input AL1
+((Cycle == Input) && (CurrentAirlock == None)) -> receiveWaferPresence(AL1,New).LampWaferHandler(CurrentAirlock = AL1)
+
++ ((Cycle == Input) && (CurrentAirlock == AL1)) -> receiveInnerDoorState(DI1,Closed).sendDoorRequest(DI1,Open).LampWaferHandler(CurrentAirlock = AL1)
+
++ ((Cycle == Input) && (CurrentAirlock == AL1)) -> receiveInnerDoorState(DI1,Open).MoveTo(A1).PickupWafer.MoveTo(Lamp).PlaceWafer.LampWaferHandler(Cycle = Output)
+
+% Output AL1
++ ((Cycle == Output) && (CurrentAirlock == AL1)) -> CheckLampState(Incomplete).LampWaferHandler(Cycle = Output)
+
++ ((Cycle == Output) && (CurrentAirlock == AL1)) -> CheckLampState(Complete).MoveTo(Lamp).PickupWafer.MoveTo(A1).PlaceWafer.sendWaferStatus(AL1,Finished).LampWaferHandler(Cycle = Input, CurrentAirlock = None);
+
+
+init 
+
+			allow(
+						{MoveTo,
+  				 		 PickupWafer,
+ 				 		 PlaceWafer,
+ 	    				 CheckIPStackState,
+	  					 CheckOPStackState,
+						 CheckLampState,
+						 OpenDoor,
+						 CloseDoor,
+
+						 commInnerDoorState,
+						 %commOuterDoorState,
+						 
+commDoorRequest,
+						 commWaferStatus,
+						 commWaferPresence},
+
+			comm(
+						{receiveInnerDoorState | sendInnerDoorState -> commInnerDoorState,
+						receiveOuterDoorState | sendOuterDoorState -> commOuterDoorState,
+	 					receiveDoorRequest | sendDoorRequest -> commDoorRequest,
+	  				 	receiveWaferStatus | sendWaferStatus -> commWaferStatus,
+				 	   receiveWaferPresence | sendWaferPresence -> commWaferPresence},
+
+						 IOHandler1(Get, Input) || AirlockChamber1Controller(NoWafer, Closed, Closed) || LampWaferHandler(Input,None)
+
+					 ));
+
