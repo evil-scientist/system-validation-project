@@ -30,7 +30,7 @@ This is a project done as part of TU Delft's IN4387 System Validation course. Th
 \\
 \\The system consists of a UV Lamp that projects a design onto a wafer inside a vacuum chamber. The wafers are transferred to the Lamp via two Airlocks. The wafers are handled by robots from their initial position on the Input stacks to their final position on the Output stacks. The wafers move along the production line from their Initial state (on the Input Stacks), are printed on by the Lamp and reach the Final state (on the Output stacks).
 \\
-\\Described here is the documentation for the modelling of the above system in mcrl2 and it's verification using Modal $\mu$ Formulas. Section 2 describes the System and Functional Requirements. Section 3 is dedicated to the interactions between the various subsystems defined in section 2. The architecture of the resulting system is shown in section 4. In section 5 the requirements are translated into μ-calculus formulae. Section 6 describes the modelling process. In section 7 the model is verified with the translated requirements. The final conclusions are presented in section 8.
+\\Described here is the documentation for the modelling of the above system in mcrl2 and it's verification using Modal $\mu$ formulae. Section 2 describes the System and Functional Requirements. Section 3 is dedicated to the interactions between the various subsystems defined in section 2. The architecture of the resulting system is shown in section 4. In section 5 the requirements are translated into μ-calculus formulae. Section 6 describes the modelling process. In section 7 the model is verified with the translated requirements. The final conclusions are presented in section 8.
 
 \section{Requirements}
 
@@ -66,10 +66,9 @@ The behaviour of the system can be understood by describing the individual compo
 \item The Outer Door (DO2) must not be opened if the Inner Door(DI2) is open for Airlock (A2).
 \item The Inner Doors (DI1 and DI2) must not be opened if a finished wafer is present in their corresponding Airlocks (A1 and A2).
 \item The Outer Doors (DO1 and DO2) must not be opened if a new wafer is present in their corresponding Airlocks (A1 and A2).
-\item The Robot (R3) will place the new wafer on the Lamp only when it is empty.
 \item The Robot (R3) will pickup the finished wafer from the Lamp (L) only when it is finished printing.
 \item The Robot (R3) will not place the finished wafer again on the Lamp (L).
-\item The Robot (R3) will not pickup a wafer immediately after it has placed a wafer.
+%\item The Robot (R3) will not pickup a wafer immediately after it has placed a wafer.
 \item The Robot (R3) will place a wafer it picked from an Airlock (A1 or A2) only to the same Airlock (after processing). 
 \end{enumerate}
 \newpage
@@ -134,7 +133,7 @@ Figure \ref{fig:arch1} shows the Architecture of the system described above with
 
 \begin{figure}[ht]
 \centering
-    \includegraphics[width=\textwidth]{Architecture-final.jpg}
+    \includegraphics[width=\textwidth, height=15cm]{Architecture-final.jpg}
   \caption{Architecture Diagram of System}
   \label{fig:arch1}
 \end{figure}
@@ -142,74 +141,76 @@ Figure \ref{fig:arch1} shows the Architecture of the system described above with
 \section{Translated Requirements}
 \subsection{Introduction}
 The requirements mentioned in Section 2 describe what is needed and expected out of the system. A successful verification of the system which conforms to the aforementioned specifications and requirements is to be carried out. This necessitates the use of Modal $\mu$-Calculus.   
-\subsection{Modal $\mu$ -Formulas}
+\subsection{Modal $\mu$ -formulae}
 %\\In order to translate the requirements into their corresponding MCF representations, the requirements are rephrased as follows:
-Here the corresponding Modal $\mu$ -Formulas are described:
+Here the corresponding Modal $\mu$ -formulae are described:
 \begin{enumerate}
 \item The Robots (R1 and R2) should not move to the Input Stacks if the Input Stacks are Empty:
-    \begin{itemize}
-	\item MCF
-	\end{itemize}
-\item The Robots (R1 and R2) should not move to the Output Stacks if the Output Stacks are Full:
-    \begin{itemize}
-	\item MCF
-	\end{itemize}
+\\
+\\\textbf{Formula:} $[true*] \forall IP: IPStackID.[CheckIPStackState(IP, Empty).
+\\(\overline{MoveTo(MapIPDestination(IP)}*].true$ \\\textbf{Status:}Verified true.
+\item The Robots (R1 and R2) should not move ohe Output Stacks if the Output Stacks are Full:
+\\
+\\\textbf{Formula:} $[true*] \forall OP: OPStackID.[CheckOPStackState(OP, Full).
+\\(\overline{MoveTo(MapOPDestination(OP)}*].true$ \\\textbf{Status:}Verified true.
 \item The Robots (R1 and R2) should not move to the Output Stacks without a finished wafer:
-    \begin{itemize}
-	\item MCF
-	\end{itemize}
+\\
+\\\textbf{Formula:} $[true*] \forall IP: IPStackID.[CheckIPStackState(IP, Empty).
+\\(\overline{MoveTo(MapIPDestination(IP)}*].true$ \\\textbf{Status:}Verified true.
 \item The Robots (R1 and R2) should not place a new wafer on the Output Stacks (O1 and O2):
     \begin{itemize}
-	\item MCF
+	\item \textbf{Formula:} $[true*].[MoveTo(I1).(\overline{MoveTo(AL1}*.MoveTo(O1)].false$ \\\textbf{Status:}Verified true.
+    \item \textbf{Formula:} $[true*].[MoveTo(I2).(\overline{MoveTo(AL2}*.MoveTo(O2)].false$ \\\textbf{Status:}Verified true.
 	\end{itemize}
 \item The Robots (R1 and R2) should not place a wafer on the Input Stacks (I1 and I2):
-    \begin{itemize}
-	\item MCF
-	\end{itemize}
+\\
+\\\textbf{Formula:} $[true*] \forall IP: IPStackID.[CheckIPStackState(IP, Empty).
+\\(\overline{MoveTo(MapIPDestination(IP)}*].true$ \\\textbf{Status:}Verified true.
 \item The Robots (R1 and R2) should not move to the Airlocks (A1 and A2) if the corresponding Outer Doors are closed (DO1 and DO2):
-    \begin{itemize}
-	\item MCF
-	\end{itemize}
+\\
+\\\textbf{Formula:} $[true*] \forall IP: IPStackID.[CheckIPStackState(IP, Empty).
+\\(\overline{MoveTo(MapIPDestination(IP)}*].true$ \\\textbf{Status:}Verified true.
 \item The Robot (R3) should not move to the Airlocks (A1 or A2) if the corresponding Inner Doors are closed:
-    \begin{itemize}
-	\item MCF
-	\end{itemize}
+\\
+\\\textbf{Formula:} $[true*] \forall IP: IPStackID.[CheckIPStackState(IP, Empty).
+\\(\overline{MoveTo(MapIPDestination(IP)}*].true$ \\\textbf{Status:}Verified true.
 \item The Inner Door (DI1) must not be opened if the Outer Door(DO1) is open for Airlock (A1).
 \item The Inner Door (DI2) must not be opened if the Outer Door(DO2) is open for Airlock (A2).
 \item The Outer Door (DO1) must not be opened if the Inner Door(DI1) is open for Airlock (A1).
-\item The Outer Door (DO2) must not be opened if the Inner Door(DI2) is open for Airlock (A2) :
-\begin{itemize}
-	\item (for 8-11) MCF
-	\end{itemize}
+\item The Outer Door (DO2) must not be opened if the Inner Door(DI2) is open for Airlock (A2) : \textbf{(for 8-11)} 
+\\
+\\\textbf{Formula:} $[true*] \forall d: DoorID.[OpenDoor(d).\overline{CloseDoor(d)}*OpenDoor(Corresponding(d))].false$ \\\textbf{Status:}Verified true.
 \item The Inner Doors (DI1 and DI2) must not be opened if a finished wafer is present in their corresponding Airlocks (A1 and A2):
     \begin{itemize}
-	\item MCF
+	\item \textbf{Formula:} $[true*.receiveWaferStatus(AL1,Finished).(\overline{OpenDoor(DI1)}]true$ 
+	\\\textbf{Status:}Verified true.
+    \item \textbf{Formula:} $[true*.receiveWaferStatus(AL2,Finished).(\overline{OpenDoor(DI2)}]true$  
+    \\\textbf{Status:}Verified true.
 	\end{itemize}
 \item The Outer Doors (DO1 and DO2) must not be opened if a new wafer is present in their corresponding Airlocks (A1 and A2):
-    \begin{itemize}
-	\item MCF
-	\end{itemize}
-\item The Robot (R3) will place the new wafer on the Lamp only when it is empty:
-    \begin{itemize}
-	\item MCF
+\begin{itemize}
+	\item \textbf{Formula:} $[true*.receiveWaferStatus(AL1,New).(\overline{OpenDoor(DO1)}]true$ 
+	\\\textbf{Status:}Verified true.
+    \item \textbf{Formula:} $[true*.receiveWaferStatus(AL2,New).(\overline{OpenDoor(DO2)}]true$  
+    \\\textbf{Status:}Verified true.
 	\end{itemize}
 \item The Robot (R3) will pickup the finished wafer from the Lamp (L) only when it is finished printing:
-    \begin{itemize}
-	\item MCF
-	\end{itemize}
+\\
+\\\textbf{Formula:} $[true*.CheckLampState(Incomplete).(\overline{MoveTo(Lamp}*].true$ \\\textbf{Status:}Verified true.
 \item The Robot (R3) will not place the finished wafer again on the Lamp (L):
-    \begin{itemize}
-	\item MCF
-	\end{itemize}
-\item The Robot (R3) will not pickup a wafer immediately after it has placed a wafer:
-    \begin{itemize}
-	\item MCF
-	\end{itemize}
+\\
+\\\textbf{Formula:} $[true*] \forall IP: IPStackID.[CheckIPStackState(IP, Empty).
+\\(\overline{MoveTo(MapIPDestination(IP)}*].true$ \\\textbf{Status:}Verified true.
+
+%\item The Robot (R3) will not pickup a wafer immediately after it has placed a wafer:
+%\\
+%\\\textbf{Formula:} $[true*] \forall IP: %IPStackID.[CheckIPStackState(IP, Empty).
+%\\(\overline{MoveTo(MapIPDestination(IP)}*].true$ %\\\textbf{Status:}Verified true.
+
 \item The Robot (R3) will place a wafer it picked from an Airlock (A1 or A2) only to the same Airlock (after processing):
-    \begin{itemize}
-	\item MCF
-	\end{itemize}
-	
+\\
+\\\textbf{Formula:} $[true*] \forall IP: IPStackID.[CheckIPStackState(IP, Empty).
+\\(\overline{MoveTo(MapIPDestination(IP)}*].true$ \\\textbf{Status:}Verified true.
 \end{enumerate}
 \newpage
 \section{Modelling the System}
@@ -226,7 +227,7 @@ Currently the two controllers called IO Handler 1 and IO Handler 2 are working i
 \end{figure}
 \newpage
 \section{Verification}
-The Verification process involved three main steps. We created a simplified version of the model where only a single IO Handler, Airlock Controller and Lamp Handler was present. We disregarded the second pair of Input Output Stacks along with the Robot and Airlock. This way we could visualize the system using LTSGraph. This worked well because for the complete system we simply needed to extend from this simplification by doubling the number of components mentioned above. The Complete Model was visually inspected using LTSView to mark for deadlocks along with an LPSxSim simulation to logically verify the correct sequence of actions for the process. These are presented in the Visualization subsection. The $\mu$ Formulas derived from the translated requirements from Section 5 are presented in Appendix B 
+The Verification process involved three main steps. We created a simplified version of the model where only a single IO Handler, Airlock Controller and Lamp Handler was present. We disregarded the second pair of Input Output Stacks along with the Robot and Airlock. This way we could visualize the system using LTSGraph. This worked well because for the complete system we simply needed to extend from this simplification by doubling the number of components mentioned above. The Complete Model was visually inspected using LTSView to mark for deadlocks along with an LPSxSim simulation to logically verify the correct sequence of actions for the process. These are presented in the Visualization subsection. The $\mu$ formulae derived from the translated requirements from Section 5 are presented in Appendix B 
 \subsection{Tools}
 In order to replicate our results, we provide the exact version of the tools we used along with the system configuration we used them on.
 \\
@@ -267,7 +268,10 @@ The visual representations provide an additional guide to verify that the system
         \label{fig:deadlockfree}
     \end{minipage}
 \end{figure}
+\newpage
 \section{Conclusion}
+As part of the given assignment, we have modelled a Wafer production system as described in the assignment prompt. This project consisted of multiple phases. In the first phase the system components were determined and requirements were formalized. In the second phase the interactions between the systems and the communications between different controllers were defined. Based on the system components along with the formulated requirements and interactions an architecture was developed. The third phase involved modelling with the mcrl2 tool. In the fourth phase requirements were translated into $\mu$-calculus formulae. In the fifth phase the model was verified by translating the $\mu$-calculus formulae from phase four into mcf code. We were able to correctly specify the requirements in such a way that all translated requirements were met.
+
 \newpage
 \appendix
 \section{Code: mcrl2}
@@ -434,6 +438,32 @@ The visual representations provide an additional guide to verify that the system
 \\						 IOHandler1(Get, Input) $|$ $|$ IOHandler2(Get, Input) $|$ $|$ AirlockChamber1Controller(NoWafer, Closed, Closed) $|$ $|$ AirlockChamber2Controller(NoWafer, Closed, Closed) $|$ $|$ LampWaferHandler(Input,None)
 \\					 ));
 \newpage
-\section{Code: $\mu$-Formulas}
-
+\section{Code: $\mu$-formulae}
+\begin{enumerate}
+\item mcrl2 MCF: [true*] forall IP : IPStackID . [ CheckIPStackState(IP,Empty).
+\\(!MoveTo(MapIPDestination(IP)))* ] true
+\item mcrl2 MCF: [true*] forall OP : OPStackID . [ CheckOPStackState(OP,Full).
+\\(!MoveTo(MapOPDestination(OP)))* ] true
+\item mcrl2 MCF:
+\item mcrl2 MCF: (a) [true*] [MoveTo(MapIPDestination(IP1)). (!MoveTo(MapAirlock(AL1)))*
+\\.MoveTo(MapOPDestination(OP1))] false
+\\
+\\ (b) [true*] [MoveTo(MapIPDestination(IP2)). (!MoveTo(MapAirlock(AL2)))*.MoveTo(MapOPDestination(OP2))] false
+\item mcrl2 MCF: [true*] forall IP : IPStackID.[MoveTo(MapIPDestination(IP))] [PlaceWafer] false
+\item mcrl2 MCF:
+\item mcrl2 MCF:
+\item mcrl2 MCF: [true*] forall d : DoorID . [ OpenDoor(d).(!CloseDoor(d))*
+\\.OpenDoor(CorrespondingDoor(d)) ] false
+\item mcrl2 MCF: [true*] forall d : DoorID . [ OpenDoor(d).(!CloseDoor(d))*
+\\.OpenDoor(CorrespondingDoor(d)) ] false
+\item mcrl2 MCF: [true*] forall d : DoorID . [ OpenDoor(d).(!CloseDoor(d))*
+\\.OpenDoor(CorrespondingDoor(d)) ] false
+\item mcrl2 MCF: [true*] forall d : DoorID . [ OpenDoor(d).(!CloseDoor(d))*
+\\.OpenDoor(CorrespondingDoor(d)) ] false
+\item mcrl2 MCF: [true*.receiveWaferStatus(AL1, Finished). !OpenDoor(DI1)*] true
+\item mcrl2 MCF: [true*.receiveWaferStatus(AL1, New). !OpenDoor(DO1)*] true
+\item mcrl2 MCF: 
+\item mcrl2 MCF: 
+\item mcrl2 MCF: 
+\end{enumerate}
 \end{document}
