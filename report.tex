@@ -21,10 +21,16 @@
 
 \date {\today}
 \maketitle
-
+\newpage
+\tableofcontents
+ 
+\newpage
 \section{Introduction}
 This is a project done as part of TU Delft's IN4387 System Validation course. The project concerns designing, modelling and validating a controller for a Transfer system in an Industrial Silicon Wafer production plant.
-The system consists of a UV Lamp that projects a design onto a wafer inside a vacuum chamber. The wafers are transferred to the Lamp via two Airlocks. The wafers are handled by robots from their initial position on Input stacks to their final position on Output stacks. The wafers move along the production line from their Initial state (on the Input Stacks), are printed on by the Lamp and reach the Final state (on the Output stacks).
+\\
+\\The system consists of a UV Lamp that projects a design onto a wafer inside a vacuum chamber. The wafers are transferred to the Lamp via two Airlocks. The wafers are handled by robots from their initial position on the Input stacks to their final position on the Output stacks. The wafers move along the production line from their Initial state (on the Input Stacks), are printed on by the Lamp and reach the Final state (on the Output stacks).
+\\
+\\Described here is the documentation for the modelling of the above system in mcrl2 and it's verification using Modal $\mu$ Formulas. Section 2 describes the System and Functional Requirements. Section 3 is dedicated to the interactions between the various subsystems defined in section 2. The architecture of the resulting system is shown in section 4. In section 5 the requirements are translated into μ-calculus formulae. Section 6 describes the modelling process. In section 7 the model is verified with the translated requirements. The final conclusions are presented in section 8.
 
 \section{Requirements}
 
@@ -41,6 +47,31 @@ The system consists of the following physical components:
 \item Inner Robot: R3
 \end{itemize}
 
+
+\subsection{System Requirements}
+The behaviour of the system can be understood by describing the individual components requirements.
+\begin{enumerate}
+\item The Robots (R1 and R2) should not move to the Input Stacks if the Input Stacks are Empty.
+
+\item The Robots (R1 and R2) should not move to the Output Stacks if the Output Stacks are Full.
+\item The Robots (R1 and R2) should not move to the Output Stacks without a finished wafer.
+\item The Robots (R1 and R2) should not place a new wafer on the Output Stacks (O1 and O2).
+\item The Robots (R1 and R2) should not place a finished wafer on the Input Stacks (I1 and I2).
+%\item *** The Robots (R1 and R2) should not move to the Airlocks (A1 and A2) without picking up a new wafer.
+\item The Robots (R1 and R2) should not move to the Airlocks (A1 and A2) if the corresponding Outer Doors are closed (DO1 and DO2).
+\item The Robot (R3) should not move to the Airlocks (A1 or A2) if the corresponding Inner Doors are closed.
+\item The Inner Door (DI1) must not be opened if the Outer Door(DO1) is open for Airlock (A1).
+\item The Inner Door (DI2) must not be opened if the Outer Door(DO2) is open for Airlock (A2).
+\item The Outer Door (DO1) must not be opened if the Inner Door(DI1) is open for Airlock (A1).
+\item The Outer Door (DO2) must not be opened if the Inner Door(DI2) is open for Airlock (A2).
+\item The Inner Doors (DI1 and DI2) must not be opened if a finished wafer is present in their corresponding Airlocks (A1 and A2).
+\item The Outer Doors (DO1 and DO2) must not be opened if a new wafer is present in their corresponding Airlocks (A1 and A2).
+\item The Robot (R3) will place the new wafer on the Lamp only when it is empty.
+\item The Robot (R3) will pickup the finished wafer from the Lamp (L) only when it is finished printing.
+\item The Robot (R3) will not place the finished wafer again on the Lamp (L).
+\item The Robot (R3) will not pickup a wafer immediately after it has placed a wafer.
+\item The Robot (R3) will place a wafer it picked from an Airlock (A1 or A2) only to the same Airlock (after processing). 
+\end{enumerate}
 \subsection{Functional Requirements}
 \subsubsection{Overall requirements of the System:}
 \begin{itemize}
@@ -54,11 +85,6 @@ The system consists of the following physical components:
 \subsubsection{System Component Requirements:}
 These are the individual component requirements:
 \begin{enumerate}
-%\item Lamp L
-	%\begin{itemize}
-	%\item The Lamp should be undisturbed during printing.\textbf{ (Safety)}
-	%\item The Lamp will turn off after completion of printing.	
-	%\end{itemize}
 \item Doors: DI1, DI2, DO1, DO2
 	\begin{itemize}
 	\item Inner and Outer Doors  (DIx, DOx) of an Airclock (Ax) should never be open at the same time. (Vaccuum must be preserved) \textbf{ (Safety)}
@@ -91,93 +117,8 @@ These are the individual component requirements:
 \end{enumerate}
 %Extension: A Robot can use 2 hands independently and having separate control -- one for Finished and one for New
 
-% Maybe need this Later
-\iffalse
-\subsection{Sequence}
-Initial Conditions: All Doors are closed. Lamp is off. Robots R1 and R2 are near the Input Stacks. Robot R3 waits at Lamp. Airlocks A1, A2 are closed. Input Stacks are not empty and Output Stacks are not full.
-\subsubsection {I/O Retrieval Sequence }
-\begin{itemize}
-\item Check if Ix Stack not empty
-\item Robot Rx moves to Ix
-\item Robot Rx picks up the wafer at Ix 
-\item Open the Outer Door DOx
-\item Move to DOx
-\item Place wafer at Ax
-\item Close DOx
-\item Wait till DOx opens
-\item Check if Ox Stack not full
-\item Pick (finished)wafer from Ax
-\item Close DOx
-\item Move to Ox
-\item Place (finished)wafer at Ox
-\item GOTO 1
-\end{itemize}
-
-\subsubsection {Printing Sequence}
-\begin{itemize}
-\item Detect wafer at Ax
-\item Check if DOx is closed
-\item Open DIx
-\item R3 moves to DIx
-\item Pick wafer at Ax
-\item Close DIx
-\item Robot R3 places wafer on Lamp L
-\item Lamp L turns on
-\item Detect completed wafer on Lamp L [Assumption: Lamp has turned off]
-\item Check if DOx is closed
-\item Open DIx
-\item R3 moves to DIx
-\item Place wafer at Ax
-\item Close DIx
-\item Open DOx
-\item GOTO 1
-\end{itemize}
-\subsection{System Requirements}
-These are the individual component's constraints:
-\begin{enumerate}
-\item Lamp L
-	\begin{itemize}
-	\item The Lamp should be undisturbed during printing.
-	\item The Lamp will be turned off after completion of printing.	
-	\end{itemize}
-\item Inner Doors: DI1, DI2
-	\begin{itemize}
-	\item The Inner Doors may be opened only if the Outer Doors are closed.
-	\end{itemize}
-
-\item Outer Doors: DO1, DO2 
-	\begin{itemize}
-	\item The Outer Doors may be opened only if the Inner Doors are closed.
-	\end{itemize}
-
-\item Output Stacks: O1, O2
-	\begin{itemize}
-	\item No Wafer shall be put on a full Output Stack.  
-	\end{itemize}
-
-\item Outer Robots: R1, R2
-	\begin{itemize}
-	\item The Outer Robots will pick up a wafer from its corresponding Input stack.
-	\item The Outer Robots will place the Input wafer on its corresponding Airlock.
-	\item The Outer Robots will pick up a finished wafer from its corresponding Airlock.
-	\item The Outer Robots will place the finished wafer on its corresponding Output stack.
-	\item The Outer Robots will pickup the next Input wafer only after delivering a finished wafer to it's corresponding Output Stack.
-	\end{itemize}
-
-\item Inner Robot: R3
-	\begin{itemize}
-	\item The Inner Robot will pick up a detected Input wafer from an Airlock.
-	\item The Inner Robot will place the Input wafer on the Lamp only when it is empty
-	\item The Inner Robot will pick up a finished wafer from the Lamp.
-	\item The Inner Robot will place the finished wafer on its corresponding Airlock.
-	\item The Inner Robot will pickup the next Input wafer only after delivering a finished wafer to it's corresponding Airlock.
-	\end{itemize}
-
-\end{enumerate}
-\fi
-
 \section{Interactions} 
-\subsection {Commands to Actuators}
+\subsection {External Commands}
 The following are the commands given by the controller to the actuators of the system. The meaning can be interpreted as: \bigskip
 
 \textbf{Command( Target actuator, optional parameters)}
@@ -201,7 +142,7 @@ The commands are valid for the combinations of target Actuators and Destinations
 \end{tabular}%
 }
 \end{table}
-\subsection {Reading Sensors}
+\subsection {Communications}
 The following are the commands used by the controller to read the data provided by the sensors of the system. The meaning can be interpreted as: \bigskip
 
 \textbf{Command(Target sensor, Return Value by sensor)}
@@ -213,12 +154,302 @@ The following are the commands used by the controller to read the data provided 
 \end{itemize}
 \newpage
 \section{Architecture}
+\subsection{Global System Architecture}
 \begin{figure}[ht]
 \centering
-    \includegraphics[angle=90, width=15cm,height=20cm]{Architecture.jpg}
+    \includegraphics[width=\textwidth]{Architecture.jpg}
   \caption{Architecture Diagram of System}
   \label{fig:arch1}
 \end{figure}
 Figure \ref{fig:arch1} shows the Architecture of the system described above with five parallel controllers along with the various entities (Sensors and Actuators) they control.
+\newpage
+\section{Translated Requirements}
+\subsection{Introduction}
+The requirements mentioned in Section 2 describe what is needed and expected out of the system. A successful verification of the system which conforms to the aforementioned specifications and requirements is to be carried out. This necessitates the use of Modal $\mu$-Calculus.   
+\\
+\\In order to translate the requirements into their corresponding MCF representations, the requirements are rephrased as follows:
+\begin{enumerate}
+\item Requirement 1
+	\begin{itemize}
+	\item This is the rephrased version
+	\item May need to add more than one 
+	\end{itemize}
+\item Requirement 2
+	\begin{itemize}
+	\item This is the rephrased version
+	\item May need to add more than one 
+	\end{itemize}
+\item Requirement 3
+	\begin{itemize}
+	\item This is the rephrased version
+	\item May need to add more than one 
+	\end{itemize}
+\item Requirement 4
+	\begin{itemize}
+	\item This is the rephrased version
+	\item May need to add more than one 
+	\end{itemize}
+\item Requirement 5
+	\begin{itemize}
+	\item This is the rephrased version
+	\item May need to add more than one 
+	\end{itemize}
+\item Requirement 6
+	\begin{itemize}
+	\item This is the rephrased version
+	\item May need to add more than one 
+	\end{itemize}
+\item Requirement 7
+	\begin{itemize}
+	\item This is the rephrased version
+	\item May need to add more than one 
+	\end{itemize}
+\item Requirement 8
+	\begin{itemize}
+	\item This is the rephrased version
+	\item May need to add more than one 
+	\end{itemize}
+\item Requirement 9
+	\begin{itemize}
+	\item This is the rephrased version
+	\item May need to add more than one 
+	\end{itemize}
+\item Requirement 10
+	\begin{itemize}
+	\item This is the rephrased version
+	\item May need to add more than one 
+	\end{itemize}
+\end{enumerate}
+
+\subsection{Modal $\mu$ -Formulas}
+Here the corresponding Modal $\mu$ -Formulas are described:
+\begin{enumerate}
+\item Translated Requirement 1:
+    \begin{itemize}
+	\item MCF
+	\end{itemize}
+\item Translated Requirement 2:
+    \begin{itemize}
+	\item MCF
+	\end{itemize}
+\item Translated Requirement 3:
+    \begin{itemize}
+	\item MCF
+	\end{itemize}
+\item Translated Requirement 4:
+    \begin{itemize}
+	\item MCF
+	\end{itemize}
+\item Translated Requirement 5:
+    \begin{itemize}
+	\item MCF
+	\end{itemize}
+\item Translated Requirement 6:
+    \begin{itemize}
+	\item MCF
+	\end{itemize}
+\item Translated Requirement 7:
+    \begin{itemize}
+	\item MCF
+	\end{itemize}
+\item Translated Requirement 8:
+    \begin{itemize}
+	\item MCF
+	\end{itemize}
+\item Translated Requirement 9:
+    \begin{itemize}
+	\item MCF
+	\end{itemize}
+\item Translated Requirement 10:
+    \begin{itemize}
+	\item MCF
+	\end{itemize}
+\end{enumerate}
+\newpage
+\section{Modelling the System}
+Currently the two controllers called IO Handler 1 and IO Handler 2 are working in parallel with 2 separate Airlock Controllers for each Airlock and with the Lamp Handler. This results in a system with five parallel components working to move the wafer along the production process. The system currently has -------- states and -------- transitions.
+\\
+\\We have however, restricted the controllers to only control and interact with one half of the symmetrical system. This implies that the IO Handlers and Airlock Controllers only interact with a single robot (R1 or R2), single pair of Input and Output stack (I1,O1 or I2,O2), Airlocks (A1 or A2) and the corresponding pair of doors (DO1,DI1 or DO2,DI2). This simplifies the system to a great extent and helps in it's modelling.
+\\
+\\There is a caveat that this simplification will reduce the throughput of the system. This happens when one of the Stacks no longer have wafers present but the other pair of stacks still do. Hence, as an extension, we have considered the possibility of modelling a system which will have the flexibility to move the robots to different stacks and hence increase the throughput. 
+\newpage
+\section{Verification}
+The Verification process involved three main steps. We created a simplified version of the model where only a single IO Handler, Airlock Controller and Lamp Handler was present. We disregarded the second pair of Input Output Stacks along with the Robot and Airlock. This way we could visualize the system using LTSGraph. This worked well because for the complete system we simply needed to extend from this simplification by doubling the number of components mentioned above. The Complete Model was visually inspected using LTSView to mark for deadlocks along with an LPSxSim simulation to logeically verify the correct sequence of actions for the process. These are presented in the Visualization subsection. The $\mu$ Formulas derived from the translated requirements from Section 5 are presented in Appendix B 
+\subsection{Tools}
+In order to replicate our results, we provide the exact version of the tools we used along with the system configuration we used them on.
+\\
+\\The following version of mcrl2 was used:
+\begin{itemize}
+    \item mcrl2--version
+\end{itemize}
+The following tools were used for modelling and verification:
+\begin{itemize}
+    \item mcrl2xi : Editing
+    \item mcrl22lps : Transformation
+    \item lpsxsim : Simulation
+    \item lps2lts : Transformation
+    \item ltsgraph : Visualization
+    \item ltsview: Visualization
+\end{itemize}
+The following is the specification of the system used for the above tools:
+\begin{itemize}
+    \item Windows 10, Intel i-core i7, 2.8GHz processor with 16GB RAM 
+\end{itemize}
+\subsection{Verification Checks}
+
+\subsection{Visualizations}
+
+\section{Conclusion}
+\newpage
+\appendix
+\section{Code: mcrl2}
+\textbf{sort} DestinationID = \textbf{struct} A1 $|$ A2 $|$ I1 $|$ I2 $|$ O1 $|$ O2 $|$ Lamp;
+\\		  StackID = \textbf{struct} IP1 $|$ IP2 $|$ OP1 $|$ OP2;
+\\		  AirlockID = \textbf{struct} AL1 $|$ AL2 $|$ None;
+\\     IOHandlerID = \textbf{struct} IOH1 $|$ IOH2;
+\\		  OperationType = \textbf{struct} Get $|$ Put;
+\\		  IPStackState = \textbf{struct} Empty $|$ NonEmpty;
+\\		  OPStackState = \textbf{struct} Full $|$ NonFull;
+\\	    DoorID = \textbf{struct} DI1 $|$ DI2 $|$ DO1 $|$ DO2;		
+\\		  DoorState = \textbf{struct} Open $|$ Closed;
+\\			LampState = \textbf{struct} Incomplete $|$ Complete;
+\\		  CycleType = \textbf{struct} Input $|$ Output;
+\\		  WaferType = \textbf{struct} New $|$ Finished $|$ NoWafer;
+\\
+\\\textbf{map} CorrespondingDoor : DoorID -$>$ DoorID;
+\\
+\\\textbf{eqn} CorrespondingDoor(DO1) = DI1;
+\\		CorrespondingDoor(DI1) = DO1;
+\\		CorrespondingDoor(DO2) = DI2;
+\\		CorrespondingDoor(DI2) = DO2;
+\\
+\\\textbf{act} MoveTo: DestinationID;
+\\	  PickupWafer;
+\\	  PlaceWafer;
+\\
+\\	    OpenDoor : DoorID;
+\\		CloseDoor : DoorID;
+\\
+\\	  CheckIPStackState : StackID \# IPStackState;
+\\	  CheckOPStackState : StackID \# OPStackState;
+\\		CheckLampState : LampState;
+\\
+\\	  receiveDoorState : DoorID \# DoorState;
+\\	  sendDoorState : DoorID \# DoorState;
+\\		commDoorState : DoorID \# DoorState;
+\\
+\\	  receiveDoorRequest : DoorID \# DoorState;
+\\		sendDoorRequest : DoorID \# DoorState;
+\\		commDoorRequest : DoorID \# DoorState;
+\\
+\\	  receiveWaferStatus : AirlockID \# WaferType;
+\\		sendWaferStatus : AirlockID \# WaferType;
+\\		commWaferStatus : AirlockID \# WaferType;
+\\
+\\	  receiveWaferPresence : AirlockID \# WaferType;
+\\		sendWaferPresence : AirlockID \# WaferType;
+\\		commWaferPresence : AirlockID \# WaferType;
+\\
+\\
+\\\textbf{proc} IOHandler1(Operation : OperationType, Cycle : CycleType) = 
+\\((Cycle == Input) \&\& (Operation == Get)) -$>$ CheckIPStackState(IP1,Empty).IOHandler1(Operation = Get)
+\\+ ((Cycle == Input) \&\& (Operation == Get)) -$>$ CheckIPStackState(IP1,NonEmpty).MoveTo(I1).PickupWafer.IOHandler1(Operation = Put)
+\\+ ((Cycle == Input) \&\& (Operation == Put)) -$>$ receiveDoorState(DO1,Closed).sendDoorRequest(DO1,Open).IOHandler1(Operation = Put)
+\\+ ((Cycle == Input) \&\& (Operation == Put)) -$>$ receiveDoorState(DO1,Open).MoveTo(A1).PlaceWafer.sendWaferStatus(AL1,New).IOHandler1(Cycle = Output, Operation = Get)
+\\
+\\+ ((Cycle == Output) \&\& (Operation == Get)) -$>$ receiveWaferPresence(AL1,NoWafer).IOHandler1(Operation = Get)
+\\+ ((Cycle == Output) \&\& (Operation == Get)) -$>$ receiveWaferPresence(AL1,Finished).receiveDoorState(DO1,Closed).sendDoorRequest(DO1,Open)
+.receiveDoorState(DO1,Open).MoveTo(A1).PickupWafer.IOHandler1(Operation = Put)
+\\
+\\+ ((Cycle == Output) \&\& (Operation == Put)) -$>$ CheckOPStackState(OP1,Full).IOHandler1(Operation = Put)
+\\+ ((Cycle == Output) \&\& (Operation == Put)) -$>$ CheckOPStackState(OP1,NonFull).MoveTo(O1).PlaceWafer.IOHandler1(Cycle = Input, Operation = Get);
+\\
+\\IOHandler2(Operation : OperationType, Cycle : CycleType) =
+\\((Cycle == Input) \&\& (Operation == Get)) -$>$ CheckIPStackState(IP2,Empty).IOHandler2(Operation = Get)
+\\+ ((Cycle == Input) \&\& (Operation == Get)) -$>$ CheckIPStackState(IP2,NonEmpty).MoveTo(I2).PickupWafer.IOHandler2(Operation = Put)
+\\+ ((Cycle == Input) \&\& (Operation == Put)) -$>$ receiveDoorState(DO2,Closed).sendDoorRequest(DO2,Open).IOHandler2(Operation = Put)
+\\+ ((Cycle == Input) \&\& (Operation == Put)) -$>$ receiveDoorState(DO2,Open).MoveTo(A2).PlaceWafer.sendWaferStatus(AL2,New).IOHandler2(Cycle = Output, Operation = Get)
+\\
+\\+ ((Cycle == Output) \&\& (Operation == Get)) -$>$ receiveWaferPresence(AL2,NoWafer).IOHandler2(Operation = Get)
+\\+ ((Cycle == Output) \&\& (Operation == Get)) -$>$ receiveWaferPresence(AL2,Finished).receiveDoorState(DO2,Closed).sendDoorRequest(DO2,Open)
+.receiveDoorState(DO2,Open).MoveTo(A2).PickupWafer.IOHandler2(Operation = Put)
+\\
+\\+ ((Cycle == Output) \&\& (Operation == Put)) -$>$ CheckOPStackState(OP2,Full).IOHandler2(Operation = Put)
+\\+ ((Cycle == Output) \&\& (Operation == Put)) -$>$ CheckOPStackState(OP2,NonFull).MoveTo(O2).PlaceWafer.IOHandler2(Cycle = Input, Operation = Get);
+\\
+\\AirlockChamber1Controller(WaferPresence : WaferType, OuterDoorState : DoorState, InnerDoorState : DoorState) =
+((OuterDoorState == Closed) \&\& (InnerDoorState == Open)) -$>$ receiveDoorRequest(DO1,Open).AirlockChamber1Controller(InnerDoorState = Open)
+\\
+\\+ ((OuterDoorState == Closed) \&\& (InnerDoorState == Closed)) -$>$ receiveDoorRequest(DO1,Open).OpenDoor(DO1).AirlockChamber1Controller(OuterDoorState = Open)
+\\+ ((OuterDoorState == Open) \&\& (InnerDoorState == Closed)) -$>$ receiveDoorRequest(DI1,Open).AirlockChamber1Controller(OuterDoorState = Open)
+\\+ ((OuterDoorState == Closed) \&\& (InnerDoorState == Closed)) -$>$ receiveDoorRequest(DI1,Open).OpenDoor(DI1).AirlockChamber1Controller(InnerDoorState = Open)
+\\
+\\+ ((OuterDoorState == Open) \&\& (InnerDoorState == Closed)) -$>$ receiveWaferStatus(AL1,New).CloseDoor(DO1).AirlockChamber1Controller(WaferPresence = New, OuterDoorState = Closed)
+\\+ ((OuterDoorState == Closed) \&\& (InnerDoorState == Open)) -$>$ receiveWaferStatus(AL1,Finished).CloseDoor(DI1).AirlockChamber1Controller(WaferPresence = Finished, InnerDoorState = Closed)
+\\
+\\+ sendDoorState(DO1,OuterDoorState).AirlockChamber1Controller()
+\\+ sendDoorState(DI1,InnerDoorState).AirlockChamber1Controller()
+\\+ sendWaferPresence(AL1,WaferPresence).AirlockChamber1Controller();
+\\
+\\AirlockChamber2Controller(WaferPresence : WaferType, OuterDoorState : DoorState, InnerDoorState : DoorState) =
+((OuterDoorState == Closed) \&\& (InnerDoorState == Open)) -$>$ receiveDoorRequest(DO2,Open).AirlockChamber2Controller(InnerDoorState = Open)
+\\+ ((OuterDoorState == Closed) \&\& (InnerDoorState == Closed)) -$>$ receiveDoorRequest(DO2,Open).OpenDoor(DO2).AirlockChamber2Controller(OuterDoorState = Open)
+\\+ ((OuterDoorState == Open) \&\& (InnerDoorState == Closed)) -$>$ receiveDoorRequest(DI2,Open).AirlockChamber2Controller(OuterDoorState = Open)
+\\+ ((OuterDoorState == Closed) \&\& (InnerDoorState == Closed)) -$>$ receiveDoorRequest(DI2,Open).OpenDoor(DI2).AirlockChamber2Controller(InnerDoorState = Open)
+\\
+\\+ ((OuterDoorState == Open) \&\& (InnerDoorState == Closed)) -$>$ receiveWaferStatus(AL2,New).CloseDoor(DO2).AirlockChamber2Controller(WaferPresence = New, OuterDoorState = Closed)
+\\+ ((OuterDoorState == Closed) \&\& (InnerDoorState == Open)) -$>$ receiveWaferStatus(AL2,Finished).CloseDoor(DI2).AirlockChamber2Controller(WaferPresence = Finished, InnerDoorState = Closed)
+\\
+\\+ sendDoorState(DO2,OuterDoorState).AirlockChamber2Controller()
+\\+ sendDoorState(DI2,InnerDoorState).AirlockChamber2Controller()
+\\+ sendWaferPresence(AL2,WaferPresence).AirlockChamber2Controller();
+\\
+\\LampWaferHandler(Cycle : CycleType, CurrentAirlock : AirlockID) = 
+\\
+\\((Cycle == Input) \&\& (CurrentAirlock == None)) -$>$ receiveWaferPresence(AL1,New).LampWaferHandler(CurrentAirlock = AL1)
+\\+ ((Cycle == Input) \&\& (CurrentAirlock == AL1)) -$>$ receiveDoorState(DI1,Closed).sendDoorRequest(DI1,Open).LampWaferHandler(CurrentAirlock = AL1)
+\\+ ((Cycle == Input) \&\& (CurrentAirlock == AL1)) -$>$ receiveDoorState(DI1,Open).MoveTo(A1).PickupWafer.MoveTo(Lamp).PlaceWafer.LampWaferHandler(Cycle = Output)
+\\
+\\+ ((Cycle == Output) \&\& (CurrentAirlock == AL1)) -$>$ CheckLampState(Incomplete).LampWaferHandler(Cycle = Output)
+\\
+\\+ ((Cycle == Output) \&\& (CurrentAirlock == AL1)) -$>$ CheckLampState(Complete).MoveTo(Lamp).PickupWafer.MoveTo(A1).PlaceWafer.sendWaferStatus(AL1,Finished).LampWaferHandler(Cycle = Input, CurrentAirlock = None)
+\\
+\\+ ((Cycle == Input) \&\& (CurrentAirlock == None)) -$>$ receiveWaferPresence(AL2,New).LampWaferHandler(CurrentAirlock = AL2)
+\\
+\\+ ((Cycle == Input) \&\& (CurrentAirlock == AL2)) -$>$ receiveDoorState(DI2,Closed).sendDoorRequest(DI2,Open).LampWaferHandler(CurrentAirlock = AL2)
+\\
+\\+ ((Cycle == Input) \&\& (CurrentAirlock == AL2)) -$>$ receiveDoorState(DI2,Open).MoveTo(A2).PickupWafer.MoveTo(Lamp).PlaceWafer.LampWaferHandler(Cycle = Output)
+\\
+\\+ ((Cycle == Output) \&\& (CurrentAirlock == AL2)) -$>$ CheckLampState(Incomplete).LampWaferHandler(Cycle = Output)
+\\
+\\+ ((Cycle == Output) \&\& (CurrentAirlock == AL2)) -$>$ CheckLampState(Complete).MoveTo(Lamp).PickupWafer.MoveTo(A2).PlaceWafer.sendWaferStatus(AL2,Finished).LampWaferHandler(Cycle = Input, CurrentAirlock = None);
+\\
+\\\textbf{init} 
+\\
+\\\textbf{			allow}(
+\\						{MoveTo,
+ \\ 				 	 PickupWafer,
+ \\				 		 PlaceWafer,
+ \\	    			 CheckIPStackState,
+\\	  				 CheckOPStackState,
+\\						 CheckLampState,
+\\						 OpenDoor,
+\\						 CloseDoor,
+\\
+\\						 commDoorState,
+\\						 commDoorRequest,
+\\						 commWaferStatus,
+\\						 commWaferPresence},
+\\
+\\\textbf{			comm}(
+\\						{receiveDoorState $|$ sendDoorState -$>$ commDoorState,
+\\						receiveDoorRequest $|$ sendDoorRequest -$>$ commDoorRequest,
+\\	  				 	receiveWaferStatus $|$ sendWaferStatus -$>$ commWaferStatus,
+\\				 	   receiveWaferPresence $|$ sendWaferPresence -$>$ commWaferPresence},
+\\
+\\						 IOHandler1(Get, Input) $|$ $|$ IOHandler2(Get, Input) $|$ $|$ AirlockChamber1Controller(NoWafer, Closed, Closed) $|$ $|$ AirlockChamber2Controller(NoWafer, Closed, Closed) $|$ $|$ LampWaferHandler(Input,None)
+\\					 ));
+\newpage
+\section{Code: $\mu$-Formulas}
 
 \end{document}
