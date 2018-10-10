@@ -56,7 +56,7 @@ The behaviour of the system can be understood by describing the individual compo
 \item The Robots (R1 and R2) should not move to the Output Stacks if the Output Stacks are Full.
 \item The Robots (R1 and R2) should not move to the Output Stacks without a finished wafer.
 \item The Robots (R1 and R2) should not place a new wafer on the Output Stacks (O1 and O2).
-\item The Robots (R1 and R2) should not place a finished wafer on the Input Stacks (I1 and I2).
+\item The Robots (R1 and R2) should not place a wafer on the Input Stacks (I1 and I2).
 %\item *** The Robots (R1 and R2) should not move to the Airlocks (A1 and A2) without picking up a new wafer.
 \item The Robots (R1 and R2) should not move to the Airlocks (A1 and A2) if the corresponding Outer Doors are closed (DO1 and DO2).
 \item The Robot (R3) should not move to the Airlocks (A1 or A2) if the corresponding Inner Doors are closed.
@@ -72,62 +72,17 @@ The behaviour of the system can be understood by describing the individual compo
 \item The Robot (R3) will not pickup a wafer immediately after it has placed a wafer.
 \item The Robot (R3) will place a wafer it picked from an Airlock (A1 or A2) only to the same Airlock (after processing). 
 \end{enumerate}
-\subsection{Functional Requirements}
-\subsubsection{Overall requirements of the System:}
-\begin{itemize}
-\item As long as the Output Stacks are not full, wafers keep moving along the production line. (System is deadlock free) \textbf{(Safety)}
-\item Both the Inner and Outer Doors of an Airlock must NOT be open at the same time.\textbf{ (Safety)}
-%\item Doors must not be closed while the robot is picking up/placing a wafer in the Airlock\textbf{ (Safety)}
-%\item Doors must not get stuck\textbf{(Safety)}
-%\item Robots must not stop before reaching their destinations\textbf{ (Safety)}
-\end{itemize}
-
-\subsubsection{System Component Requirements:}
-These are the individual component requirements:
-\begin{enumerate}
-\item Doors: DI1, DI2, DO1, DO2
-	\begin{itemize}
-	\item Inner and Outer Doors  (DIx, DOx) of an Airclock (Ax) should never be open at the same time. (Vaccuum must be preserved) \textbf{ (Safety)}
-	\item Inner Door (DIx) should be opened ONLY if it's corresponding Outer Door (DOx) is closed and vice versa. \textbf{ (Safety)}
-	\end{itemize}
-
-\item Output Stacks: O1, O2
-	\begin{itemize}
-	\item Wafer should not be put on a full Output Stack.\textbf{ (Safety)}
-	\end{itemize}
-
-\item Outer Robots: R1, R2
-	\begin{itemize}
-	%\item The Outer Robots will pick up a wafer from its corresponding Input stack.
-	%\item The Outer Robots will place the Input wafer on its corresponding Airlock.
-	%\item The Outer Robots will pick up a finished wafer from its corresponding Airlock.
-	%\item The Outer Robots will place the finished wafer on its corresponding Output stack.
-	\item The Outer Robot (Rx) should pick the next Input wafer ONLY after delivering a finished wafer to it's corresponding Output Stack (Ox).\textbf{ (Safety)}
-	\end{itemize}
-
-\item Inner Robot: R3
-	\begin{itemize}
-	%\item The Inner Robot will pick up a detected Input wafer from an Airlock.
-	\item The Inner Robot should place the Input wafer on the Lamp ONLY when the Lamp's stack is empty.\textbf{ (Safety)}
-	%\item The Inner Robot will pick up a finished wafer from the Lamp.
-	%\item The Inner Robot will place the finished wafer on its corresponding Airlock.
-	\item The Inner Robot should pick the next Input wafer ONLY after delivering a finished wafer to it's corresponding Airlock (Ax).\textbf{ (Safety)}
-	\end{itemize}
-
-\end{enumerate}
-%Extension: A Robot can use 2 hands independently and having separate control -- one for Finished and one for New
-
+\newpage
 \section{Interactions} 
 \subsection {External Commands}
 The following are the commands given by the controller to the actuators of the system. The meaning can be interpreted as: \bigskip
-
-\textbf{Command( Target actuator, optional parameters)}
+\textbf{Command(Target)}
 \begin{itemize}
-\item MoveTo(x, D) [x: R1, R2, R3 ; D: Lamp, Airlocks, Input/Output Stacks]		Move to assigned destination.	
-\item PickupWafer(x, D)															[x: R1, R2, R3 ; D: Lamp, Airlocks, Input Stacks] 					Picks up the wafer.
-\item PlaceWafer(x, D) 															[x: R1, R2, R3 ; D: Lamp, Airlocks, Output Stacks]					Places the wafer.
-\item OpenDoor(x,s) 																[x: DI1, DI2, DO1, DO2; s:Open, Close]  														Opens the corresponding door.
-\item CloseDoor(x) 																[x: DI1, DI2, DO1, DO2]														Closes the corresponding door.
+\item MoveTo(x) [x: DestinationID]	: Move to assigned destination.	
+\item PickupWafer : Picks up the wafer.
+\item PlaceWafer : Places the wafer.
+\item OpenDoor(x) [x: DI1, DI2, DO1, DO2] : Opens the corresponding door.
+\item CloseDoor(x) [x: DI1, DI2, DO1, DO2] : Closes the corresponding door.
 \end{itemize}
 The commands are valid for the combinations of target Actuators and Destinations shown below:
 \begin{table}[!h]
@@ -142,145 +97,142 @@ The commands are valid for the combinations of target Actuators and Destinations
 \end{tabular}%
 }
 \end{table}
-\subsection {Communications}
-The following are the commands used by the controller to read the data provided by the sensors of the system. The meaning can be interpreted as: \bigskip
-
-\textbf{Command(Target sensor, Return Value by sensor)}
+\newpage
+The following commands are used to check sensor states:
 \begin{itemize}
-\item CheckInputStack(x, s)              [x: I1,I2 ; s: Present, Absent] 
-\item CheckOutputStack(x, s)          [x: O1,O2 ; s: Full, Empty]
-\item CheckLamp(L, s)	                  [L: Lamp ; s: Busy, CompletedPrinting]	
-\item CheckAirlock(x, s)                    [x: A1,A2 ; s : WaferPresent, WaferAbsent]  % if wafer present close outer door, open inner door;  else inner door remains closed, and outer remains open?? optimisation?? 
+\item CheckIPStackState(x,s) [x: I1, I2 ; s: Empty, Full] :
+\item CheckOPStackState(x,s) [x: O1, O2 ; s: Empty, Full] :
+\item CheckLampState(s) [Incomplete, Complete] :
+\end{itemize}
+
+\subsection {Communications}
+The following are the commands used by the controllers to communicate within the system. The meaning can be interpreted as: 
+\bigskip
+\newline 
+\textbf{Command(ComponentID, State):}
+\begin{itemize}
+\item receiveDoorState(x,s) [x: DI1, DI2, DO1, DO2 ; s: Open, Closed] 
+\item sendDoorState(x,s) [x: DI1, DI2, DO1, DO2 ; s: Open, Closed]
+\item commDoorState(x,s) [x: DI1, DI2, DO1, DO2 ; s: Open, Closed] 
+\bigskip
+\item receiveDoorRequest(x,s) [x: DI1, DI2, DO1, DO2 ; s: Open, Closed]
+\item sendDoorRequest(x,s) [x: DI1, DI2, DO1, DO2 ; s: Open, Closed] 
+\item commDoorRequest(x,s) [x: DI1, DI2, DO1, DO2 ; s: Open, Closed]
+\bigskip
+\item receiveWaferStatus(x,s) [x: A1, A2 ; s: New, Finished , NoWafer]
+\item sendWaferStatus(x,s) [x: A1, A2 ; s: New, Finished , NoWafer]
+\item commWaferStatus(x,s) [x: A1, A2 ; s: New, Finished , NoWafer]
+\bigskip
+\item receiveWaferPresence(x,s) [x: A1, A2 ; s: New, Finished , NoWafer]
+\item sendWaferPresence(x,s) [x: A1, A2 ; s: New, Finished , NoWafer]
+\item commWaferPresence(x,s) [x: A1, A2 ; s: New, Finished , NoWafer]
 \end{itemize}
 \newpage
 \section{Architecture}
 \subsection{Global System Architecture}
+Figure \ref{fig:arch1} shows the Architecture of the system described above with five parallel controllers along with the various entities (Sensors and Actuators) they control.
+
 \begin{figure}[ht]
 \centering
-    \includegraphics[width=\textwidth]{Architecture.jpg}
+    \includegraphics[width=\textwidth]{Architecture-final.jpg}
   \caption{Architecture Diagram of System}
   \label{fig:arch1}
 \end{figure}
-Figure \ref{fig:arch1} shows the Architecture of the system described above with five parallel controllers along with the various entities (Sensors and Actuators) they control.
 \newpage
 \section{Translated Requirements}
 \subsection{Introduction}
 The requirements mentioned in Section 2 describe what is needed and expected out of the system. A successful verification of the system which conforms to the aforementioned specifications and requirements is to be carried out. This necessitates the use of Modal $\mu$-Calculus.   
-\\
-\\In order to translate the requirements into their corresponding MCF representations, the requirements are rephrased as follows:
-\begin{enumerate}
-\item Requirement 1
-	\begin{itemize}
-	\item This is the rephrased version
-	\item May need to add more than one 
-	\end{itemize}
-\item Requirement 2
-	\begin{itemize}
-	\item This is the rephrased version
-	\item May need to add more than one 
-	\end{itemize}
-\item Requirement 3
-	\begin{itemize}
-	\item This is the rephrased version
-	\item May need to add more than one 
-	\end{itemize}
-\item Requirement 4
-	\begin{itemize}
-	\item This is the rephrased version
-	\item May need to add more than one 
-	\end{itemize}
-\item Requirement 5
-	\begin{itemize}
-	\item This is the rephrased version
-	\item May need to add more than one 
-	\end{itemize}
-\item Requirement 6
-	\begin{itemize}
-	\item This is the rephrased version
-	\item May need to add more than one 
-	\end{itemize}
-\item Requirement 7
-	\begin{itemize}
-	\item This is the rephrased version
-	\item May need to add more than one 
-	\end{itemize}
-\item Requirement 8
-	\begin{itemize}
-	\item This is the rephrased version
-	\item May need to add more than one 
-	\end{itemize}
-\item Requirement 9
-	\begin{itemize}
-	\item This is the rephrased version
-	\item May need to add more than one 
-	\end{itemize}
-\item Requirement 10
-	\begin{itemize}
-	\item This is the rephrased version
-	\item May need to add more than one 
-	\end{itemize}
-\end{enumerate}
-
 \subsection{Modal $\mu$ -Formulas}
+%\\In order to translate the requirements into their corresponding MCF representations, the requirements are rephrased as follows:
 Here the corresponding Modal $\mu$ -Formulas are described:
 \begin{enumerate}
-\item Translated Requirement 1:
+\item The Robots (R1 and R2) should not move to the Input Stacks if the Input Stacks are Empty:
     \begin{itemize}
 	\item MCF
 	\end{itemize}
-\item Translated Requirement 2:
+\item The Robots (R1 and R2) should not move to the Output Stacks if the Output Stacks are Full:
     \begin{itemize}
 	\item MCF
 	\end{itemize}
-\item Translated Requirement 3:
+\item The Robots (R1 and R2) should not move to the Output Stacks without a finished wafer:
     \begin{itemize}
 	\item MCF
 	\end{itemize}
-\item Translated Requirement 4:
+\item The Robots (R1 and R2) should not place a new wafer on the Output Stacks (O1 and O2):
     \begin{itemize}
 	\item MCF
 	\end{itemize}
-\item Translated Requirement 5:
+\item The Robots (R1 and R2) should not place a wafer on the Input Stacks (I1 and I2):
     \begin{itemize}
 	\item MCF
 	\end{itemize}
-\item Translated Requirement 6:
+\item The Robots (R1 and R2) should not move to the Airlocks (A1 and A2) if the corresponding Outer Doors are closed (DO1 and DO2):
     \begin{itemize}
 	\item MCF
 	\end{itemize}
-\item Translated Requirement 7:
+\item The Robot (R3) should not move to the Airlocks (A1 or A2) if the corresponding Inner Doors are closed:
     \begin{itemize}
 	\item MCF
 	\end{itemize}
-\item Translated Requirement 8:
+\item The Inner Door (DI1) must not be opened if the Outer Door(DO1) is open for Airlock (A1).
+\item The Inner Door (DI2) must not be opened if the Outer Door(DO2) is open for Airlock (A2).
+\item The Outer Door (DO1) must not be opened if the Inner Door(DI1) is open for Airlock (A1).
+\item The Outer Door (DO2) must not be opened if the Inner Door(DI2) is open for Airlock (A2) :
+\begin{itemize}
+	\item (for 8-11) MCF
+	\end{itemize}
+\item The Inner Doors (DI1 and DI2) must not be opened if a finished wafer is present in their corresponding Airlocks (A1 and A2):
     \begin{itemize}
 	\item MCF
 	\end{itemize}
-\item Translated Requirement 9:
+\item The Outer Doors (DO1 and DO2) must not be opened if a new wafer is present in their corresponding Airlocks (A1 and A2):
     \begin{itemize}
 	\item MCF
 	\end{itemize}
-\item Translated Requirement 10:
+\item The Robot (R3) will place the new wafer on the Lamp only when it is empty:
     \begin{itemize}
 	\item MCF
 	\end{itemize}
+\item The Robot (R3) will pickup the finished wafer from the Lamp (L) only when it is finished printing:
+    \begin{itemize}
+	\item MCF
+	\end{itemize}
+\item The Robot (R3) will not place the finished wafer again on the Lamp (L):
+    \begin{itemize}
+	\item MCF
+	\end{itemize}
+\item The Robot (R3) will not pickup a wafer immediately after it has placed a wafer:
+    \begin{itemize}
+	\item MCF
+	\end{itemize}
+\item The Robot (R3) will place a wafer it picked from an Airlock (A1 or A2) only to the same Airlock (after processing):
+    \begin{itemize}
+	\item MCF
+	\end{itemize}
+	
 \end{enumerate}
 \newpage
 \section{Modelling the System}
-Currently the two controllers called IO Handler 1 and IO Handler 2 are working in parallel with 2 separate Airlock Controllers for each Airlock and with the Lamp Handler. This results in a system with five parallel components working to move the wafer along the production process. The system currently has -------- states and -------- transitions.
+Currently the two controllers called IO Handler 1 and IO Handler 2 are working in parallel with 2 separate Airlock Controllers for each Airlock and with the Lamp Handler. This results in a system with five parallel components working to move the wafer along the production process. The system currently has 87 levels, 1740 states and 3776 transitions.
 \\
 \\We have however, restricted the controllers to only control and interact with one half of the symmetrical system. This implies that the IO Handlers and Airlock Controllers only interact with a single robot (R1 or R2), single pair of Input and Output stack (I1,O1 or I2,O2), Airlocks (A1 or A2) and the corresponding pair of doors (DO1,DI1 or DO2,DI2). This simplifies the system to a great extent and helps in it's modelling.
 \\
 \\There is a caveat that this simplification will reduce the throughput of the system. This happens when one of the Stacks no longer have wafers present but the other pair of stacks still do. Hence, as an extension, we have considered the possibility of modelling a system which will have the flexibility to move the robots to different stacks and hence increase the throughput. 
+\begin{figure}[ht]
+\centering
+    \includegraphics[width=\textwidth, height=8cm]{3D-Model.png}
+  \caption{LTSView of the System}
+  \label{fig:ltsview}
+\end{figure}
 \newpage
 \section{Verification}
-The Verification process involved three main steps. We created a simplified version of the model where only a single IO Handler, Airlock Controller and Lamp Handler was present. We disregarded the second pair of Input Output Stacks along with the Robot and Airlock. This way we could visualize the system using LTSGraph. This worked well because for the complete system we simply needed to extend from this simplification by doubling the number of components mentioned above. The Complete Model was visually inspected using LTSView to mark for deadlocks along with an LPSxSim simulation to logeically verify the correct sequence of actions for the process. These are presented in the Visualization subsection. The $\mu$ Formulas derived from the translated requirements from Section 5 are presented in Appendix B 
+The Verification process involved three main steps. We created a simplified version of the model where only a single IO Handler, Airlock Controller and Lamp Handler was present. We disregarded the second pair of Input Output Stacks along with the Robot and Airlock. This way we could visualize the system using LTSGraph. This worked well because for the complete system we simply needed to extend from this simplification by doubling the number of components mentioned above. The Complete Model was visually inspected using LTSView to mark for deadlocks along with an LPSxSim simulation to logically verify the correct sequence of actions for the process. These are presented in the Visualization subsection. The $\mu$ Formulas derived from the translated requirements from Section 5 are presented in Appendix B 
 \subsection{Tools}
 In order to replicate our results, we provide the exact version of the tools we used along with the system configuration we used them on.
 \\
 \\The following version of mcrl2 was used:
 \begin{itemize}
-    \item mcrl2--version
+    \item mcrl2 --version: 201808.0
 \end{itemize}
 The following tools were used for modelling and verification:
 \begin{itemize}
@@ -289,16 +241,32 @@ The following tools were used for modelling and verification:
     \item lpsxsim : Simulation
     \item lps2lts : Transformation
     \item ltsgraph : Visualization
-    \item ltsview: Visualization
+    \item ltsview : Visualization
+    \item lts2pbes : Transformation
+    \item pbessolve : Verification
 \end{itemize}
 The following is the specification of the system used for the above tools:
 \begin{itemize}
     \item Windows 10, Intel i-core i7, 2.8GHz processor with 16GB RAM 
 \end{itemize}
 \subsection{Verification Checks}
-
+The method used for formal verification of the system requirements presented in Section 2 is converting the model to PBES and then verifying each MCF individually. The MCF presented in Section 5 are verified individually and each of the presented MCF holds true for the model presented.
 \subsection{Visualizations}
-
+The visual representations provide an additional guide to verify that the system is, indeed, deadlock free. Figure \ref{fig:ltsview-1} shows the system when visualized with LTSView tool. The figure represents the states and transitions present in the model. Figure \ref{fig:deadlockfree} shows the model when marked for deadlocks. The absence of red dots confirms that the system is deadlock free.
+\begin{figure}[ht]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{3D-Model.png} \caption{LTSView}
+        \label{fig:ltsview-1}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{Deadlockfree.png} 
+        \caption{Marking Deadlocks}
+        \label{fig:deadlockfree}
+    \end{minipage}
+\end{figure}
 \section{Conclusion}
 \newpage
 \appendix
@@ -316,12 +284,28 @@ The following is the specification of the system used for the above tools:
 \\		  CycleType = \textbf{struct} Input $|$ Output;
 \\		  WaferType = \textbf{struct} New $|$ Finished $|$ NoWafer;
 \\
-\\\textbf{map} CorrespondingDoor : DoorID -$>$ DoorID;
+\\\textbf{map} CorrespondingDoor : DoorID -> DoorID;
+\\	  CorrespondingOPDestination : IPStackID -> \\DestinationID;		
+\\	  MapOPDestination : OPStackID -> DestinationID;
+\\		MapIPDestination : IPStackID -> DestinationID;
+\\		MapAirlock : AirlockID -> DestinationID;
 \\
-\\\textbf{eqn} CorrespondingDoor(DO1) = DI1;
+\\ \textbf{eqn} CorrespondingDoor(DO1) = DI1;
 \\		CorrespondingDoor(DI1) = DO1;
 \\		CorrespondingDoor(DO2) = DI2;
 \\		CorrespondingDoor(DI2) = DO2;
+\\
+\\		CorrespondingOPDestination(IP1) = O1;
+\\		CorrespondingOPDestination(IP2) = O2;
+\\
+\\		MapOPDestination(OP1) = O1;
+\\		MapOPDestination(OP2) = O2;
+\\		MapIPDestination(IP1) = I1;
+\\		MapIPDestination(IP2) = I2;
+\\
+\\		MapAirlock(AL1) = A1;
+\\		MapAirlock(AL2) = A2;
+\\		MapAirlock(None) = Null;
 \\
 \\\textbf{act} MoveTo: DestinationID;
 \\	  PickupWafer;
