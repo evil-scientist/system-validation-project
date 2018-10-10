@@ -1,1 +1,0 @@
-[true*] forall OP: OPStackID . [ CheckOPStackState(OP, Full).(!MoveTo(MapOPDestination(OP)))* ] true
