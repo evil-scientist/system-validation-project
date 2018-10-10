@@ -1,2 +1,0 @@
-[true*] forall IP : IPStackID.[MoveTo(MapIPDestination(IP))] [PlaceWafer] false
-

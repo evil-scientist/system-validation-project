@@ -50,22 +50,23 @@ The system consists of the following physical components:
 
 \subsection{System Requirements}
 The behaviour of the system can be understood by describing the individual components requirements.
+
 \begin{enumerate}
 
 \item The Robots (R1 and R2) should not move to the Input Stacks if the Input Stacks are Empty.
 
 \item The Robots (R1 and R2) should not move to the Output Stacks if the Output Stacks are Full.
 
-\item The Robots (R1 and R2) should not move to the Output Stacks without a finished wafer.
+%\item The Robots (R1 and R2) should not move to the Output Stacks without a finished wafer.
 
 \item The Robots (R1 and R2) should not place a new wafer on the Output Stacks (O1 and O2).
 
 %\item The Robots (R1 and R2) should not place a wafer on the Input Stacks (I1 and I2).
 %\item *** The Robots (R1 and R2) should not move to the Airlocks (A1 and A2) without picking up a new wafer.
 
-\item The Robots (R1 and R2) should not move to the Airlocks (A1 and A2) if the corresponding Outer Doors are closed (DO1 and DO2).
+%\item The Robots (R1 and R2) should not move to the Airlocks (A1 and A2) if the corresponding Outer Doors are closed (DO1 and DO2).
 
-\item The Robot (R3) should not move to the Airlocks (A1 or A2) if the corresponding Inner Doors are closed.
+%\item The Robot (R3) should not move to the Airlocks (A1 or A2) if the corresponding Inner Doors are closed.
 
 \item The Inner Door (DI1) must not be opened if the Outer Door(DO1) is open for Airlock (A1).
 
@@ -86,6 +87,8 @@ The behaviour of the system can be understood by describing the individual compo
 %\item The Robot (R3) will not pickup a wafer immediately after it has placed a wafer.
 
 %\item The Robot (R3) will place a wafer it picked from an Airlock (A1 or A2) only to the same Airlock (after processing). 
+
+\item As long as the wafer can move through the production process, it will. In other words, the system is deadlock free.
 
 \end{enumerate}
 
@@ -176,10 +179,10 @@ Here the corresponding Modal $\mu$ -formulae are described:
 \\(\overline{MoveTo(MapOPDestination(OP)}*].true$ \\\textbf{Status:}Verified true.
 
 
-\item The Robots (R1 and R2) should not move to the Output Stacks without a finished wafer:
-\\
-\\\textbf{Formula:} $[true*] \forall IP: IPStackID.[CheckIPStackState(IP, Empty).
-\\(\overline{MoveTo(MapIPDestination(IP)}*].true$ \\\textbf{Status:}Verified true.
+%\item The Robots (R1 and R2) should not move to the Output Stacks without a finished wafer:
+%\\
+%\\\textbf{Formula:} $[true*] \forall IP: IPStackID.[CheckIPStackState(IP, Empty).
+%\\(\overline{MoveTo(MapIPDestination(IP)}*].true$ \\\textbf{Status:}Verified true.
 
 
 \item The Robots (R1 and R2) should not place a new wafer on the Output Stacks (O1 and O2):
@@ -195,16 +198,16 @@ Here the corresponding Modal $\mu$ -formulae are described:
 %%\\(\overline{MoveTo(MapIPDestination(IP)}*].true$ %%\\\textbf{Status:}Verified true.
 
 
-\item The Robots (R1 and R2) should not move to the Airlocks (A1 and A2) if the corresponding Outer Doors are closed (DO1 and DO2):
-\\
-\\\textbf{Formula:} $[true*] \forall IP: IPStackID.[CheckIPStackState(IP, Empty).
-\\(\overline{MoveTo(MapIPDestination(IP)}*].true$ \\\textbf{Status:}Verified true.
+%\item The Robots (R1 and R2) should not move to the Airlocks (A1 and A2) if the corresponding Outer Doors are closed (DO1 and DO2):
+%\\
+%\\\textbf{Formula:} $[true*] \forall IP: IPStackID.[CheckIPStackState(IP, Empty).
+%\\(\overline{MoveTo(MapIPDestination(IP)}*].true$ %\\\textbf{Status:}Verified true.
 
 
-\item The Robot (R3) should not move to the Airlocks (A1 or A2) if the corresponding Inner Doors are closed:
-\\
-\\\textbf{Formula:} $[true*] \forall IP: IPStackID.[CheckIPStackState(IP, Empty).
-\\(\overline{MoveTo(MapIPDestination(IP)}*].true$ \\\textbf{Status:}Verified true.
+%\item The Robot (R3) should not move to the Airlocks (A1 or A2) if the corresponding Inner Doors are closed:
+%\\
+%\\\textbf{Formula:} $[true*] \forall IP: IPStackID.[CheckIPStackState(IP, Empty).
+%\\(\overline{MoveTo(MapIPDestination(IP)}*].true$ %\\\textbf{Status:}Verified true.
 
 
 \item The Inner Door (DI1) must not be opened if the Outer Door(DO1) is open for Airlock (A1).
@@ -216,7 +219,7 @@ Here the corresponding Modal $\mu$ -formulae are described:
 \item The Outer Door (DO1) must not be opened if the Inner Door(DI1) is open for Airlock (A1).
 
 
-\item The Outer Door (DO2) must not be opened if the Inner Door(DI2) is open for Airlock (A2) : \textbf{(for 8-11)} 
+\item The Outer Door (DO2) must not be opened if the Inner Door(DI2) is open for Airlock (A2) : \textbf{(for 4-7)} 
 \\
 \\\textbf{Formula:} $[true*] \forall d: DoorID.[OpenDoor(d).\overline{CloseDoor(d)}*OpenDoor(Corresponding(d))].false$ \\\textbf{Status:}Verified true.
 
@@ -257,6 +260,11 @@ Here the corresponding Modal $\mu$ -formulae are described:
 %\\
 %\\\textbf{Formula:} $[true*] \forall IP: IPStackID.[CheckIPStackState(IP, Empty).
 %\\(\overline{MoveTo(MapIPDestination(IP)}*].true$ %\\\textbf{Status:}Verified true.
+
+\item The system is deadlock free:
+\\
+\\\textbf{Formula:} $[true*].<true>.true$
+\\\textbf{Status:}Verified true.
 
 \end{enumerate}
 
@@ -495,7 +503,7 @@ As part of the given assignment, we have modelled a Wafer production system as d
 \item mcrl2 MCF: [true*] forall OP : OPStackID . [ CheckOPStackState(OP,Full).
 \\(!MoveTo(MapOPDestination(OP)))* ] true
 
-\item mcrl2 MCF:
+%\item mcrl2 MCF:
 
 \item mcrl2 MCF: (a) [true*] [MoveTo(MapIPDestination(IP1)). (!MoveTo(MapAirlock(AL1)))*
 \\.MoveTo(MapOPDestination(OP1))] false
@@ -504,9 +512,9 @@ As part of the given assignment, we have modelled a Wafer production system as d
 
 %\item mcrl2 MCF: [true*] forall IP : IPStackID.[MoveTo(MapIPDestination(IP))] [PlaceWafer] false
 
-\item mcrl2 MCF:
+%\item mcrl2 MCF:
 
-\item mcrl2 MCF:
+%\item mcrl2 MCF:
 
 \item mcrl2 MCF: [true*] forall d : DoorID . [ OpenDoor(d).(!CloseDoor(d))*
 \\.OpenDoor(CorrespondingDoor(d)) ] false
@@ -528,6 +536,7 @@ As part of the given assignment, we have modelled a Wafer production system as d
 
 \item mcrl2 MCF: [true*.receiveWaferStatus(AL1, New). !OpenDoor(DO1)*] true
 
+\item mcrl2 MCF: [true*].<true>.true
 
 \end{enumerate}
 \end{document}
