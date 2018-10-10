@@ -1,0 +1,1 @@
+[true*] forall AL: AirlockID . [ MoveTo(Lamp).(!MoveTo(MapAirlock(AL)))*.MoveTo(MapIPDestination(IP)) ] false
