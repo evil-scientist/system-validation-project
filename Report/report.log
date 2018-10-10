@@ -1,0 +1,661 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.9.27)  10 OCT 2018 14:12
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**report.tex
+(./report.tex
+LaTeX2e <2017-04-15>
+Babel <3.18> and hyphenation patterns for 84 language(s) loaded.
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
+File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 99.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen103
+\Gin@req@width=\dimen104
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/rotating.sty
+Package: rotating 2016/08/11 v2.16d rotated objects in LaTeX
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+\c@r@tfl@t=\count87
+\rotFPtop=\skip43
+\rotFPbot=\skip44
+\rot@float@box=\box26
+\rot@mess@toks=\toks15
+)
+(/usr/share/texlive/texmf-dist/tex/latex/bbding/bbding.sty
+Package: bbding 1999/04/15 v1.01 Dingbats symbols
+) (./report.aux)
+\openout1 = `report.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count88
+\scratchdimen=\dimen105
+\scratchbox=\box27
+\nofMPsegments=\count89
+\nofMParguments=\count90
+\everyMPshowfont=\toks16
+\MPscratchCnt=\count91
+\MPscratchDim=\dimen106
+\MPnumerator=\count92
+\makeMPintoPDFobject=\count93
+\everyMPtoPDFconversion=\toks17
+) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
+)))
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2018/01/21 v0.26 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2017/03/15 v3.2 Provides the ifpdf switch
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+38.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 456.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <14.4> on input line 23.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 23.
+
+[1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./report.toc
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 3.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 3.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 3.
+)
+\tf@toc=\write3
+\openout3 = `report.toc'.
+
+ [2]
+Missing character: There is no Î in font cmr12!
+Missing character: There is no ¼ in font cmr12!
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--34
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--34
+
+ []
+
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 40.
+(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 40.
+ [3] [4] [5]
+LaTeX Font Info:    Try loading font information for U+ding on input line 139.
+
+(/usr/share/texlive/texmf-dist/tex/latex/bbding/Uding.fd
+File: Uding.fd 1996/02/01 v1.0 BBding font definitions
+)
+Overfull \hbox (15.39276pt too wide) in paragraph at lines 136--144
+ [][] 
+ []
+
+[6] [7]
+<Architecture.jpg, id=32, 5262.66125pt x 2374.8725pt>
+File: Architecture.jpg Graphic file (type jpg)
+<use Architecture.jpg>
+Package pdftex.def Info: Architecture.jpg  used on input line 160.
+(pdftex.def)             Requested size: 390.0pt x 175.96973pt.
+ [8 <./Architecture.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 168--171
+
+ []
+
+[9] [10] [11]
+Underfull \hbox (badness 10000) in paragraph at lines 270--275
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 270--275
+
+ []
+
+[12]
+Underfull \hbox (badness 10000) in paragraph at lines 279--282
+
+ []
+
+[13]
+Underfull \hbox (badness 10000) in paragraph at lines 306--452
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--452
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--452
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--452
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--452
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--452
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--452
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--452
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--452
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--452
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--452
+
+ []
+
+
+Overfull \hbox (137.32928pt too wide) in paragraph at lines 306--452
+\OT1/cmr/m/n/12 ((Cycle == In-put) && (Op-er-a-tion == Get)) -$\OML/cmm/m/it/12
+ >$ \OT1/cmr/m/n/12 Check-IP-Stack-State(IP1,Empty).IOHandler1(Operation
+ []
+
+
+Overfull \hbox (302.6248pt too wide) in paragraph at lines 306--452
+\OT1/cmr/m/n/12 + ((Cy-cle == In-put) && (Op-er-a-tion == Get)) -$\OML/cmm/m/it
+/12 >$ \OT1/cmr/m/n/12 Check-IP-Stack-State(IP1,NonEmpty).MoveTo(I1).PickupWafe
+r.IOHandler1(Operation
+ []
+
+
+Overfull \hbox (299.82344pt too wide) in paragraph at lines 306--452
+\OT1/cmr/m/n/12 + ((Cy-cle == In-put) && (Op-er-a-tion == Put)) -$\OML/cmm/m/it
+/12 >$ \OT1/cmr/m/n/12 re-ceive-DoorState(DO1,Closed).sendDoorRequest(DO1,Open)
+.IOHandler1(Operation
+ []
+
+
+Overfull \hbox (388.3489pt too wide) in paragraph at lines 306--452
+\OT1/cmr/m/n/12 + ((Cy-cle == In-put) && (Op-er-a-tion == Put)) -$\OML/cmm/m/it
+/12 >$ \OT1/cmr/m/n/12 re-ceive-DoorState(DO1,Open).MoveTo(A1).PlaceWafer.sendW
+aferStatus(AL1,New).IOHandler1(Cycle
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--452
+
+ []
+
+
+Overfull \hbox (27.85266pt too wide) in paragraph at lines 306--452
+\OT1/cmr/m/n/12 ence(AL1,Finished).receiveDoorState(DO1,Closed).sendDoorRequest
+(DO1,Open)
+ []
+
+
+Overfull \hbox (21.05548pt too wide) in paragraph at lines 306--452
+\OT1/cmr/m/n/12 .re-ceive-DoorState(DO1,Open).MoveTo(A1).PickupWafer.IOHandler1
+(Operation
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--452
+
+ []
+
+
+Overfull \hbox (153.41522pt too wide) in paragraph at lines 306--452
+\OT1/cmr/m/n/12 + ((Cy-cle == Out-put) && (Op-er-a-tion == Put)) -$\OML/cmm/m/i
+t/12 >$ \OT1/cmr/m/n/12 Check-OP-Stack-State(OP1,Full).IOHandler1(Operation
+ []
+
+
+Overfull \hbox (280.5278pt too wide) in paragraph at lines 306--452
+\OT1/cmr/m/n/12 + ((Cy-cle == Out-put) && (Op-er-a-tion == Put)) -$\OML/cmm/m/i
+t/12 >$ \OT1/cmr/m/n/12 Check-OP-Stack-State(OP1,NonFull).MoveTo(O1).PlaceWafer
+.IOHandler1(Cycle
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--452
+
+ []
+
+
+Overfull \hbox (137.32928pt too wide) in paragraph at lines 306--452
+\OT1/cmr/m/n/12 ((Cycle == In-put) && (Op-er-a-tion == Get)) -$\OML/cmm/m/it/12
+ >$ \OT1/cmr/m/n/12 Check-IP-Stack-State(IP2,Empty).IOHandler2(Operation
+ []
+
+
+Overfull \hbox (302.6248pt too wide) in paragraph at lines 306--452
+\OT1/cmr/m/n/12 + ((Cy-cle == In-put) && (Op-er-a-tion == Get)) -$\OML/cmm/m/it
+/12 >$ \OT1/cmr/m/n/12 Check-IP-Stack-State(IP2,NonEmpty).MoveTo(I2).PickupWafe
+r.IOHandler2(Operation
+ []
+
+
+Overfull \hbox (299.82344pt too wide) in paragraph at lines 306--452
+\OT1/cmr/m/n/12 + ((Cy-cle == In-put) && (Op-er-a-tion == Put)) -$\OML/cmm/m/it
+/12 >$ \OT1/cmr/m/n/12 re-ceive-DoorState(DO2,Closed).sendDoorRequest(DO2,Open)
+.IOHandler2(Operation
+ []
+
+
+Overfull \hbox (388.3489pt too wide) in paragraph at lines 306--452
+\OT1/cmr/m/n/12 + ((Cy-cle == In-put) && (Op-er-a-tion == Put)) -$\OML/cmm/m/it
+/12 >$ \OT1/cmr/m/n/12 re-ceive-DoorState(DO2,Open).MoveTo(A2).PlaceWafer.sendW
+aferStatus(AL2,New).IOHandler2(Cycle
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--452
+
+ []
+
+
+Overfull \hbox (27.85266pt too wide) in paragraph at lines 306--452
+\OT1/cmr/m/n/12 ence(AL2,Finished).receiveDoorState(DO2,Closed).sendDoorRequest
+(DO2,Open)
+ []
+
+
+Overfull \hbox (21.05548pt too wide) in paragraph at lines 306--452
+\OT1/cmr/m/n/12 .re-ceive-DoorState(DO2,Open).MoveTo(A2).PickupWafer.IOHandler2
+(Operation
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--452
+
+ []
+
+
+Overfull \hbox (153.41522pt too wide) in paragraph at lines 306--452
+\OT1/cmr/m/n/12 + ((Cy-cle == Out-put) && (Op-er-a-tion == Put)) -$\OML/cmm/m/i
+t/12 >$ \OT1/cmr/m/n/12 Check-OP-Stack-State(OP2,Full).IOHandler2(Operation
+ []
+
+
+Overfull \hbox (280.5278pt too wide) in paragraph at lines 306--452
+\OT1/cmr/m/n/12 + ((Cy-cle == Out-put) && (Op-er-a-tion == Put)) -$\OML/cmm/m/i
+t/12 >$ \OT1/cmr/m/n/12 Check-OP-Stack-State(OP2,NonFull).MoveTo(O2).PlaceWafer
+.IOHandler2(Cycle
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--452
+
+ []
+
+
+Overfull \hbox (188.23431pt too wide) in paragraph at lines 306--452
+\OT1/cmr/m/n/12 && (In-ner-DoorState == Open)) -$\OML/cmm/m/it/12 >$ \OT1/cmr/m
+/n/12 re-ceive-Door-Re-quest(DO1,Open).AirlockChamber1Controller(InnerDoorState
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--452
+
+ []
+
+
+Overfull \hbox (87.55064pt too wide) in paragraph at lines 306--452
+\OT1/cmr/m/n/12 ceive-Door-Re-quest(DO1,Open).OpenDoor(DO1).AirlockChamber1Cont
+roller(OuterDoorState
+ []
+
+
+Overfull \hbox (4.64871pt too wide) in paragraph at lines 306--452
+\OT1/cmr/m/n/12 ceive-Door-Re-quest(DI1,Open).AirlockChamber1Controller(OuterDo
+orState =
+ []
+
+
+Overfull \hbox (74.80911pt too wide) in paragraph at lines 306--452
+\OT1/cmr/m/n/12 ceive-Door-Re-quest(DI1,Open).OpenDoor(DI1).AirlockChamber1Cont
+roller(InnerDoorState
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--452
+
+ []
+
+
+Overfull \hbox (69.06471pt too wide) in paragraph at lines 306--452
+\OT1/cmr/m/n/12 ceive-Wafer-Sta-tus(AL1,New).CloseDoor(DO1).AirlockChamber1Cont
+roller(WaferPresence
+ []
+
+
+Overfull \hbox (85.284pt too wide) in paragraph at lines 306--452
+\OT1/cmr/m/n/12 ceive-Wafer-Sta-tus(AL1,Finished).CloseDoor(DI1).AirlockChamber
+1Controller(WaferPresence
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--452
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--452
+
+ []
+
+
+Overfull \hbox (188.23431pt too wide) in paragraph at lines 306--452
+\OT1/cmr/m/n/12 && (In-ner-DoorState == Open)) -$\OML/cmm/m/it/12 >$ \OT1/cmr/m
+/n/12 re-ceive-Door-Re-quest(DO2,Open).AirlockChamber2Controller(InnerDoorState
+
+ []
+
+
+Overfull \hbox (87.55064pt too wide) in paragraph at lines 306--452
+\OT1/cmr/m/n/12 ceive-Door-Re-quest(DO2,Open).OpenDoor(DO2).AirlockChamber2Cont
+roller(OuterDoorState
+ []
+
+
+Overfull \hbox (4.64871pt too wide) in paragraph at lines 306--452
+\OT1/cmr/m/n/12 ceive-Door-Re-quest(DI2,Open).AirlockChamber2Controller(OuterDo
+orState =
+ []
+
+
+Overfull \hbox (74.80911pt too wide) in paragraph at lines 306--452
+\OT1/cmr/m/n/12 ceive-Door-Re-quest(DI2,Open).OpenDoor(DI2).AirlockChamber2Cont
+roller(InnerDoorState
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--452
+
+ []
+
+
+Overfull \hbox (69.06471pt too wide) in paragraph at lines 306--452
+\OT1/cmr/m/n/12 ceive-Wafer-Sta-tus(AL2,New).CloseDoor(DO2).AirlockChamber2Cont
+roller(WaferPresence
+ []
+
+
+Overfull \hbox (85.284pt too wide) in paragraph at lines 306--452
+\OT1/cmr/m/n/12 ceive-Wafer-Sta-tus(AL2,Finished).CloseDoor(DI2).AirlockChamber
+2Controller(WaferPresence
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--452
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--452
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--452
+
+ []
+
+
+Overfull \hbox (384.49757pt too wide) in paragraph at lines 306--452
+\OT1/cmr/m/n/12 + ((Cy-cle == In-put) && (Cur-rentAir-lock == AL1)) -$\OML/cmm/
+m/it/12 >$ \OT1/cmr/m/n/12 re-ceive-DoorState(DI1,Closed).sendDoorRequest(DI1,O
+pen).LampWaferHandler(CurrentAirlock
+ []
+
+
+Overfull \hbox (458.05237pt too wide) in paragraph at lines 306--452
+\OT1/cmr/m/n/12 + ((Cy-cle == In-put) && (Cur-rentAir-lock == AL1)) -$\OML/cmm/
+m/it/12 >$ \OT1/cmr/m/n/12 re-ceive-DoorState(DI1,Open).MoveTo(A1).PickupWafer.
+MoveTo(Lamp).PlaceWafer.LampWaferHandler(Cycle
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--452
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--452
+
+ []
+
+
+Overfull \hbox (279.88893pt too wide) in paragraph at lines 306--452
+\OT1/cmr/m/n/12 State(Complete).MoveTo(Lamp).PickupWafer.MoveTo(A1).PlaceWafer.
+sendWaferStatus(AL1,Finished).LampWaferHandler(Cycle
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--452
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--452
+
+ []
+
+
+Overfull \hbox (384.49757pt too wide) in paragraph at lines 306--452
+\OT1/cmr/m/n/12 + ((Cy-cle == In-put) && (Cur-rentAir-lock == AL2)) -$\OML/cmm/
+m/it/12 >$ \OT1/cmr/m/n/12 re-ceive-DoorState(DI2,Closed).sendDoorRequest(DI2,O
+pen).LampWaferHandler(CurrentAirlock
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--452
+
+ []
+
+
+Overfull \hbox (458.05237pt too wide) in paragraph at lines 306--452
+\OT1/cmr/m/n/12 + ((Cy-cle == In-put) && (Cur-rentAir-lock == AL2)) -$\OML/cmm/
+m/it/12 >$ \OT1/cmr/m/n/12 re-ceive-DoorState(DI2,Open).MoveTo(A2).PickupWafer.
+MoveTo(Lamp).PlaceWafer.LampWaferHandler(Cycle
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--452
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--452
+
+ []
+
+
+Overfull \hbox (279.88893pt too wide) in paragraph at lines 306--452
+\OT1/cmr/m/n/12 State(Complete).MoveTo(Lamp).PickupWafer.MoveTo(A2).PlaceWafer.
+sendWaferStatus(AL2,Finished).LampWaferHandler(Cycle
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--452
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--452
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--452
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--452
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--452
+
+ []
+
+
+Overfull \hbox (79.287pt too wide) in paragraph at lines 306--452
+\OT1/cmr/m/n/12 IOHandler1(Get, In-put) $\OMS/cmsy/m/n/12 j$ $j$ \OT1/cmr/m/n/1
+2 IO-Han-dler2(Get, In-put) $\OMS/cmsy/m/n/12 j$ $j$ \OT1/cmr/m/n/12 Air-lockCh
+am-ber1Controller(NoWafer,
+ []
+
+[14] [15] [16] [17] [18]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <17.28> on input line 453.
+ [19] (./report.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 1726 strings out of 492982
+ 24652 string characters out of 6134896
+ 91389 words of memory out of 5000000
+ 5279 multiletter control sequences out of 15000+600000
+ 9737 words of font info for 35 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 41i,10n,25p,826b,246s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/niceframe-type1/bbding10.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on report.pdf (19 pages, 1403362 bytes).
+PDF statistics:
+ 95 PDF objects out of 1000 (max. 8388607)
+ 65 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+
