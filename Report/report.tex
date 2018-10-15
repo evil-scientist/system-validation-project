@@ -490,7 +490,7 @@ As part of the given assignment, we have modelled a Wafer production system as d
 \\
 \\+ ((OuterDoorState == Open) \&\& (InnerDoorState == Closed)) -$>$ receiveWaferStatus(AL2,New).CloseDoor(DO2)
 \\.AirlockChamber2Controller(WaferPresence = New, OuterDoorState = Closed)
-\\+ ((OuterDoorState == Closed) \&\& (InnerDoorState == Open)) -$>$ receiveWaferStatus(AL2,Finished).CloseDoor(DI2).AirlockChamber2Controller(WaferPresence = Finished, InnerDoorState = Closed)
+\\+ ((OuterDoorState == Closed) \&\& (InnerDoorState == Open)) -$>$ receiveWaferStatus(AL2,Finished).CloseDoor(DI2)\\.AirlockChamber2Controller(WaferPresence = Finished, InnerDoorState = Closed)
 \\
 \\+ sendDoorState(DO2,OuterDoorState).AirlockChamber2Controller()
 \\+ sendDoorState(DI2,InnerDoorState).AirlockChamber2Controller()
@@ -499,22 +499,30 @@ As part of the given assignment, we have modelled a Wafer production system as d
 \\LampWaferHandler(Cycle : CycleType, CurrentAirlock : AirlockID) = 
 \\
 \\((Cycle == Input) \&\& (CurrentAirlock == None)) -$>$ receiveWaferPresence(AL1,New).LampWaferHandler(CurrentAirlock = AL1)
-\\+ ((Cycle == Input) \&\& (CurrentAirlock == AL1)) -$>$ receiveDoorState(DI1,Closed).sendDoorRequest(DI1,Open).LampWaferHandler(CurrentAirlock = AL1)
-\\+ ((Cycle == Input) \&\& (CurrentAirlock == AL1)) -$>$ receiveDoorState(DI1,Open).MoveTo(A1).PickupWafer.MoveTo(Lamp).PlaceWafer.LampWaferHandler(Cycle = Output)
+\\+ ((Cycle == Input) \&\& (CurrentAirlock == AL1)) -$>$ receiveDoorState(DI1,Closed)
+\\.sendDoorRequest(DI1,Open).LampWaferHandler(CurrentAirlock = AL1)
+\\+ ((Cycle == Input) \&\& (CurrentAirlock == AL1)) -$>$ receiveDoorState(DI1,Open)
+\\.MoveTo(A1).PickupWafer.MoveTo(Lamp).PlaceWafer.LampWaferHandler(Cycle = Output)
 \\
 \\+ ((Cycle == Output) \&\& (CurrentAirlock == AL1)) -$>$ CheckLampState(Incomplete).LampWaferHandler(Cycle = Output)
 \\
-\\+ ((Cycle == Output) \&\& (CurrentAirlock == AL1)) -$>$ CheckLampState(Complete).MoveTo(Lamp).PickupWafer.MoveTo(A1).PlaceWafer.sendWaferStatus(AL1,Finished).LampWaferHandler(Cycle = Input, CurrentAirlock = None)
+\\+ ((Cycle == Output) \&\& (CurrentAirlock == AL1)) -$>$ CheckLampState(Complete).MoveTo(Lamp).PickupWafer
+\\.MoveTo(A1).PlaceWafer.sendWaferStatus(AL1,Finished).LampWaferHandler(Cycle = Input, CurrentAirlock = None)
 \\
 \\+ ((Cycle == Input) \&\& (CurrentAirlock == None)) -$>$ receiveWaferPresence(AL2,New).LampWaferHandler(CurrentAirlock = AL2)
 \\
-\\+ ((Cycle == Input) \&\& (CurrentAirlock == AL2)) -$>$ receiveDoorState(DI2,Closed).sendDoorRequest(DI2,Open).LampWaferHandler(CurrentAirlock = AL2)
+\\+ ((Cycle == Input) \&\& (CurrentAirlock == AL2)) -$>$ receiveDoorState(DI2,Closed)
+\\.sendDoorRequest(DI2,Open).LampWaferHandler(CurrentAirlock = AL2)
 \\
-\\+ ((Cycle == Input) \&\& (CurrentAirlock == AL2)) -$>$ receiveDoorState(DI2,Open).MoveTo(A2).PickupWafer.MoveTo(Lamp).PlaceWafer.LampWaferHandler(Cycle = Output)
+\\+ ((Cycle == Input) \&\& (CurrentAirlock == AL2)) -$>$ receiveDoorState(DI2,Open)\\.MoveTo(A2).PickupWafer.MoveTo(Lamp).PlaceWafer.LampWaferHandler(Cycle = Output)
 \\
 \\+ ((Cycle == Output) \&\& (CurrentAirlock == AL2)) -$>$ CheckLampState(Incomplete).LampWaferHandler(Cycle = Output)
 \\
-\\+ ((Cycle == Output) \&\& (CurrentAirlock == AL2)) -$>$ CheckLampState(Complete).MoveTo(Lamp).PickupWafer.MoveTo(A2).PlaceWafer.sendWaferStatus(AL2,Finished).LampWaferHandler(Cycle = Input, CurrentAirlock = None);
+\\
+\\
+\\
+\\+ ((Cycle == Output) \&\& (CurrentAirlock == AL2)) -$>$ CheckLampState(Complete).MoveTo(Lamp).PickupWafer.MoveTo(A2).PlaceWafer
+\\.sendWaferStatus(AL2,Finished).LampWaferHandler(Cycle = Input, CurrentAirlock = None);
 \\
 \\\textbf{init} 
 \\
