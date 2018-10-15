@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.9.27)  10 OCT 2018 23:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.13)  15 OCT 2018 16:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -153,20 +153,17 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./report.toc
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 3.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 3.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 3.
-)
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./report.toc)
 \tf@toc=\write3
 \openout3 = `report.toc'.
 
  [2]
-Missing character: There is no Î in font cmr12!
-Missing character: There is no ¼ in font cmr12!
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 33.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 33.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 33.
 
 Underfull \hbox (badness 10000) in paragraph at lines 29--34
 
@@ -193,19 +190,28 @@ Overfull \hbox (15.39276pt too wide) in paragraph at lines 111--119
  [][] 
  []
 
-[5] [6]
-<Architecture-final.jpg, id=28, 1707.37875pt x 1193.45876pt>
+[5]
+Overfull \hbox (19.6707pt too wide) in paragraph at lines 149--150
+\OT1/cmr/m/n/12 wafer which has just been placed by them in the Air-locks(Unpro
+cessed,
+ []
+
+[6]
+
+LaTeX Warning: Reference `fig:arch1' on page 7 undefined on input line 163.
+
+<Architecture-final.jpg, id=28, 1679.27374pt x 1138.2525pt>
 File: Architecture-final.jpg Graphic file (type jpg)
 <use Architecture-final.jpg>
-Package pdftex.def Info: Architecture-final.jpg  used on input line 157.
-(pdftex.def)             Requested size: 390.00545pt x 426.78575pt.
- [7 <./Architecture-final.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 170--174
+Package pdftex.def Info: Architecture-final.jpg  used on input line 167.
+(pdftex.def)             Requested size: 540.60716pt x 426.79153pt.
+[7 <./Architecture-final.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 180--184
 
  []
 
 
-Overfull \hbox (4.4155pt too wide) in paragraph at lines 170--174
+Overfull \hbox (4.4155pt too wide) in paragraph at lines 180--184
 \OT1/cmr/bx/n/12 Formula: $\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 true\OMS/cmsy/m/n/
 12 ^^C\OT1/cmr/m/n/12 ]\OMS/cmsy/m/n/12 8\OML/cmm/m/it/12 IP \OT1/cmr/m/n/12 : 
 \OML/cmm/m/it/12 IPStackID:\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 CheckIPStackState\
@@ -214,12 +220,12 @@ OT1/cmr/m/n/12 (\OML/cmm/m/it/12 IP; Empty\OT1/cmr/m/n/12 )\OML/cmm/m/it/12 :[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 176--180
+Underfull \hbox (badness 10000) in paragraph at lines 186--190
 
  []
 
 
-Overfull \hbox (4.61142pt too wide) in paragraph at lines 176--180
+Overfull \hbox (4.61142pt too wide) in paragraph at lines 186--190
 \OT1/cmr/bx/n/12 Formula: $\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 true\OMS/cmsy/m/n/
 12 ^^C\OT1/cmr/m/n/12 ]\OMS/cmsy/m/n/12 8\OML/cmm/m/it/12 OP \OT1/cmr/m/n/12 : 
 \OML/cmm/m/it/12 OPStackID:\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 CheckOPStackState\
@@ -228,7 +234,7 @@ OT1/cmr/m/n/12 (\OML/cmm/m/it/12 OP; Full\OT1/cmr/m/n/12 )\OML/cmm/m/it/12 :[]
  []
 
 
-Overfull \hbox (19.20543pt too wide) in paragraph at lines 190--191
+Overfull \hbox (19.20543pt too wide) in paragraph at lines 200--201
 []\OT1/cmr/bx/n/12 Formula: $\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 true\OMS/cmsy/m/
 n/12 ^^C\OT1/cmr/m/n/12 ]\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 Mo
 veTo\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 I\OT1/cmr/m/n/12 1)\OML/cmm/m/it/12 :\OT1
@@ -237,7 +243,7 @@ OML/cmm/m/it/12 O\OT1/cmr/m/n/12 1)]\OML/cmm/m/it/12 :false$
  []
 
 
-Overfull \hbox (19.20543pt too wide) in paragraph at lines 191--192
+Overfull \hbox (19.20543pt too wide) in paragraph at lines 201--202
 []\OT1/cmr/bx/n/12 Formula: $\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 true\OMS/cmsy/m/
 n/12 ^^C\OT1/cmr/m/n/12 ]\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 Mo
 veTo\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 I\OT1/cmr/m/n/12 2)\OML/cmm/m/it/12 :\OT1
@@ -246,22 +252,12 @@ OML/cmm/m/it/12 O\OT1/cmr/m/n/12 2)]\OML/cmm/m/it/12 :false$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 222--225
+Underfull \hbox (badness 10000) in paragraph at lines 232--237
 
- []
-
-
-Overfull \hbox (146.49222pt too wide) in paragraph at lines 222--225
-\OT1/cmr/bx/n/12 Formula: $\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 true\OMS/cmsy/m/n/
-12 ^^C\OT1/cmr/m/n/12 ]\OMS/cmsy/m/n/12 8\OML/cmm/m/it/12 d \OT1/cmr/m/n/12 : \
-OML/cmm/m/it/12 DoorID:\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 OpenDoor\OT1/cmr/m/n/1
-2 (\OML/cmm/m/it/12 d\OT1/cmr/m/n/12 )\OML/cmm/m/it/12 :[] \OMS/cmsy/m/n/12 ^^C
- \OML/cmm/m/it/12 OpenDoor\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 Corresponding\OT1/c
-mr/m/n/12 (\OML/cmm/m/it/12 d\OT1/cmr/m/n/12 ))]\OML/cmm/m/it/12 :false$ 
  []
 
 [8]
-Overfull \hbox (69.52937pt too wide) in paragraph at lines 229--231
+Overfull \hbox (69.52937pt too wide) in paragraph at lines 241--243
 []\OT1/cmr/bx/n/12 Formula: $\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 true \OMS/cmsy/m
 /n/12 ^^C \OML/cmm/m/it/12 :receiveWaferStatus\OT1/cmr/m/n/12 (\OML/cmm/m/it/12
  AL\OT1/cmr/m/n/12 1\OML/cmm/m/it/12 ; Finished\OT1/cmr/m/n/12 )\OML/cmm/m/it/1
@@ -269,7 +265,7 @@ Overfull \hbox (69.52937pt too wide) in paragraph at lines 229--231
  []
 
 
-Overfull \hbox (69.52937pt too wide) in paragraph at lines 231--233
+Overfull \hbox (69.52937pt too wide) in paragraph at lines 243--245
 []\OT1/cmr/bx/n/12 Formula: $\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 true \OMS/cmsy/m
 /n/12 ^^C \OML/cmm/m/it/12 :receiveWaferStatus\OT1/cmr/m/n/12 (\OML/cmm/m/it/12
  AL\OT1/cmr/m/n/12 2\OML/cmm/m/it/12 ; Finished\OT1/cmr/m/n/12 )\OML/cmm/m/it/1
@@ -277,7 +273,7 @@ Overfull \hbox (69.52937pt too wide) in paragraph at lines 231--233
  []
 
 
-Overfull \hbox (49.42154pt too wide) in paragraph at lines 238--240
+Overfull \hbox (49.42154pt too wide) in paragraph at lines 250--252
 []\OT1/cmr/bx/n/12 Formula: $\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 true \OMS/cmsy/m
 /n/12 ^^C \OML/cmm/m/it/12 :receiveWaferStatus\OT1/cmr/m/n/12 (\OML/cmm/m/it/12
  AL\OT1/cmr/m/n/12 1\OML/cmm/m/it/12 ; New\OT1/cmr/m/n/12 )\OML/cmm/m/it/12 :\O
@@ -285,7 +281,7 @@ T1/cmr/m/n/12 ([]]\OML/cmm/m/it/12 true$
  []
 
 
-Overfull \hbox (49.42154pt too wide) in paragraph at lines 240--242
+Overfull \hbox (49.42154pt too wide) in paragraph at lines 252--254
 []\OT1/cmr/bx/n/12 Formula: $\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 true \OMS/cmsy/m
 /n/12 ^^C \OML/cmm/m/it/12 :receiveWaferStatus\OT1/cmr/m/n/12 (\OML/cmm/m/it/12
  AL\OT1/cmr/m/n/12 2\OML/cmm/m/it/12 ; New\OT1/cmr/m/n/12 )\OML/cmm/m/it/12 :\O
@@ -293,12 +289,12 @@ T1/cmr/m/n/12 ([]]\OML/cmm/m/it/12 true$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 245--248
+Underfull \hbox (badness 10000) in paragraph at lines 257--260
 
  []
 
 
-Overfull \hbox (11.258pt too wide) in paragraph at lines 245--248
+Overfull \hbox (11.258pt too wide) in paragraph at lines 257--260
 \OT1/cmr/bx/n/12 Formula: $\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 true \OMS/cmsy/m/n
 /12 ^^C \OML/cmm/m/it/12 :CheckLampState\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 Incom
 plete\OT1/cmr/m/n/12 )\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 ([]\OMS/cmsy/m/n/12 ^^C
@@ -306,7 +302,7 @@ plete\OT1/cmr/m/n/12 )\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 ([]\OMS/cmsy/m/n/12 ^^C
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 264--268
+Underfull \hbox (badness 10000) in paragraph at lines 276--280
 
  []
 
@@ -314,522 +310,509 @@ Underfull \hbox (badness 10000) in paragraph at lines 264--268
 <3D-Model.png, id=39, 1690.315pt x 1981.4025pt>
 File: 3D-Model.png Graphic file (type png)
 <use 3D-Model.png>
-Package pdftex.def Info: 3D-Model.png  used on input line 280.
+Package pdftex.def Info: 3D-Model.png  used on input line 308.
 (pdftex.def)             Requested size: 390.00229pt x 227.5995pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 273--284
+Underfull \hbox (badness 10000) in paragraph at lines 302--312
+
+ []
+
+[10] [11 <./3D-Model.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 314--317
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 273--284
+Underfull \hbox (badness 10000) in paragraph at lines 318--321
 
  []
 
-[10 <./3D-Model.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 288--291
 
+Overfull \hbox (11.58472pt too wide) in paragraph at lines 324--326
+\OT1/cmr/m/n/12 The fol-low-ing tools were used for mod-elling and ver-i-fi-ca-
+tion: mcrl2xi, mcrl22lps,
  []
 
-[11]
+
+LaTeX Warning: Reference `fig:ltsview-1' on page 12 undefined on input line 332
+.
+
+
+LaTeX Warning: Reference `fig:deadlockfree' on page 12 undefined on input line 
+332.
+
 File: 3D-Model.png Graphic file (type png)
 <use 3D-Model.png>
-Package pdftex.def Info: 3D-Model.png  used on input line 317.
+Package pdftex.def Info: 3D-Model.png  used on input line 337.
 (pdftex.def)             Requested size: 157.94785pt x 185.12112pt.
 <Deadlockfree.png, id=48, 1661.20625pt x 1991.44pt>
 File: Deadlockfree.png Graphic file (type png)
 <use Deadlockfree.png>
-Package pdftex.def Info: Deadlockfree.png  used on input line 322.
+Package pdftex.def Info: Deadlockfree.png  used on input line 342.
 (pdftex.def)             Requested size: 157.94785pt x 189.3407pt.
- [12 <./Deadlockfree.png>] [13]
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+[12] [13 <./Deadlockfree.png>] [14]
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Overfull \hbox (137.32928pt too wide) in paragraph at lines 334--496
+Overfull \hbox (17.55414pt too wide) in paragraph at lines 354--544
 \OT1/cmr/m/n/12 ((Cycle == In-put) && (Op-er-a-tion == Get)) -$\OML/cmm/m/it/12
- >$ \OT1/cmr/m/n/12 Check-IP-Stack-State(IP1,Empty).IOHandler1(Operation
+ >$ \OT1/cmr/m/n/12 Check-IP-Stack-State(IP1,Empty) 
  []
 
 
-Overfull \hbox (302.6248pt too wide) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
+
+ []
+
+
+Overfull \hbox (50.51491pt too wide) in paragraph at lines 354--544
 \OT1/cmr/m/n/12 + ((Cy-cle == In-put) && (Op-er-a-tion == Get)) -$\OML/cmm/m/it
-/12 >$ \OT1/cmr/m/n/12 Check-IP-Stack-State(IP1,NonEmpty).MoveTo(I1).PickupWafe
-r.IOHandler1(Operation
+/12 >$ \OT1/cmr/m/n/12 Check-IP-Stack-State(IP1,NonEmpty) 
  []
 
 
-Overfull \hbox (299.82344pt too wide) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
+
+ []
+
+
+Overfull \hbox (23.09573pt too wide) in paragraph at lines 354--544
 \OT1/cmr/m/n/12 + ((Cy-cle == In-put) && (Op-er-a-tion == Put)) -$\OML/cmm/m/it
-/12 >$ \OT1/cmr/m/n/12 re-ceive-DoorState(DO1,Closed).sendDoorRequest(DO1,Open)
-.IOHandler1(Operation
+/12 >$ \OT1/cmr/m/n/12 re-ceive-DoorState(DO1,Closed) 
  []
 
 
-Overfull \hbox (388.3489pt too wide) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
+
+ []
+
+
+Overfull \hbox (16.82913pt too wide) in paragraph at lines 354--544
 \OT1/cmr/m/n/12 + ((Cy-cle == In-put) && (Op-er-a-tion == Put)) -$\OML/cmm/m/it
-/12 >$ \OT1/cmr/m/n/12 re-ceive-DoorState(DO1,Open).MoveTo(A1).PlaceWafer.sendW
-aferStatus(AL1,New).IOHandler1(Cycle
+/12 >$ \OT1/cmr/m/n/12 re-ceive-DoorState(DO1,Open) 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+Overfull \hbox (20.03326pt too wide) in paragraph at lines 354--544
+\OT1/cmr/m/n/12 .MoveTo(A1).PlaceWafer.sendWaferStatus(AL1,New).IOHandler1(Cycl
+e = Out-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Overfull \hbox (27.85266pt too wide) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
+
+ []
+
+
+Overfull \hbox (27.85266pt too wide) in paragraph at lines 354--544
 \OT1/cmr/m/n/12 ence(AL1,Finished).receiveDoorState(DO1,Closed).sendDoorRequest
 (DO1,Open)
  []
 
 
-Overfull \hbox (21.05548pt too wide) in paragraph at lines 334--496
+Overfull \hbox (21.05548pt too wide) in paragraph at lines 354--544
 \OT1/cmr/m/n/12 .re-ceive-DoorState(DO1,Open).MoveTo(A1).PickupWafer.IOHandler1
 (Operation
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Overfull \hbox (153.41522pt too wide) in paragraph at lines 334--496
+Overfull \hbox (33.64008pt too wide) in paragraph at lines 354--544
 \OT1/cmr/m/n/12 + ((Cy-cle == Out-put) && (Op-er-a-tion == Put)) -$\OML/cmm/m/i
-t/12 >$ \OT1/cmr/m/n/12 Check-OP-Stack-State(OP1,Full).IOHandler1(Operation
+t/12 >$ \OT1/cmr/m/n/12 Check-OP-Stack-State(OP1,Full) 
  []
 
 
-Overfull \hbox (280.5278pt too wide) in paragraph at lines 334--496
+Overfull \hbox (54.85097pt too wide) in paragraph at lines 354--544
 \OT1/cmr/m/n/12 + ((Cy-cle == Out-put) && (Op-er-a-tion == Put)) -$\OML/cmm/m/i
-t/12 >$ \OT1/cmr/m/n/12 Check-OP-Stack-State(OP1,NonFull).MoveTo(O1).PlaceWafer
-.IOHandler1(Cycle
+t/12 >$ \OT1/cmr/m/n/12 Check-OP-Stack-State(OP1,NonFull) 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Overfull \hbox (137.32928pt too wide) in paragraph at lines 334--496
+Overfull \hbox (17.55414pt too wide) in paragraph at lines 354--544
 \OT1/cmr/m/n/12 ((Cycle == In-put) && (Op-er-a-tion == Get)) -$\OML/cmm/m/it/12
- >$ \OT1/cmr/m/n/12 Check-IP-Stack-State(IP2,Empty).IOHandler2(Operation
+ >$ \OT1/cmr/m/n/12 Check-IP-Stack-State(IP2,Empty) 
  []
 
 
-Overfull \hbox (302.6248pt too wide) in paragraph at lines 334--496
+Overfull \hbox (50.51491pt too wide) in paragraph at lines 354--544
 \OT1/cmr/m/n/12 + ((Cy-cle == In-put) && (Op-er-a-tion == Get)) -$\OML/cmm/m/it
-/12 >$ \OT1/cmr/m/n/12 Check-IP-Stack-State(IP2,NonEmpty).MoveTo(I2).PickupWafe
-r.IOHandler2(Operation
+/12 >$ \OT1/cmr/m/n/12 Check-IP-Stack-State(IP2,NonEmpty) 
  []
 
 
-Overfull \hbox (299.82344pt too wide) in paragraph at lines 334--496
+Overfull \hbox (23.09573pt too wide) in paragraph at lines 354--544
 \OT1/cmr/m/n/12 + ((Cy-cle == In-put) && (Op-er-a-tion == Put)) -$\OML/cmm/m/it
-/12 >$ \OT1/cmr/m/n/12 re-ceive-DoorState(DO2,Closed).sendDoorRequest(DO2,Open)
-.IOHandler2(Operation
+/12 >$ \OT1/cmr/m/n/12 re-ceive-DoorState(DO2,Closed) 
  []
 
 
-Overfull \hbox (388.3489pt too wide) in paragraph at lines 334--496
+Overfull \hbox (16.82913pt too wide) in paragraph at lines 354--544
 \OT1/cmr/m/n/12 + ((Cy-cle == In-put) && (Op-er-a-tion == Put)) -$\OML/cmm/m/it
-/12 >$ \OT1/cmr/m/n/12 re-ceive-DoorState(DO2,Open).MoveTo(A2).PlaceWafer.sendW
-aferStatus(AL2,New).IOHandler2(Cycle
+/12 >$ \OT1/cmr/m/n/12 re-ceive-DoorState(DO2,Open) 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+Overfull \hbox (20.03326pt too wide) in paragraph at lines 354--544
+\OT1/cmr/m/n/12 .MoveTo(A2).PlaceWafer.sendWaferStatus(AL2,New).IOHandler2(Cycl
+e = Out-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Overfull \hbox (27.85266pt too wide) in paragraph at lines 334--496
+Overfull \hbox (27.85266pt too wide) in paragraph at lines 354--544
 \OT1/cmr/m/n/12 ence(AL2,Finished).receiveDoorState(DO2,Closed).sendDoorRequest
 (DO2,Open)
  []
 
 
-Overfull \hbox (21.05548pt too wide) in paragraph at lines 334--496
-\OT1/cmr/m/n/12 .re-ceive-DoorState(DO2,Open).MoveTo(A2).PickupWafer.IOHandler2
-(Operation
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Overfull \hbox (153.41522pt too wide) in paragraph at lines 334--496
+Overfull \hbox (33.64008pt too wide) in paragraph at lines 354--544
 \OT1/cmr/m/n/12 + ((Cy-cle == Out-put) && (Op-er-a-tion == Put)) -$\OML/cmm/m/i
-t/12 >$ \OT1/cmr/m/n/12 Check-OP-Stack-State(OP2,Full).IOHandler2(Operation
+t/12 >$ \OT1/cmr/m/n/12 Check-OP-Stack-State(OP2,Full) 
  []
 
 
-Overfull \hbox (280.5278pt too wide) in paragraph at lines 334--496
+Overfull \hbox (54.85097pt too wide) in paragraph at lines 354--544
 \OT1/cmr/m/n/12 + ((Cy-cle == Out-put) && (Op-er-a-tion == Put)) -$\OML/cmm/m/i
-t/12 >$ \OT1/cmr/m/n/12 Check-OP-Stack-State(OP2,NonFull).MoveTo(O2).PlaceWafer
-.IOHandler2(Cycle
+t/12 >$ \OT1/cmr/m/n/12 Check-OP-Stack-State(OP2,NonFull) 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
-
- []
-
-
-Overfull \hbox (188.23431pt too wide) in paragraph at lines 334--496
-\OT1/cmr/m/n/12 && (In-ner-DoorState == Open)) -$\OML/cmm/m/it/12 >$ \OT1/cmr/m
-/n/12 re-ceive-Door-Re-quest(DO1,Open).AirlockChamber1Controller(InnerDoorState
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Overfull \hbox (87.55064pt too wide) in paragraph at lines 334--496
-\OT1/cmr/m/n/12 ceive-Door-Re-quest(DO1,Open).OpenDoor(DO1).AirlockChamber1Cont
-roller(OuterDoorState
- []
-
-
-Overfull \hbox (4.64871pt too wide) in paragraph at lines 334--496
-\OT1/cmr/m/n/12 ceive-Door-Re-quest(DI1,Open).AirlockChamber1Controller(OuterDo
-orState =
- []
-
-
-Overfull \hbox (74.80911pt too wide) in paragraph at lines 334--496
-\OT1/cmr/m/n/12 ceive-Door-Re-quest(DI1,Open).OpenDoor(DI1).AirlockChamber1Cont
-roller(InnerDoorState
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Overfull \hbox (69.06471pt too wide) in paragraph at lines 334--496
-\OT1/cmr/m/n/12 ceive-Wafer-Sta-tus(AL1,New).CloseDoor(DO1).AirlockChamber1Cont
-roller(WaferPresence
+Overfull \hbox (13.13472pt too wide) in paragraph at lines 354--544
+\OT1/cmr/m/n/12 .AirlockChamber1Controller(WaferPresence = New, Ou-t-er-DoorSta
+te = Closed) 
  []
 
 
-Overfull \hbox (85.284pt too wide) in paragraph at lines 334--496
-\OT1/cmr/m/n/12 ceive-Wafer-Sta-tus(AL1,Finished).CloseDoor(DI1).AirlockChamber
-1Controller(WaferPresence
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Overfull \hbox (188.23431pt too wide) in paragraph at lines 334--496
-\OT1/cmr/m/n/12 && (In-ner-DoorState == Open)) -$\OML/cmm/m/it/12 >$ \OT1/cmr/m
-/n/12 re-ceive-Door-Re-quest(DO2,Open).AirlockChamber2Controller(InnerDoorState
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Overfull \hbox (87.55064pt too wide) in paragraph at lines 334--496
-\OT1/cmr/m/n/12 ceive-Door-Re-quest(DO2,Open).OpenDoor(DO2).AirlockChamber2Cont
-roller(OuterDoorState
+Overfull \hbox (13.13472pt too wide) in paragraph at lines 354--544
+\OT1/cmr/m/n/12 .AirlockChamber2Controller(WaferPresence = New, Ou-t-er-DoorSta
+te = Closed) 
  []
 
 
-Overfull \hbox (4.64871pt too wide) in paragraph at lines 334--496
-\OT1/cmr/m/n/12 ceive-Door-Re-quest(DI2,Open).AirlockChamber2Controller(OuterDo
-orState =
- []
-
-
-Overfull \hbox (74.80911pt too wide) in paragraph at lines 334--496
-\OT1/cmr/m/n/12 ceive-Door-Re-quest(DI2,Open).OpenDoor(DI2).AirlockChamber2Cont
-roller(InnerDoorState
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
-
- []
-
-
-Overfull \hbox (69.06471pt too wide) in paragraph at lines 334--496
-\OT1/cmr/m/n/12 ceive-Wafer-Sta-tus(AL2,New).CloseDoor(DO2).AirlockChamber2Cont
-roller(WaferPresence
- []
-
-
-Overfull \hbox (85.284pt too wide) in paragraph at lines 334--496
+Overfull \hbox (85.284pt too wide) in paragraph at lines 354--544
 \OT1/cmr/m/n/12 ceive-Wafer-Sta-tus(AL2,Finished).CloseDoor(DI2).AirlockChamber
 2Controller(WaferPresence
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Overfull \hbox (384.49757pt too wide) in paragraph at lines 334--496
+Overfull \hbox (384.49757pt too wide) in paragraph at lines 354--544
 \OT1/cmr/m/n/12 + ((Cy-cle == In-put) && (Cur-rentAir-lock == AL1)) -$\OML/cmm/
 m/it/12 >$ \OT1/cmr/m/n/12 re-ceive-DoorState(DI1,Closed).sendDoorRequest(DI1,O
 pen).LampWaferHandler(CurrentAirlock
  []
 
 
-Overfull \hbox (458.05237pt too wide) in paragraph at lines 334--496
+Overfull \hbox (458.05237pt too wide) in paragraph at lines 354--544
 \OT1/cmr/m/n/12 + ((Cy-cle == In-put) && (Cur-rentAir-lock == AL1)) -$\OML/cmm/
 m/it/12 >$ \OT1/cmr/m/n/12 re-ceive-DoorState(DI1,Open).MoveTo(A1).PickupWafer.
 MoveTo(Lamp).PlaceWafer.LampWaferHandler(Cycle
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Overfull \hbox (279.88893pt too wide) in paragraph at lines 334--496
+Overfull \hbox (279.88893pt too wide) in paragraph at lines 354--544
 \OT1/cmr/m/n/12 State(Complete).MoveTo(Lamp).PickupWafer.MoveTo(A1).PlaceWafer.
 sendWaferStatus(AL1,Finished).LampWaferHandler(Cycle
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Overfull \hbox (384.49757pt too wide) in paragraph at lines 334--496
+Overfull \hbox (384.49757pt too wide) in paragraph at lines 354--544
 \OT1/cmr/m/n/12 + ((Cy-cle == In-put) && (Cur-rentAir-lock == AL2)) -$\OML/cmm/
 m/it/12 >$ \OT1/cmr/m/n/12 re-ceive-DoorState(DI2,Closed).sendDoorRequest(DI2,O
 pen).LampWaferHandler(CurrentAirlock
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Overfull \hbox (458.05237pt too wide) in paragraph at lines 334--496
+Overfull \hbox (458.05237pt too wide) in paragraph at lines 354--544
 \OT1/cmr/m/n/12 + ((Cy-cle == In-put) && (Cur-rentAir-lock == AL2)) -$\OML/cmm/
 m/it/12 >$ \OT1/cmr/m/n/12 re-ceive-DoorState(DI2,Open).MoveTo(A2).PickupWafer.
 MoveTo(Lamp).PlaceWafer.LampWaferHandler(Cycle
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Overfull \hbox (279.88893pt too wide) in paragraph at lines 334--496
+Overfull \hbox (279.88893pt too wide) in paragraph at lines 354--544
 \OT1/cmr/m/n/12 State(Complete).MoveTo(Lamp).PickupWafer.MoveTo(A2).PlaceWafer.
 sendWaferStatus(AL2,Finished).LampWaferHandler(Cycle
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--496
+Underfull \hbox (badness 10000) in paragraph at lines 354--544
 
  []
 
 
-Overfull \hbox (79.287pt too wide) in paragraph at lines 334--496
+Overfull \hbox (79.287pt too wide) in paragraph at lines 354--544
 \OT1/cmr/m/n/12 IOHandler1(Get, In-put) $\OMS/cmsy/m/n/12 j$ $j$ \OT1/cmr/m/n/1
 2 IO-Han-dler2(Get, In-put) $\OMS/cmsy/m/n/12 j$ $j$ \OT1/cmr/m/n/12 Air-lockCh
 am-ber1Controller(NoWafer,
  []
 
-[14] [15] [16] [17] [18] [19]
+[15] [16] [17] [18] [19] [20]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <17.28> on input line 497.
+(Font)              <17.28> on input line 545.
 
-Overfull \hbox (17.1238pt too wide) in paragraph at lines 500--502
+Overfull \hbox (17.1238pt too wide) in paragraph at lines 548--550
 []\OT1/cmr/m/n/12 mcrl2 MCF: [true*] forall IP : IP-StackID . [ Check-IP-Stack-
 State(IP,Empty). 
  []
 
 
-Overfull \hbox (21.70985pt too wide) in paragraph at lines 503--505
+Overfull \hbox (21.70985pt too wide) in paragraph at lines 551--553
 []\OT1/cmr/m/n/12 mcrl2 MCF: [true*] forall OP : OP-StackID . [ Check-OP-Stack-
 State(OP,Full). 
  []
 
 
-Overfull \hbox (99.97644pt too wide) in paragraph at lines 508--512
+Overfull \hbox (99.97644pt too wide) in paragraph at lines 556--560
 []\OT1/cmr/m/n/12 mcrl2 MCF: (a) [true*] [MoveTo(MapIPDestination(IP1)). (!Move
 To(MapAirlock(AL1)))* 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 508--512
+Underfull \hbox (badness 10000) in paragraph at lines 556--560
 
  []
 
 
-Overfull \hbox (224.71266pt too wide) in paragraph at lines 508--512
+Overfull \hbox (224.71266pt too wide) in paragraph at lines 556--560
 \OT1/cmr/m/n/12 (b) [true*] [MoveTo(MapIPDestination(IP2)). (!MoveTo(MapAirlock
 (AL2)))*.MoveTo(MapOPDestination(OP2))]
  []
 
 
-Overfull \hbox (17.42174pt too wide) in paragraph at lines 534--535
+Overfull \hbox (17.42174pt too wide) in paragraph at lines 582--583
 []\OT1/cmr/m/n/12 mcrl2 MCF: [true*.receiveWaferStatus(AL1, Fin-ished). !Open-D
 oor(DI1)*]
  []
 
 
-Overfull \hbox (1.20245pt too wide) in paragraph at lines 537--538
+Overfull \hbox (1.20245pt too wide) in paragraph at lines 585--586
 []\OT1/cmr/m/n/12 mcrl2 MCF: [true*.receiveWaferStatus(AL1, New). !Open-Door(DO
 1)*]
  []
 
-[20] (./report.aux) ) 
+[21] (./report.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
  1740 strings out of 492982
- 24910 string characters out of 6134896
- 92416 words of memory out of 5000000
+ 24910 string characters out of 6134895
+ 93382 words of memory out of 5000000
  5290 multiletter control sequences out of 15000+600000
  9737 words of font info for 35 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,10n,25p,862b,275s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/nicefram
-e-type1/bbding10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-mi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pf
-b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on report.pdf (20 pages, 496051 bytes).
+ 41i,10n,25p,760b,275s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/niceframe-type1/bbding10.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on report.pdf (21 pages, 653841 bytes).
 PDF statistics:
- 103 PDF objects out of 1000 (max. 8388607)
- 68 compressed objects within 1 object stream
+ 106 PDF objects out of 1000 (max. 8388607)
+ 70 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
