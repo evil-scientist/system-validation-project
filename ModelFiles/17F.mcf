@@ -1,0 +1,2 @@
+[true*. MoveTo(Lamp).PlaceWafer. !sendWaferStatus(AL1, Finished)*.PickupWafer] false
+

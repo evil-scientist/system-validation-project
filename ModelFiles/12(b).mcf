@@ -1,0 +1,2 @@
+[true*.commWaferStatus(AL2, Finished). !commWaferStatus (AL2, New)*.OpenDoor(DI2)] false
+

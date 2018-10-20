@@ -1,1 +1,1 @@
-[true*] forall OP : OPStackID . [ CheckOPStackState(OP,Full).(!MoveTo(MapOPDestination(OP)))* ] true
+[true*] forall OP : OPStackID . [CheckOPStackState(OP,Full). !CheckOPStackState(OP,NonFull)*. MoveTo(MapOPDestination(OP))]false
