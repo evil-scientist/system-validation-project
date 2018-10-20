@@ -1,0 +1,35 @@
+DONE : 1) As long as the Output Stacks are not full, wafers keep moving along
+the production line. (System is deadlock free) (Safety)
+ 
+mcf terms: System is deadlock free 
+
+2)The correspinding Inner and Outer Doors of an Airlock must NEVER be open at the same time. (Safety)
+
+mcf: The system can never do a CloseDoor(DoorID) consecutively after an OpenDoor(DoorID) transition [for the same door id]
+
+mcf: An OpenOuterDoor(DoorID) transition should always happen after an OpenInnerDoor(DoorID).
+
+mcf: 2 consecutive OpenOuterdoor actions must have an OpenInnerDoor action in between
+
+3)Doors must not be closed while the robot is picking up/placing a wafer in the Airlock (Safety)
+
+mcf: CloseDoor(DoorID) must happen after PickWafer or PlaceWafer 
+ 
+4) Wafer should not be put on a full Output Stack. (Safety)
+ 
+mcf: 
+
+5) The Robot (R1 and R2) should pick the next Input wafer ONLY
+after delivering a finished wafer to it’s corresponding Output Stack (Safety)
+
+mcf: 
+
+6) The Robot 3 should place the Input wafer on the Lamp ONLY
+when the Lamp’s stack is empty. (Safety)
+
+mcf: 
+
+7)The Robot 3 should pick the next wafer ONLY af-
+ter delivering a finished wafer to it’s corresponding Airlock (Ax)(Safety)
+
+mcf:

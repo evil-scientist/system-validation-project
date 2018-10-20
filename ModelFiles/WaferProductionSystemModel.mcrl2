@@ -68,7 +68,7 @@ proc
 
 % -------------------------------------------------------------------- IO 1 -------------------------------------------------------------- 
 
-IOHandler1(Operation : OperationType, Cycle : CycleType) =    %, FinishedWaferReady : Bool) =
+IOHandler1(Operation : OperationType, Cycle : CycleType) =    
 % Input Cycle
 ((Cycle == Input) && (Operation == Get)) -> CheckIPStackState(IP1,Empty).IOHandler1(Operation = Get)
 
@@ -201,10 +201,10 @@ init
 
 			allow(
 						{MoveTo,
-  				 	 PickupWafer,
+  				 	   PickupWafer,
  				 		 PlaceWafer,
- 	    			 CheckIPStackState,
-	  				 CheckOPStackState,
+ 	    			   CheckIPStackState,
+	  				   CheckOPStackState,
 						 CheckLampState,
 						 OpenDoor,
 						 CloseDoor,
@@ -215,13 +215,13 @@ init
 						 commWaferPresence},
 
 			comm(
-						{receiveDoorState | sendDoorState -> commDoorState,
-						receiveDoorRequest | sendDoorRequest -> commDoorRequest,
-	  				 	receiveWaferStatus | sendWaferStatus -> commWaferStatus,
-				 	   receiveWaferPresence | sendWaferPresence -> commWaferPresence},
+						{	receiveDoorState | sendDoorState -> commDoorState,
+							receiveDoorRequest | sendDoorRequest -> commDoorRequest,
+	  				 		receiveWaferStatus | sendWaferStatus -> commWaferStatus,
+				 	   	receiveWaferPresence | sendWaferPresence -> commWaferPresence},
 
-						 IOHandler1(Get, Input) || IOHandler2(Get, Input) || AirlockChamber1Controller(NoWafer, Closed, Closed) 
-						 || AirlockChamber2Controller(NoWafer, Closed, Closed) || LampWaferHandler(Input,None)
+						 	IOHandler1(Get, Input) || IOHandler2(Get, Input) || AirlockChamber1Controller(NoWafer, Closed, Closed) 
+						 	|| AirlockChamber2Controller(NoWafer, Closed, Closed) || LampWaferHandler(Input,None)
 
-					 ));
+					));
 

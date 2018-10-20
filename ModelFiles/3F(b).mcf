@@ -1,0 +1,2 @@
+[true*] [MoveTo(MapIPDestination(IP2)). (!MoveTo(MapAirlock(AL2)))*.MoveTo(MapOPDestination(OP2))] false
+
