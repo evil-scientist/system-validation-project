@@ -42,63 +42,65 @@
 		\item Outer Doors: DO1, DO2
 		\item Input Stacks: I1, I2
 		\item Output Stacks: O1, O2
-		\item Airlocks: A1, A2
+		\item Airlocks: AL1, AL2
 		\item Outer Robots: R1, R2
 		\item Inner Robot: R3
 	\end{itemize}
 	
 	
 	\subsection{System Requirements}
-	The behaviour of the system can be understood by describing the individual components requirements.
+	The behaviour of the system can be understood by listing the following requirements:
 	
 	\begin{enumerate}
-		
-		\item Once the Robots (R1 and R2) pickup an \textbf{unprocessed} wafer from their Input Stack, the wafer gets placed in it's corresponding Airlock.
-		
-		\item The Robots (R1 and R2) should not move to the Input Stacks if the Input Stacks are Empty.
-		
-		\item The Robots (R1 and R2) should not place a wafer on the Input Stacks (I1 and I2).
-		
-		\item The Robots (R1 and R2) should not move to the Airlocks (A1 and A2) without picking up an \textbf{unprocessed} wafer.
-		
-		\item The Robots (R1 and R2) should not move to the Airlocks (A1 and A2) if the corresponding Outer Doors are closed (DO1 and DO2).
-		
-		\item Once the Robots (R1 and R2) pickup a \textbf{finished} wafer from an Airlock, the wafer gets placed on it's corresponding Output Stack provided the Output Stack is not full.
-		
-		\item The Robots (R1 and R2) should not move to the Output Stacks if the Output Stacks are Full.
-		
-		\item The Robots (R1 and R2) should not move to the Output Stacks without a \textbf{finished} wafer.
-		
-		\item The Robots (R1 and R2) should not place an \textbf{unprocessed} wafer on the Output Stacks (O1 and O2).
-		
-		\item The Robot (R3) should not move to the Airlocks (A1 or A2) if the corresponding Inner Doors are closed.
-		
-		\item The Inner Door (DI1) must not be opened if the Outer Door(DO1) is open for Airlock (A1).
-		
-		\item The Inner Door (DI2) must not be opened if the Outer Door(DO2) is open for Airlock (A2).
-		
-		\item The Outer Door (DO1) must not be opened if the Inner Door(DI1) is open for Airlock (A1).
-		
-		\item The Outer Door (DO2) must not be opened if the Inner Door(DI2) is open for Airlock (A2).
-		
-		\item The Inner Doors (DI1 and DI2) must not be opened if a finished wafer is present in their corresponding Airlocks (A1 and A2).
-		
-		\item The Outer Doors (DO1 and DO2) must not be opened if a new wafer is present in their corresponding Airlocks (A1 and A2).
-		
-		\item The Robot (R3) will pickup the finished wafer from the Lamp (L) only when it is finished printing.
-		
-		\item The Robot (R3) will not place the finished wafer again on the Lamp (L).
-		
-		\item The Robot (R3) will not pickup a wafer immediately after it has placed a wafer.
-		
-		\item The Robot (R3) will place a wafer it picked from an Airlock (A1 or A2) only to the same Airlock (after processing). 
-		
-		\item As long as the wafer can move through the production process, it will. In other words, the system is deadlock free.
+		%1
+		\item Once a wafer is picked up from an Input Stack, it eventually gets printed and placed on the Output Stack if the Output Stack is not full. (\textbf{As long as the wafer can move through the production process, it will.}) \textbf{[Liveness]}
+		%2
+		\item Once a wafer is picked up from an Input Stack (I1 or I2), the next wafer from that Input Stack gets picked up only after the first wafer has been printed and placed on the corresponding Output Stack. \textbf{[Safety]}
+		%3
+		\item The Outer Robots (R1 and R2) should not place a wafer on the Input Stacks (I1 and I2). \textbf{[Safety]}
+		%4
+		\item The Outer Robots (R1 and R2) should not pickup a wafer from an empty Input Stack. \textbf{[Safety]}
+		%5
+		\item Once an \textbf{unprocessed} wafer is picked up from its Input Stack by the Outer Robots (R1 and R2), it gets placed in it's corresponding Airlock. \textbf{[Liveness]}
+		%6
+		\item The Outer Robots (R1 and R2) must not pickup an \textbf{unprocessed} wafer from the Airlocks (AL1 and AL2). \textbf{[Safety]}
+		%7
+		\item The Outer and Inner Doors of the Airlocks must not be opened at the same time \textbf{[Safety]}
+		\begin{enumerate}
+			\item The Inner Door (DI1) must not be opened if the Outer Door(DO1) is open for Airlock (AL1).
+			
+			\item The Inner Door (DI2) must not be opened if the Outer Door(DO2) is open for Airlock (AL2).
+			
+			\item The Outer Door (DO1) must not be opened if the Inner Door(DI1) is open for Airlock (AL1).
+			
+			\item The Outer Door (DO2) must not be opened if the Inner Door(DI2) is open for Airlock (AL2).
+			
+		\end{enumerate}
+		%8
+		\item Once an \textbf{unprocessed} wafer is picked up from an Airlock by the Inner Robot (R3), the wafer gets placed on the Lamp. \textbf{[Liveness]}
+		%9
+		\item The Inner Robot (R3) will only pickup a \textbf{finished} i.e. printed wafer from the Lamp (L). \textbf{[Safety]}
+		%10
+		\item The Inner Robot (R3) will not place the \textbf{finished} wafer again on the Lamp (L). \textbf{[Safety]}
+		%11
+		\item Once a \textbf{finished} wafer is picked up from the Lamp by the Inner Robot (R3), the wafer gets placed in its corresponding Airlock. \textbf{[Liveness]}
+		%12
+		\item The Inner Robot (R3) should not pickup a \textbf{processed} wafer from the Airlocks. \textbf{[Safety]}
+		%13
+		\item Once a \textbf{finished} wafer is picked up from an Airlock by the Outer Robots (R1 and R2), the wafer gets placed on it's corresponding Output Stack. \textbf{[Liveness]}
+		%14
+		\item The Outer Robots (R1 and R2) should not pickup a wafer from the Output Stacks (O1 and O2). \textbf{[Safety]}
+		%15
+		\item The Outer Robots (R1 and R2) should not place a wafer on the Output Stacks if the Output Stacks are Full. \textbf{[Safety]}
+		%16
+		\item The Outer Robots (R1 and R2) should not place an \textbf{unprocessed} wafer on the Output Stacks (O1 and O2). \textbf{[Safety]}
+		%17
+		\item \textbf{The system is deadlock free}. \textbf{[Safety]}
 		
 	\end{enumerate}
 	
 	\newpage
-	\section{Interactions} 
+	\section{Interactions}
 	\subsection {External Commands}
 	The following are the commands given by the controller to the actuators of the system. The meaning can be interpreted as: \bigskip
 	\textbf{Command(Target)}
@@ -149,14 +151,14 @@
 		\end{itemize}
 		\bigskip
 		
-		\item commWaferStatus(x,s) [x: A1, A2 ; s: Unprocessed, Finished]
+		\item commWaferStatus(x,s) [x: AL1, AL2 ; s: Unprocessed, Finished]
 		\begin{itemize}
 			\item The IO Handlers and the Lamp Handler \textbf{send} the Status of the wafer which has just been placed by them in the Airlocks(Unprocessed, Finished) 
 			\item This is \textbf{received} by Airlock Controllers
 		\end{itemize}
 		\bigskip
 		
-		\item commWaferPresence(x,s) [x: A1, A2 ; s: New, Finished , NoWafer]
+		\item commWaferPresence(x,s) [x: AL1, AL2 ; s: New, Finished , NoWafer]
 		\begin{itemize}
 			\item The Airlock Controllers \textbf{send} a notification about the presence and type of Wafer present in the Airlock (Unprocessed, Finished, No wafer) 
 			\item This is \textbf{received} by IO Handlers and the Lamp Handler
@@ -213,35 +215,35 @@
 		\\(\overline{MoveTo(MapIPDestination(IP)}*].true$ \\\textbf{Status:}Verified true.
 		
 		
-		\item The Robots (R1 and R2) should not move to the Airlocks (A1 and A2) if the corresponding Outer Doors are closed (DO1 and DO2):
+		\item The Robots (R1 and R2) should not move to the Airlocks (AL1 and AL2) if the corresponding Outer Doors are closed (DO1 and DO2):
 		\\
 		\\\textbf{Formula:} $[true*] \forall IP: IPStackID.[CheckIPStackState(IP, Empty).
 		\\(\overline{MoveTo(MapIPDestination(IP)}*].true$ \\\textbf{Status:}Verified true.
 		
 		
-		\item The Robot (R3) should not move to the Airlocks (A1 or A2) if the corresponding Inner Doors are closed:
+		\item The Robot (R3) should not move to the Airlocks (AL1 or AL2) if the corresponding Inner Doors are closed:
 		\\
 		\\\textbf{Formula:} $[true*] \forall IP: IPStackID.[CheckIPStackState(IP, Empty).
 		\\(\overline{MoveTo(MapIPDestination(IP)}*].true$ \\\textbf{Status:}Verified true.
 		
 		
-		\item The Inner Door (DI1) must not be opened if the Outer Door(DO1) is open for Airlock (A1).
+		\item The Inner Door (DI1) must not be opened if the Outer Door(DO1) is open for Airlock (AL1).
 		
 		
-		\item The Inner Door (DI2) must not be opened if the Outer Door(DO2) is open for Airlock (A2).
+		\item The Inner Door (DI2) must not be opened if the Outer Door(DO2) is open for Airlock (AL2).
 		
 		
-		\item The Outer Door (DO1) must not be opened if the Inner Door(DI1) is open for Airlock (A1).
+		\item The Outer Door (DO1) must not be opened if the Inner Door(DI1) is open for Airlock (AL1).
 		
 		
-		\item The Outer Door (DO2) must not be opened if the Inner Door(DI2) is open for Airlock (A2) : \textbf{(for 4-7)} 
+		\item The Outer Door (DO2) must not be opened if the Inner Door(DI2) is open for Airlock (AL2) : \textbf{(for 4-7)} 
 		\\
 		\\\textbf{Formula:} $[true*] \forall d: DoorID.[OpenDoor(d).\overline{CloseDoor(d)}*
 		\\OpenDoor(Corresponding(d))].false$ 
 		\\\textbf{Status:}Verified true.
 		
 		
-		\item The Inner Doors (DI1 and DI2) must not be opened if a finished wafer is present in their corresponding Airlocks (A1 and A2):
+		\item The Inner Doors (DI1 and DI2) must not be opened if a finished wafer is present in their corresponding Airlocks (AL1 and AL2):
 		\begin{itemize}
 			\item \textbf{Formula:} $[true*.receiveWaferStatus(AL1,Finished).(\overline{OpenDoor(DI1)}]true$ 
 			\\\textbf{Status:}Verified true.
@@ -250,7 +252,7 @@
 		\end{itemize}
 		
 		
-		\item The Outer Doors (DO1 and DO2) must not be opened if a new wafer is present in their corresponding Airlocks (A1 and A2):
+		\item The Outer Doors (DO1 and DO2) must not be opened if a new wafer is present in their corresponding Airlocks (AL1 and AL2):
 		\begin{itemize}
 			\item \textbf{Formula:} $[true*.receiveWaferStatus(AL1,New).(\overline{OpenDoor(DO1)}]true$ 
 			\\\textbf{Status:}Verified true.
@@ -273,7 +275,7 @@
 		\\\textbf{Formula:} $[true*] \forall IP: IPStackID.[CheckIPStackState(IP, Empty).
 		\\(\overline{MoveTo(MapIPDestination(IP)}*].true$ \\\textbf{Status:}Verified true.
 		
-		\item The Robot (R3) will place a wafer it picked from an Airlock (A1 or A2) only to the same Airlock (after processing):
+		\item The Robot (R3) will place a wafer it picked from an Airlock (AL1 or AL2) only to the same Airlock (after processing):
 		\\
 		\\\textbf{Formula:} $[true*] \forall IP: IPStackID.[CheckIPStackState(IP, Empty).
 		\\(\overline{MoveTo(MapIPDestination(IP)}*].true$ \\\textbf{Status:}Verified true.
@@ -304,7 +306,7 @@
 	\end{itemize} 
 	The Input The system currently has 87 levels, 1740 states and 3776 transitions.
 	\subsection{Restrictions and Extensions}
-	We have however, restricted the controllers to only control and interact with one half of the symmetrical system. This implies that the IO Handlers and Airlock Controllers only interact with a single robot (R1 or R2), single pair of Input and Output stack (I1,O1 or I2,O2), Airlocks (A1 or A2) and the corresponding pair of doors (DO1,DI1 or DO2,DI2). This simplifies the system to a great extent and helps in it's modelling.
+	We have however, restricted the controllers to only control and interact with one half of the symmetrical system. This implies that the IO Handlers and Airlock Controllers only interact with a single robot (R1 or R2), single pair of Input and Output stack (I1,O1 or I2,O2), Airlocks (AL1 or AL2) and the corresponding pair of doors (DO1,DI1 or DO2,DI2). This simplifies the system to a great extent and helps in it's modelling.
 	\\
 	\\There is a caveat that this simplification will reduce the throughput of the system. This happens when one of the Stacks no longer have wafers present but the other pair of stacks still do. Hence, as an extension, we have considered the possibility of modelling a system which will have the flexibility to move the robots to different stacks and hence increase the throughput. 
 	We have considered the case when the output stacks are emptied once they are full and the case when the input stacks are replenished. Our system loops around the check for the stacks to return to a workable state (Input not empty and Output not full)
