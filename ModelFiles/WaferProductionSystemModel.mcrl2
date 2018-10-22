@@ -1,4 +1,4 @@
-sort DestinationID = struct A1 | A2 | I1 | I2 | O1 | O2 | Lamp | Null;
+sort LocationID = struct A1 | A2 | I1 | I2 | O1 | O2 | Lamp | Null;
 		  IPStackID = struct IP1 | IP2;
 			OPStackID = struct OP1 | OP2;
 		  AirlockID = struct AL1 | AL2 | None;
@@ -13,10 +13,10 @@ sort DestinationID = struct A1 | A2 | I1 | I2 | O1 | O2 | Lamp | Null;
 		  WaferType = struct Unprocessed | Finished | NoWafer;
 
 map CorrespondingDoor : DoorID -> DoorID;
-	  CorrespondingOPDestination : IPStackID -> DestinationID;		
-	  MapOPDestination : OPStackID -> DestinationID;
-		MapIPDestination : IPStackID -> DestinationID;
-		MapAirlock : AirlockID -> DestinationID;
+	  CorrespondingOPDestination : IPStackID -> LocationID;		
+	  MapOPDestination : OPStackID -> LocationID;
+		MapIPDestination : IPStackID -> LocationID;
+		MapAirlock : AirlockID -> LocationID;
 
 eqn CorrespondingDoor(DO1) = DI1;
 		CorrespondingDoor(DI1) = DO1;
@@ -35,9 +35,9 @@ eqn CorrespondingDoor(DO1) = DI1;
 		MapAirlock(AL2) = A2;
 		MapAirlock(None) = Null;
 
-act Move: RobotID # DestinationID;
-	  PickupWafer : RobotID;
-	  PlaceWafer : RobotID;
+act Move: RobotID # LocationID;
+	  PickupWafer : RobotID # LocationID;
+	  PlaceWafer : RobotID # LocationID;
 
 		OpenDoor : DoorID;
 		CloseDoor : DoorID;
@@ -72,24 +72,24 @@ IOHandler1(Operation : OperationType, Cycle : CycleType) =
 % Input Cycle
 ((Cycle == Input) && (Operation == Get)) -> CheckIPStackState(IP1,Empty).IOHandler1(Operation = Get)
 
-+ ((Cycle == Input) && (Operation == Get)) -> CheckIPStackState(IP1,NonEmpty).Move(R1,I1).PickupWafer(R1).IOHandler1(Operation = Put)
++ ((Cycle == Input) && (Operation == Get)) -> CheckIPStackState(IP1,NonEmpty).Move(R1,I1).PickupWafer(R1,I1).IOHandler1(Operation = Put)
 
 + ((Cycle == Input) && (Operation == Put)) -> receiveDoorState(DO1,Closed).sendDoorRequest(DO1,Open).IOHandler1(Operation = Put)
 
-+ ((Cycle == Input) && (Operation == Put)) -> receiveDoorState(DO1,Open).Move(R1,A1).PlaceWafer(R1).sendWaferStatus(AL1,Unprocessed).IOHandler1(Cycle = Output, Operation = Get)
++ ((Cycle == Input) && (Operation == Put)) -> receiveDoorState(DO1,Open).Move(R1,A1).PlaceWafer(R1,A1).sendWaferStatus(AL1,Unprocessed).IOHandler1(Cycle = Output, Operation = Get)
 
 % Output Cycle
 %Check -----------------------------------------------------------------------------------------
 + ((Cycle == Output) && (Operation == Get)) -> receiveWaferPresence(AL1,NoWafer).IOHandler1(Operation = Get)
 
 + ((Cycle == Output) && (Operation == Get)) -> receiveWaferPresence(AL1,Finished).receiveDoorState(DO1,Closed).sendDoorRequest(DO1,Open)
-.receiveDoorState(DO1,Open).Move(R1,A1).PickupWafer(R1).IOHandler1(Operation = Put)
+.receiveDoorState(DO1,Open).Move(R1,A1).PickupWafer(R1,A1).IOHandler1(Operation = Put)
 
-%+ ((Cycle == Output) && (Operation == Get)) -> receiveWaferPresence(AL1,Finished).receiveDoorState(DO1,Open).Move(R1,A1).PickupWafer(R1).IOHandler1(Operation = Put)
+%+ ((Cycle == Output) && (Operation == Get)) -> receiveWaferPresence(AL1,Finished).receiveDoorState(DO1,Open).Move(R1,A1).PickupWafer(R1,A1).IOHandler1(Operation = Put)
 %Check -----------------------------------------------------------------------------------------
 + ((Cycle == Output) && (Operation == Put)) -> CheckOPStackState(OP1,Full).IOHandler1(Operation = Put)
 
-+ ((Cycle == Output) && (Operation == Put)) -> CheckOPStackState(OP1,NonFull).Move(R1,O1).PlaceWafer(R1).IOHandler1(Cycle = Input, Operation = Get);
++ ((Cycle == Output) && (Operation == Put)) -> CheckOPStackState(OP1,NonFull).Move(R1,O1).PlaceWafer(R1,O1).IOHandler1(Cycle = Input, Operation = Get);
 
 
 
@@ -99,24 +99,24 @@ IOHandler2(Operation : OperationType, Cycle : CycleType) =
 % Input Cycle
 ((Cycle == Input) && (Operation == Get)) -> CheckIPStackState(IP2,Empty).IOHandler2(Operation = Get)
 
-+ ((Cycle == Input) && (Operation == Get)) -> CheckIPStackState(IP2,NonEmpty).Move(R2,I2).PickupWafer(R2).IOHandler2(Operation = Put)
++ ((Cycle == Input) && (Operation == Get)) -> CheckIPStackState(IP2,NonEmpty).Move(R2,I2).PickupWafer(R2,I2).IOHandler2(Operation = Put)
 
 + ((Cycle == Input) && (Operation == Put)) -> receiveDoorState(DO2,Closed).sendDoorRequest(DO2,Open).IOHandler2(Operation = Put)
 
-+ ((Cycle == Input) && (Operation == Put)) -> receiveDoorState(DO2,Open).Move(R2,A2).PlaceWafer(R2).sendWaferStatus(AL2,Unprocessed).IOHandler2(Cycle = Output, Operation = Get)
++ ((Cycle == Input) && (Operation == Put)) -> receiveDoorState(DO2,Open).Move(R2,A2).PlaceWafer(R2,A2).sendWaferStatus(AL2,Unprocessed).IOHandler2(Cycle = Output, Operation = Get)
 
 % Output Cycle
 %Check -----------------------------------------------------------------------------------------
 + ((Cycle == Output) && (Operation == Get)) -> receiveWaferPresence(AL2,NoWafer).IOHandler2(Operation = Get)
 
 + ((Cycle == Output) && (Operation == Get)) -> receiveWaferPresence(AL2,Finished).receiveDoorState(DO2,Closed).sendDoorRequest(DO2,Open)
-.receiveDoorState(DO2,Open).Move(R2,A2).PickupWafer(R2).IOHandler2(Operation = Put)
+.receiveDoorState(DO2,Open).Move(R2,A2).PickupWafer(R2,A2).IOHandler2(Operation = Put)
 
-%+ ((Cycle == Output) && (Operation == Get)) -> receiveWaferPresence(AL2,Finished).receiveDoorState(DO2,Open).Move(R2,A2).PickupWafer(R2).IOHandler2(Operation = Put)
+%+ ((Cycle == Output) && (Operation == Get)) -> receiveWaferPresence(AL2,Finished).receiveDoorState(DO2,Open).Move(R2,A2).PickupWafer(R2,A2).IOHandler2(Operation = Put)
 %Check -----------------------------------------------------------------------------------------
 + ((Cycle == Output) && (Operation == Put)) -> CheckOPStackState(OP2,Full).IOHandler2(Operation = Put)
 
-+ ((Cycle == Output) && (Operation == Put)) -> CheckOPStackState(OP2,NonFull).Move(R2,O2).PlaceWafer(R2).IOHandler2(Cycle = Input, Operation = Get);
++ ((Cycle == Output) && (Operation == Put)) -> CheckOPStackState(OP2,NonFull).Move(R2,O2).PlaceWafer(R2,O2).IOHandler2(Cycle = Input, Operation = Get);
 
 
 
@@ -177,24 +177,24 @@ LampWaferHandler(Cycle : CycleType, CurrentAirlock : AirlockID) =
 
 + ((Cycle == Input) && (CurrentAirlock == AL1)) -> receiveDoorState(DI1,Closed).sendDoorRequest(DI1,Open).LampWaferHandler(CurrentAirlock = AL1)
 
-+ ((Cycle == Input) && (CurrentAirlock == AL1)) -> receiveDoorState(DI1,Open).Move(R3,A1).PickupWafer(R3).Move(R3,Lamp).PlaceWafer(R3).LampWaferHandler(Cycle = Output)
++ ((Cycle == Input) && (CurrentAirlock == AL1)) -> receiveDoorState(DI1,Open).Move(R3,A1).PickupWafer(R3,A1).Move(R3,Lamp).PlaceWafer(R3,Lamp).LampWaferHandler(Cycle = Output)
 
 % Output AL1
 + ((Cycle == Output) && (CurrentAirlock == AL1)) -> CheckLampState(Incomplete).LampWaferHandler(Cycle = Output)
 
-+ ((Cycle == Output) && (CurrentAirlock == AL1)) -> CheckLampState(Complete).Move(R3,Lamp).PickupWafer(R3).Move(R3,A1).PlaceWafer(R3).sendWaferStatus(AL1,Finished).LampWaferHandler(Cycle = Input, CurrentAirlock = None)
++ ((Cycle == Output) && (CurrentAirlock == AL1)) -> CheckLampState(Complete).Move(R3,Lamp).PickupWafer(R3,Lamp).Move(R3,A1).PlaceWafer(R3,A1).sendWaferStatus(AL1,Finished).LampWaferHandler(Cycle = Input, CurrentAirlock = None)
 
 % Input AL2
 + ((Cycle == Input) && (CurrentAirlock == None)) -> receiveWaferPresence(AL2,Unprocessed).LampWaferHandler(CurrentAirlock = AL2)
 
 + ((Cycle == Input) && (CurrentAirlock == AL2)) -> receiveDoorState(DI2,Closed).sendDoorRequest(DI2,Open).LampWaferHandler(CurrentAirlock = AL2)
 
-+ ((Cycle == Input) && (CurrentAirlock == AL2)) -> receiveDoorState(DI2,Open).Move(R3,A2).PickupWafer(R3).Move(R3,Lamp).PlaceWafer(R3).LampWaferHandler(Cycle = Output)
++ ((Cycle == Input) && (CurrentAirlock == AL2)) -> receiveDoorState(DI2,Open).Move(R3,A2).PickupWafer(R3,A2).Move(R3,Lamp).PlaceWafer(R3,Lamp).LampWaferHandler(Cycle = Output)
 
 % Output AL2
 + ((Cycle == Output) && (CurrentAirlock == AL2)) -> CheckLampState(Incomplete).LampWaferHandler(Cycle = Output)
 
-+ ((Cycle == Output) && (CurrentAirlock == AL2)) -> CheckLampState(Complete).Move(R3,Lamp).PickupWafer(R3).Move(R3,A2).PlaceWafer(R3).sendWaferStatus(AL2,Finished).LampWaferHandler(Cycle = Input, CurrentAirlock = None);
++ ((Cycle == Output) && (CurrentAirlock == AL2)) -> CheckLampState(Complete).Move(R3,Lamp).PickupWafer(R3,Lamp).Move(R3,A2).PlaceWafer(R3,A2).sendWaferStatus(AL2,Finished).LampWaferHandler(Cycle = Input, CurrentAirlock = None);
 
 
 init 
