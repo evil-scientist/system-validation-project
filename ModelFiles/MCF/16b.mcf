@@ -1,0 +1,2 @@
+[true* .PickupWafer(R2, I2) .(!PickupWafer(R2, A2))* . PlaceWafer(R2, O2)] false 
+
