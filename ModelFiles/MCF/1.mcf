@@ -1,0 +1,1 @@
+[true*] forall IP : IPStackID . [CheckIPStackState(IP,Empty). !CheckIPStackState(IP,NonEmpty)*. MoveTo(MapIPDestination(IP))]false
