@@ -1,1 +1,0 @@
-[true* . CheckIPStackState(IP2, Empty). (!CheckIPStackState(IP2, NonEmpty))*. PickupWafer(R2, I2)] false
