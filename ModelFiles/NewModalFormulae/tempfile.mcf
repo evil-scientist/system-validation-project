@@ -1,0 +1,2 @@
+[true*.PickupWafer(R3,Lamp).!PlaceWafer(R3,AL1)*.PlaceWafer(R3,Lamp)] false
+[true*.PickupWafer(R3,Lamp).!PlaceWafer(R3,AL2)*.PlaceWafer(R3,Lamp)] false
