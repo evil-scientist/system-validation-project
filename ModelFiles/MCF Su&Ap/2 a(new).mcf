@@ -1,0 +1,1 @@
+[true* . PickupWafer(R1, I1) . (!PlaceWafer(R1,O1))*. PickupWafer(R1,I1)] false
