@@ -1,0 +1,1 @@
+[true*.PickupWafer(R1,I1)] mu x.([!PlaceWafer(R1,A1)]x && <true> true)
