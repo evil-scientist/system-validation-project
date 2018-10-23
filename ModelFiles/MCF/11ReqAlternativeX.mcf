@@ -1,0 +1,1 @@
+[true*.PickupWafer(R3,Lamp)] mu x.([!(PlaceWafer(R3,A1) || PlaceWafer(R3,A2))]x && <true> true)
