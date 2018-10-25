@@ -61,7 +61,7 @@ The behaviour of the system can be understood by listing the following requireme
 %4
 \item The Outer Robots (R1 and R2) should not pickup a wafer from an empty Input Stack. \textbf{[Safety]}
 %5
-\item Once an \textbf{unprocessed} wafer is picked up from its Input Stack by the Outer Robots (R1 and R2), it gets placed in it's corresponding Airlock. \textbf{[Liveness]}
+\item Once an \textbf{unprocessed} wafer is picked up from its Input Stack (I1 or I2) by the Outer Robots (R1 and R2), it gets placed only in it's corresponding Airlock (A1 or A2). \textbf{[Safety]}
 %6
 \item The Outer Robots (R1 and R2) must not pickup an \textbf{unprocessed} wafer from the Airlocks (AL1 and AL2). \textbf{[Safety]}
 %7
@@ -240,59 +240,87 @@ Here the corresponding Modal $\mu$ -Calculus are described:
 \\
 \\\textbf{Formula:} $[true*] \forall IP: IPStackID.[CheckIPStackState(IP, Empty).
 \\(\overline{MoveTo(MapIPDestination(IP)}*].true$ \\\textbf{Status:}Verified true.
-
+%%%
 %9
 \item The Inner Robot (R3) will only pickup a \textbf{finished} i.e. printed wafer from the Lamp (L). \textbf{[Safety]}
 \\
-\\\textbf{Formula:} $[true*] \forall IP: IPStackID.[CheckIPStackState(IP, Empty).
-\\(\overline{MoveTo(MapIPDestination(IP)}*].true$ \\\textbf{Status:}Verified true.
-
+\\\textbf{Formula:} $[ \overline{CheckLampState(Complete)}^*.PickupWafer(R3,Lamp)]  false$ 
+\\\textbf{Status:}Verified true.
+%[!CheckLampState(Complete)*.PickupWafer(R3,Lamp)] false
+%%%
 %10
 \item The Inner Robot (R3) will not place the \textbf{finished} wafer again on the Lamp (L). \textbf{[Safety]}
 \\
-\\\textbf{Formula:} $[true*] \forall IP: IPStackID.[CheckIPStackState(IP, Empty).
-\\(\overline{MoveTo(MapIPDestination(IP)}*].true$ \\\textbf{Status:}Verified true.
-
+\\\textbf{Formula:} $[true^*.PickupWafer(R3,Lamp).
+\\ \overline{PlaceWafer(R3,A1) \vee PlaceWafer(R3,A2)}^*.PlaceWafer(R3,Lamp)] false$ \\\textbf{Status:}Verified true.
+%[true*.PickupWafer(R3,Lamp).!(PlaceWafer(R3,A1) || PlaceWafer(R3,A2))*.PlaceWafer(R3,Lamp)] false
+%%%
 %11
 \item Once a \textbf{finished} wafer is picked up from the Lamp by the Inner Robot (R3), the wafer gets placed in its corresponding Airlock. \textbf{[Liveness]}
 \\
-\\\textbf{Formula:} $[true*] \forall IP: IPStackID.[CheckIPStackState(IP, Empty).
-\\(\overline{MoveTo(MapIPDestination(IP)}*].true$ \\\textbf{Status:}Verified true.
-
+\\\textbf{Formula:} 
+\\\textbf{Status:}Verified true.
+%
+%%%
 %12
 \item The Inner Robot (R3) should not pickup a \textbf{processed} wafer from the Airlocks. \textbf{[Safety]}
 \\
-\\\textbf{Formula:} $[true*] \forall IP: IPStackID.[CheckIPStackState(IP, Empty).
-\\(\overline{MoveTo(MapIPDestination(IP)}*].true$ \\\textbf{Status:}Verified true.
-
+\\\textbf{Formula:} $[true^*. receiveWaferStatus(AL1, Finished). true^*. 
+\\PickupWafer(R3, A1)] false $
+\\\textbf{Status:}Verified true.
+%[true* . receiveWaferStatus(AL1, Finished). true*. PickupWafer(R3, A1)]false
+%%%
 %13
 \item Once a \textbf{finished} wafer is picked up from an Airlock by the Outer Robots (R1 and R2), the wafer gets placed on it's corresponding Output Stack. \textbf{[Liveness]}
 \\
-\\\textbf{Formula:} $[true*] \forall IP: IPStackID.[CheckIPStackState(IP, Empty).
-\\(\overline{MoveTo(MapIPDestination(IP)}*].true$ \\\textbf{Status:}Verified true.
-
+\\\textbf{Formula:} 
+\\\textbf{Status:}Verified true.
+%
+%%%
 %14
 \item The Outer Robots (R1 and R2) should not pickup a wafer from the Output Stacks (O1 and O2). \textbf{[Safety]}
-\\
-\\\textbf{Formula:} $[true*] \forall IP: IPStackID.[CheckIPStackState(IP, Empty).
-\\(\overline{MoveTo(MapIPDestination(IP)}*].true$ \\\textbf{Status:}Verified true.
-
+\begin{enumerate}
+\item \textbf{Formula:} $[true^* . PickupWafer(R1, O1)] false$
+\\\textbf{Status:}Verified true.
+\item \textbf{Formula:} $[true^* . PickupWafer(R2, O2)] false$
+\\\textbf{Status:}Verified true.
+\end{enumerate}
+%[true* . PickupWafer(R1, O1)] false 
+%[true* . PickupWafer(R2, O2)] false 
+%%%
 %15
 \item The Outer Robots (R1 and R2) should not place a wafer on the Output Stacks if the Output Stacks are Full. \textbf{[Safety]}
-\\
-\\\textbf{Formula:} $[true*] \forall IP: IPStackID.[CheckIPStackState(IP, Empty).
-\\(\overline{MoveTo(MapIPDestination(IP)}*].true$ \\\textbf{Status:}Verified true.
+\begin{enumerate}
 
+\item \textbf{Formula:} $[true^* . CheckOPStackState(OP1,Full). \\\overline{CheckOPStackState(OP1, NonFull)}^* .PlaceWafer(R1, O1)] false $
+\\\textbf{Status:}Verified true.
+
+\item \textbf{Formula:} $[true^* . CheckOPStackState(OP2,Full). \\\overline{CheckOPStackState(OP2, NonFull)}^* .PlaceWafer(R2, O2)] false $
+\\\textbf{Status:}Verified true.
+\end{enumerate}
+%[true* .CheckOPStackState(OP1,Full). (!CheckOPStackState(OP1, NonFull))* . PlaceWafer(R1, O1)] false 
+%[true* .CheckOPStackState(OP2,Full). (!CheckOPStackState(OP2, NonFull))* . PlaceWafer(R2, O2)] false 
+%%%
 %16
 \item The Outer Robots (R1 and R2) should not place an \textbf{unprocessed} wafer on the Output Stacks (O1 and O2). \textbf{[Safety]}
-\\
-\\\textbf{Formula:} $[true*] \forall IP: IPStackID.[CheckIPStackState(IP, Empty).
-\\(\overline{MoveTo(MapIPDestination(IP)}*].true$ \\\textbf{Status:}Verified true.
+\begin{enumerate}
 
+\item \textbf{Formula:} $[true^* . PickupWafer(R1, I1) .\overline{PickupWafer(R1, A1)}^* . 
+\\PlaceWafer(R1, O1)] false $
+\\\textbf{Status:}Verified true.
+
+\item \textbf{Formula:} $[true^* . PickupWafer(R2, I2) .\overline{PickupWafer(R2, A2)}^* . 
+\\PlaceWafer(R1, O1)] false $
+\\\textbf{Status:}Verified true.
+
+\end{enumerate}
+%[true* .PickupWafer(R1, I1) .(!PickupWafer(R1, A1))* . PlaceWafer(R1, O1)] false 
+%[true* .PickupWafer(R2, I2) .(!PickupWafer(R2, A2))* . PlaceWafer(R2, O2)] false 
+%%%
 %17
 \item \textbf{The system is deadlock free}. \textbf{[Safety]}
 \\
-\\\textbf{Formula:} $[true*].<true>.true$
+\\\textbf{Formula:} $[true^*]. <true> . true$
 \\\textbf{Status:}Verified true.
 \end{enumerate}
 %-------------------------------------%

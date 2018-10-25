@@ -1,0 +1,7 @@
+*.pbes
+*.lts
+*.lps
+*.synctex.gz
+*.log
+*.aux
+*.toc
