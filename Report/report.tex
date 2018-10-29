@@ -30,7 +30,7 @@
 	\\
 	\\The system consists of a UV Lamp that projects a design onto a wafer inside a vacuum chamber. The wafers are transferred to the Lamp via two Airlocks. The wafers are handled by robots from their initial position on the Input stacks to their final position on the Output stacks. The wafers move along the production line from their Initial state (on the Input Stacks), are printed on by the Lamp and reach the Final state (on the Output stacks).
 	\\
-	\\Described here is the documentation for the modelling of the above system in mcrl2 and it's verification using Modal $\mu$ calculus. Section 2 describes the System and Functional Requirements. Section 3 is dedicated to the interactions between the various subsystems defined in section 2. The architecture of the resulting system is shown in section 4. In section 5 the requirements are translated into Modal S$\mu$-calculus. Section 6 describes the modelling process. In section 7 the model is verified with the translated requirements. The final conclusions are presented in section 8.
+	\\Described here is the documentation for the modelling of the above system in mcrl2 and it's verification using Modal $\mu$ calculus. Section 2 describes the System and Functional Requirements. Section 3 is dedicated to the interactions between the various subsystems defined in section 2. The architecture of the resulting system is shown in section 4. In section 5 the requirements are translated into Modal $\mu$-calculus. Section 6 describes the modelling process. In section 7 the model is verified with the translated requirements. The final conclusions are presented in section 8.
 	
 	\section{Requirements}
 	
@@ -53,7 +53,7 @@
 	
 	\begin{enumerate}
 		%1
-		\item Once a wafer is picked up from an Input Stack, it eventually gets printed and placed on the Output Stack if the Output Stack is not full. (\textbf{As long as the wafer can move through the production process, it will.}) \textbf{[Liveness]}
+		\item Overall Requirement for our system: Once a wafer is picked up from an Input Stack, it eventually gets printed and placed on the Output Stack if the Output Stack is not full. (\textbf{As long as the wafer can move through the production process, it will.}) \textbf{[Liveness]}
 		%2
 		\item Once a wafer is picked up from an Input Stack (I1 or I2), the next wafer from that Input Stack gets picked up only after the previous wafer has been printed and placed on the corresponding Output Stack. \textbf{[Safety]}
 		%3
@@ -61,7 +61,7 @@
 		%4
 		\item The Outer Robots (R1 and R2) should not pickup a wafer from an empty Input Stack. \textbf{[Safety]}
 		%5
-		\item Once an \textbf{unprocessed} wafer is picked up from its Input Stack (I1 or I2) by the Outer Robots (R1 and R2), it gets placed on it's corresponding Airlock (A1 or A2). \textbf{[Liveness]}
+		\item Once an \textbf{unprocessed} wafer is picked up from its Input Stack (I1 or I2) by the Outer Robots (R1 and R2), it will be placed on it's corresponding Airlock (A1 or A2). \textbf{[Liveness]}
 		%6
 		\item The Outer Robots (R1 and R2) must not pickup an \textbf{unprocessed} wafer from the Airlocks (AL1 and AL2). \textbf{[Safety]}
 		%7
@@ -77,17 +77,17 @@
 			
 		\end{enumerate}
 		%8
-		\item Once an \textbf{unprocessed} wafer is picked up from an Airlock by the Inner Robot (R3), the wafer gets placed on the Lamp. \textbf{[Liveness]}
+		\item Once an \textbf{unprocessed} wafer is picked up from an Airlock by the Inner Robot (R3), the wafer will be placed on the Lamp. \textbf{[Liveness]}
 		%9
 		\item The Inner Robot (R3) will only pickup a \textbf{finished} i.e. printed wafer from the Lamp (L). \textbf{[Safety]}
 		%10
 		\item The Inner Robot (R3) will not place the \textbf{finished} wafer again on the Lamp (L). \textbf{[Safety]}
 		%11
-		\item Once a \textbf{finished} wafer is picked up from the Lamp by the Inner Robot (R3), the wafer gets placed in its corresponding Airlock. \textbf{[Liveness]}
+		\item Once a \textbf{finished} wafer is picked up from the Lamp by the Inner Robot (R3), the wafer will be placed in its corresponding Airlock. \textbf{[Liveness]}
 		%12
 		\item The Inner Robot (R3) should not pickup a \textbf{processed} wafer from the Airlocks. \textbf{[Safety]}
 		%13
-		\item Once a \textbf{finished} wafer is picked up from an Airlock by the Outer Robots (R1 and R2), the wafer gets placed on it's corresponding Output Stack. \textbf{[Liveness]}
+		\item Once a \textbf{finished} wafer is picked up from an Airlock by the Outer Robots (R1 and R2), the wafer will be placed on it's corresponding Output Stack. \textbf{[Liveness]}
 		%14
 		\item The Outer Robots (R1 and R2) should not pickup a wafer from the Output Stacks (O1 and O2). \textbf{[Safety]}
 		%15
@@ -126,15 +126,16 @@
 	\end{table}
 	\\The following commands are used to check sensor states:
 	\begin{itemize}
-		\item CheckIPStackState(x,s) [x: I1, I2 ; s: Empty, Full] :
-		\item CheckOPStackState(x,s) [x: O1, O2 ; s: Empty, Full] :
-		\item CheckLampState(s) [Incomplete, Complete] :
+		\item CheckIPStackState(x,s) [x: I1, I2 ; s: Empty, Full]
+		\item CheckOPStackState(x,s) [x: O1, O2 ; s: Empty, Full]
+		\item CheckLampState(s) [Incomplete, Complete]
 	\end{itemize}
-	
+		\bigskip
+
 	\subsection {Communications}
-	The following are the commands used by the controllers to communicate within the system. The meaning can be interpreted as: 
+	The following are commands used by the controllers to communicate within the system. Their meaning can be interpreted as: 
 	\bigskip
-	\newline 
+	\newline
 	\textbf{Command(ComponentID, State):}
 	\begin{itemize}
 		\item commDoorState(x,s) [x: DI1, DI2, DO1, DO2 ; s: Open, Closed] 
@@ -214,7 +215,7 @@
 		
 		
 		%5
-		\item Once an \textbf{unprocessed} wafer is picked up from its Input Stack by the Outer Robots (R1 and R2), it gets placed in it's corresponding Airlock. \textbf{[Liveness]}
+		\item Once an \textbf{unprocessed} wafer is picked up from its Input Stack (I1 or I2) by the Outer Robots (R1 and R2), it will be placed on it's corresponding Airlock (A1 or A2). \textbf{[Liveness]}
 		\\
 		\\\textbf{Formula:} $[true*.PlaceWafer(R1,A2)] false $ \\\textbf{Status:}Verified true.
 		\\
@@ -247,7 +248,7 @@
 		
 		
 		%8 to be done
-		\item Once an \textbf{unprocessed} wafer is picked up from an Airlock by the Inner Robot (R3), the wafer gets placed on the Lamp. \textbf{[Liveness]}
+		\item Once an \textbf{unprocessed} wafer is picked up from an Airlock by the Inner Robot (R3), the wafer will be placed on the Lamp. \textbf{[Liveness]}
 		\\
 		\\\textbf{Formula:} $[true*] \forall IP: IPStackID.[CheckIPStackState(IP, Empty).
 		\\(\overline{MoveTo(MapIPDestination(IP)}*].true$ \\\textbf{Status:}Verified true.
@@ -267,7 +268,7 @@
 		%[true*.PickupWafer(R3,Lamp).!(PlaceWafer(R3,A1) || PlaceWafer(R3,A2))*.PlaceWafer(R3,Lamp)] false
 		%%%
 		%11
-		\item Once a \textbf{finished} wafer is picked up from the Lamp by the Inner Robot (R3), the wafer gets placed in its corresponding Airlock. \textbf{[Liveness]}
+		\item Once a \textbf{finished} wafer is picked up from the Lamp by the Inner Robot (R3), the wafer will be placed in its corresponding Airlock. \textbf{[Liveness]}
 		\\
 		\\\textbf{Formula:} 
 		\\\textbf{Status:}Verified true.
@@ -282,7 +283,7 @@
 		%[true* . receiveWaferStatus(AL1, Finished). true*. PickupWafer(R3, A1)]false
 		%%%
 		%13
-		\item Once a \textbf{finished} wafer is picked up from an Airlock by the Outer Robots (R1 and R2), the wafer gets placed on it's corresponding Output Stack. \textbf{[Liveness]}
+		\item Once a \textbf{finished} wafer is picked up from an Airlock by the Outer Robots (R1 and R2), the wafer will be placed on it's corresponding Output Stack. \textbf{[Liveness]} \textbf{[Liveness]}
 		\\
 		\\\textbf{Formula:} 
 		\\\textbf{Status:}Verified true.
