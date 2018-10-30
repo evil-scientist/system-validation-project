@@ -1,2 +1,1 @@
 [true* .CheckOPStackState(OP2,Full). (!CheckOPStackState(OP2, NonFull))* . PlaceWafer(R2, O2)] false 
-

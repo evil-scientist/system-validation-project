@@ -1,2 +1,0 @@
-[true* . PickupWafer(R3, A1)] nu x.[(!PlaceWafer(R3, A1))]x && <true>true
-

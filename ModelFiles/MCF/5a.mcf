@@ -1,1 +1,1 @@
-[true*.PlaceWafer(R1,A2)] false
+[true*.PickupWafer(R1,I1)] <true*.PlaceWafer(R1,A1)> true
