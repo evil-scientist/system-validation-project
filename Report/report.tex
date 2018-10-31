@@ -390,13 +390,12 @@
 	\\There is a caveat though. This simplification will reduce the throughput of the system. This happens when one of the Stacks no longer have wafers present but the other pair of stacks still do. 
 	\\
 	\\Hence, as an extension, we have considered the possibility of the stacks being replenished. This ensures that the Robots continuously check the Input and Output stack till they are in a state where the system can proceed. Instead of dealing with the number of wafers present in the stacks, we have abstracted that away to a binary state of the stacks, that is, are usable or not. Usable here indicates different meanings for Input and Output stacks. For the Input stack we check if the stacks are Empty or Non-Empty. For the output stacks the check is performed to determine if they are Full or Not-Full. This ensures that if at any point of time the stacks are replenished (input) or cleared (output) the system will continue to work. 
-	\\
-	\\Thus, We have considered the case when the output stacks are emptied once they are full and the case when the input stacks are replenished. Our system loops around the check for the stacks to return to a workable state (Input not empty and Output not full)
-	\\
+	\par Thus, We have considered the case when the output stacks are emptied once they are full and the case when the input stacks are replenished. Our system loops around the check for the stacks to return to a workable state (Input not empty and Output not full)	
+	\par Another extension we came up with was a condition where the door failed to open after a  request from the IO Handler or the Lamp Wafer Handler. We added an error communication from the Airlock Controller to the requester in this case and modeled our system to retry opening the door in such a case. This guards against a deadlock due to cases such as the door being jammed while opening etc.
 	\\
 	\begin{figure}[ht]
 		\centering
-		\includegraphics[width=\textwidth, height=8cm]{3D-Model.png}
+		\includegraphics[width=\textwidth, height=6cm]{3D-Model.png}
 		\caption{LTSView of the System}
 		\label{fig:ltsview}
 	\end{figure}
