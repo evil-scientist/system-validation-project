@@ -33,7 +33,7 @@ make view
 ```
 for simulation and visualization of the system.
 
-The following will test all of the mu calculus formaluae
+The following will test all of the μ calculus formaluae
 ```
 make tests
 ```
