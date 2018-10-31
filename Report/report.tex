@@ -102,7 +102,15 @@
 	\end{enumerate}
 	
 	\newpage
-	\section{Interactions}
+	\section{System Description and Interactions}
+	\subsection {System Description}
+	We consider that our system consists of five components for control:
+	\begin{itemize}
+		\item \textbf{Input-Output Handlers} which are controllers that manage the (Outer) Robots R1 and R2 and their interactions with the pair of Stacks and the Airlocks. These IO Handlers monitor the Input and Output stacks, command the Robots and send/receive information to/from the Airlocks regarding presence of a wafer in the airlocks.
+		\item \textbf{Airlock Chamber Controllers} which control the actuation of the Doors and the Airlocks' interactions with the rest of the system. These Airlock controllers receive and act on requests from the other components for opening/closing of doors. Moreover, they recieve information about wafers that have been placed in the Airlocks by the IO Handlers and Lamp Wafer Handler.
+		\item A \textbf{Lamp Wafer Handler} which controls the (Inner)Robot R3 and its' interactions with the Lamp and the Airlocks. The Lamp Wafer Handler monitors the Lamp's printing process, commands the Inner Robot and sends/receives information to/from the Airlocks regarding presence of a wafer in the airlocks.
+	\end{itemize}
+	
 	\subsection {External Commands}
 	The following are the commands given by the controller to the actuators of the system. The meaning can be interpreted as: \bigskip
 	\textbf{Command(Target)}
@@ -129,13 +137,15 @@
 	\\The following commands are used to check sensor states:
 	\begin{itemize}
 		\item CheckIPStackState(x,s) [x: I1, I2 ; s: Empty, Full]
+		
 		\item CheckOPStackState(x,s) [x: O1, O2 ; s: Empty, Full]
 		\item CheckLampState(s) [Incomplete, Complete]
 	\end{itemize}
 	\bigskip
 	
 	\subsection {Communications}
-	The following are commands used by the controllers to communicate within the system. Their meaning can be interpreted as: 
+	The following are commands used by the controllers to communicate within
+	the system. Their meaning can be interpreted as: 
 	\bigskip
 	\newline
 	\textbf{Command(ComponentID, State):}
@@ -166,7 +176,17 @@
 			\item The Airlock Controllers \textbf{send} a notification about the presence and type of Wafer present in the Airlock (Unprocessed, Finished, No wafer) 
 			\item This is \textbf{received} by IO Handlers and the Lamp Handler
 		\end{itemize}
+		
+		\bigskip
+		
+		\item commerror(x) [x: DO1,DO2,DI1,DI2 ; s: NA]
+		\begin{itemize}
+			\item The Airlock Controllers \textbf{send} an error when the opening of the doors after receiveDoorRequest(x,Open) is unsuccessful. 
+			\item This is \textbf{received} by IO Handlers and the Lamp Handler which asked to open the doors with sendDoorRequest(x,Open).
+			\textbf{Note:} When an error is received by the Lamp Handler or the IO Handlers, the sendDoorRequest(x,open) action is initiated again.
+		\end{itemize}
 	\end{itemize}
+	
 	\newpage
 	\section{Architecture}
 	\subsection{Global System Architecture}
@@ -206,7 +226,6 @@
 		\\
 		\\\textbf{Formula:} $[true^*. PlaceWafer(R2,I2)]false $ \\\textbf{Status:}Verified true.
 		
-		
 		%4
 		\item The Outer Robots (R1 and R2) should not pickup a wafer from an empty Input Stack. \textbf{[Safety]}
 		\\
@@ -215,7 +234,6 @@
 		\\
 		\\\textbf{Formula:} $[true^*.  CheckIPStackState(IP2, Empty).
 		\\(\overline{CheckIPStackState(IP2, NonEmpty)}^*.PickupWafer(R2, I2)]false$ \\\textbf{Status:}Verified true.
-		
 		
 		%5
 		\item Once an \textbf{unprocessed} wafer is picked up from its Input Stack (I1 or I2) by the Outer Robots (R1 and R2), it will be placed on it's corresponding Airlock (A1 or A2). \textbf{[Liveness]}
@@ -336,15 +354,10 @@
 			\\\textbf{Status:}Verified true.
 			
 			
-			\item The doors should not get jammed. \textbf{[Safety]}
-			\item \textbf{Formula:} $[true^* . Requst(R1, I1) .\overline{PickupWafer(R1, A1)}^* . 
-			\\PlaceWafer(R1, O1)] false $
-			\\\textbf{Status:}Verified true.
+			
 			
 		\end{enumerate}
-		%[true* .PickupWafer(R1, I1) .(!PickupWafer(R1, A1))* . PlaceWafer(R1, O1)] false 
-		%[true* .PickupWafer(R2, I2) .(!PickupWafer(R2, A2))* . PlaceWafer(R2, O2)] false 
-		%%%
+		
 		%17
 		\item \textbf{The system is deadlock free}. \textbf{[Safety]}
 		\\
@@ -425,9 +438,8 @@
 		\end{minipage}
 	\end{figure}
 	\newpage
-	\section{Conclusion}
-	As part of the given assignment, we have modelled a Wafer production system as described in the assignment prompt. This project consisted of multiple phases. In the first phase the system components were determined and requirements were formalized. In the second phase the interactions between the systems and the communications between different controllers were defined. Based on the system components along with the formulated requirements and interactions an architecture was developed. The third phase involved modelling with the mcrl2 tool. In the fourth phase requirements were translated into $\mu$-calculus Calculus. In the fifth phase the model was verified by translating the $\mu$-calculus Calculus from phase 4 into Modal $\mu$-Code. 
-	
+	\section{Conclusion and Future Work}
+	As part of the given assignment, we have modelled a Wafer production system as described in the assignment prompt. This project consisted of multiple phases. In the first phase the system components were determined and requirements were formalized. In the second phase the interactions between the systems and the communications between different controllers were defined. Based on the system components along with the formulated requirements and interactions an architecture was developed. The third phase involved modelling with the mcrl2 tool. In the fourth phase requirements were translated into $\mu$-calculus Calculus. In the fifth phase the model was verified by translating the $\mu$-calculus Calculus from phase 4 into Modal $\mu$-Code. We feel there is a good scope to extend the system to increase the throughput and decrease the wafer transfer time. This can be done by allowing each of the robots( R1, R2) to access each of the stacks and airlocks. This would eliminate (reduce) the waiting time of the outer robots at the airlocks for a finished wafer.But this would mean increased complexity of the system. To speed up the system further, the robots can be allowed to handle two wafers at a time. This can be done by modelling the arms/hands of the robots. These extensions to the system were thought of during the project and can be the future scope of the project. 
 	\newpage
 	\appendix
 	\section{Code: mcrl2}
