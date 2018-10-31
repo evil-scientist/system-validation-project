@@ -149,11 +149,6 @@ AirlockChamber1Controller(WaferPresence : WaferType, OuterDoorState : DoorState,
 
 + ((OuterDoorState == Closed) && (InnerDoorState == Closed)) -> receiveDoorRequest(DI1,Open).sendError(DI1).AirlockChamber1Controller()
 
-+ ((OuterDoorState == Closed) && (InnerDoorState == Open)) -> receiveDoorRequest(DO1,Open).sendError(DO1).AirlockChamber1Controller()
-
-+ ((OuterDoorState == Open) && (InnerDoorState == Closed)) -> receiveDoorRequest(DI1,Open).sendError(DI1).AirlockChamber1Controller()
-
-
 %%%-----------------------------------
 
 
@@ -189,10 +184,6 @@ AirlockChamber2Controller(WaferPresence : WaferType, OuterDoorState : DoorState,
 + ((OuterDoorState == Closed) && (InnerDoorState == Closed)) -> receiveDoorRequest(DO2,Open).sendError(DO2).AirlockChamber2Controller()
 
 + ((OuterDoorState == Closed) && (InnerDoorState == Closed)) -> receiveDoorRequest(DI2,Open).sendError(DI2).AirlockChamber2Controller()
-
-+ ((OuterDoorState == Closed) && (InnerDoorState == Open)) -> receiveDoorRequest(DO2,Open).sendError(DO2).AirlockChamber2Controller()
-
-+ ((OuterDoorState == Open) && (InnerDoorState == Closed)) -> receiveDoorRequest(DI2,Open).sendError(DI2).AirlockChamber2Controller()
 
 %%%-----------------------------------------------------------------
 

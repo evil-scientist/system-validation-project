@@ -2,6 +2,7 @@
 \usepackage{graphicx}
 \usepackage{rotating}
 \usepackage{bbding}
+\usepackage{listings}% http://ctan.org/pkg/listings
 \newcommand\descitem[1]{\item{\bfseries #1}}
 \begin{document}
 	
@@ -131,8 +132,8 @@
 		\item CheckOPStackState(x,s) [x: O1, O2 ; s: Empty, Full]
 		\item CheckLampState(s) [Incomplete, Complete]
 	\end{itemize}
-		\bigskip
-
+	\bigskip
+	
 	\subsection {Communications}
 	The following are commands used by the controllers to communicate within the system. Their meaning can be interpreted as: 
 	\bigskip
@@ -173,11 +174,7 @@
 	
 	\begin{figure}[ht]
 		\centerline{
-<<<<<<< HEAD
-			\includegraphics[width=20cm, height=14cm]{Architecture(last-rot).jpg}}
-=======
-			\includegraphics[width=21cm, height=14cm]{Architecture(last-rot).jpg}}
->>>>>>> eeef9b20a14bc83f4fdd4e8e56c3e40b2f51c63b
+			\includegraphics[width=20cm, height=14cm]{Architecture(last).jpg}}
 		\caption{Architecture Diagram of System}
 		\label{fig:arch1}
 	\end{figure}
@@ -197,76 +194,43 @@
 		%2
 		\item Once a wafer is picked up from an Input Stack (I1 or I2), the next wafer from that Input Stack gets picked up only after the previous wafer has been printed and placed on the corresponding Output Stack. \textbf{[Safety]}
 		\\
-<<<<<<< HEAD
 		\\\textbf{Formula:} $[true^*.PickupWafer(R1, I1) \\.(\overline{PlaceWafer(R1,O1)}^*.PickupWafer(R1,I1)]false$ \\\textbf{Status:}Verified true.
 		\\
 		\\\textbf{Formula:} $[true^*.PickupWafer(R2, I2)
 		\\.(\overline{PlaceWafer(R2,O2)}^*.PickupWafer(R2,I2)]false$ \\\textbf{Status:}Verified true.
-=======
-		\\\textbf{Formula:} $[true*.PickupWafer(R1, I1) \\.(\overline{PlaceWafer(R1,O1)}*.PickupWafer(R1,I1)]false$ \\\textbf{Status:}Verified true.
-		\\
-		\\\textbf{Formula:} $[true*.PickupWafer(R2, I2)
-		\\.(\overline{PlaceWafer(R2,O2)}*.PickupWafer(R2,I2)]false$ \\\textbf{Status:}Verified true.
->>>>>>> eeef9b20a14bc83f4fdd4e8e56c3e40b2f51c63b
 		
 		%3
 		\item The Outer Robots (R1 and R2) should not place a wafer on the Input Stacks (I1 and I2). \textbf{[Safety]}
 		\\
-<<<<<<< HEAD
 		\\\textbf{Formula:} $[true^*. PlaceWafer(R1,I1)]false $ \\\textbf{Status:}Verified true.
 		\\
 		\\\textbf{Formula:} $[true^*. PlaceWafer(R2,I2)]false $ \\\textbf{Status:}Verified true.
-=======
-		\\\textbf{Formula:} $[true*. PlaceWafer(R1,I1)]false $ \\\textbf{Status:}Verified true.
-		\\
-		\\\textbf{Formula:} $[true*. PlaceWafer(R2,I2)]false $ \\\textbf{Status:}Verified true.
->>>>>>> eeef9b20a14bc83f4fdd4e8e56c3e40b2f51c63b
 		
 		
 		%4
 		\item The Outer Robots (R1 and R2) should not pickup a wafer from an empty Input Stack. \textbf{[Safety]}
 		\\
-<<<<<<< HEAD
 		\\\textbf{Formula:} $[true^*.  CheckIPStackState(IP1, Empty).
 		\\(\overline{CheckIPStackState(IP1, NonEmpty)}^*.PickupWafer(R1, I1)]false$ \\\textbf{Status:}Verified true.
 		\\
 		\\\textbf{Formula:} $[true^*.  CheckIPStackState(IP2, Empty).
 		\\(\overline{CheckIPStackState(IP2, NonEmpty)}^*.PickupWafer(R2, I2)]false$ \\\textbf{Status:}Verified true.
-=======
-		\\\textbf{Formula:} $[true*.  CheckIPStackState(IP1, Empty).
-		\\(\overline{CheckIPStackState(IP1, NonEmpty)}*.PickupWafer(R1, I1)]false$ \\\textbf{Status:}Verified true.
-		\\
-		\\\textbf{Formula:} $[true*.  CheckIPStackState(IP2, Empty).
-		\\(\overline{CheckIPStackState(IP2, NonEmpty)}*.PickupWafer(R2, I2)]false$ \\\textbf{Status:}Verified true.
->>>>>>> eeef9b20a14bc83f4fdd4e8e56c3e40b2f51c63b
 		
 		
 		%5
 		\item Once an \textbf{unprocessed} wafer is picked up from its Input Stack (I1 or I2) by the Outer Robots (R1 and R2), it will be placed on it's corresponding Airlock (A1 or A2). \textbf{[Liveness]}
 		\\
-<<<<<<< HEAD
 		\\\textbf{Formula:} $[true^*.PickupWafer(R1,I1)] <true^*.PlaceWafer(R1,A1)>true$ \\\textbf{Status:}Verified true.
 		\\
 		\\\textbf{Formula:} $[true^*.PickupWafer(R2,I2)] <true^*.PlaceWafer(R2,A2)>true$ \\\textbf{Status:}Verified true.
-=======
-		\\\textbf{Formula:} $[true*.PickupWafer(R1,I1)] <true*.\\PlaceWafer(R1,A1)>true$ \\\textbf{Status:}Verified true.
-		\\
-		\\\textbf{Formula:} $[true*.PickupWafer(R2,I2)] <true*.\\PlaceWafer(R2,A2)>true$ \\\textbf{Status:}Verified true.
->>>>>>> eeef9b20a14bc83f4fdd4e8e56c3e40b2f51c63b
 		
 		
 		%6
 		\item The Outer Robots (R1 and R2) must not pickup an \textbf{unprocessed} wafer from the Airlocks (AL1 and AL2). \textbf{[Safety]}
 		\\
-<<<<<<< HEAD
 		\\\textbf{Formula:} $[\overline{commWaferPresence(AL1,Finished)}^*.PickupWafer(R1,A1)]false $ \\\textbf{Status:}Verified true.
 		\\
 		\\\textbf{Formula:} $[\overline{commWaferPresence(AL2,Finished)}^*.PickupWafer(R2,A2)]false $ \\\textbf{Status:}Verified true.
-=======
-		\\\textbf{Formula:} $[\overline{commWaferPresence(AL1,Finished)}*.PickupWafer(R1,A1)]false $ \\\textbf{Status:}Verified true.
-		\\
-		\\\textbf{Formula:} $[\overline{commWaferPresence(AL2,Finished)}*.PickupWafer(R2,A2)]false $ \\\textbf{Status:}Verified true.
->>>>>>> eeef9b20a14bc83f4fdd4e8e56c3e40b2f51c63b
 		
 		
 		%7
@@ -282,27 +246,16 @@
 			\item The Outer Door (DO2) must not be opened if the Inner Door(DI2) is open for Airlock (AL2).
 		\end{enumerate}
 		
-<<<<<<< HEAD
 		\textbf{Formula:} $[true^*] \forall d: DoorID.[OpenDoor(d).
 		\\(\overline{CloseDoor(d)}^*.OpenDoor(CorrespondingDoor(d))].false$ \\\textbf{Status:}Verified true.
-=======
-		\textbf{Formula:} $[true*] \forall d: DoorID.[OpenDoor(d).
-		\\(\overline{CloseDoor(d)}*.OpenDoor(CorrespondingDoor(d))].false$ \\\textbf{Status:}Verified true.
->>>>>>> eeef9b20a14bc83f4fdd4e8e56c3e40b2f51c63b
 		
 		
 		%8
 		\item Once an \textbf{unprocessed} wafer is picked up from an Airlock by the Inner Robot (R3), the wafer will be placed on the Lamp. \textbf{[Liveness]}
 		\\
-<<<<<<< HEAD
 		\\\textbf{Formula:} $[true^*.PickupWafer(R3,A1)]<true^*.PlaceWafer(R3,Lamp)>true$ \\\textbf{Status:}Verified true.
 		\\
 		\\\textbf{Formula:} $[true^*.PickupWafer(R3,A2)] <true^*.PlaceWafer(R3,Lamp)>true$ \\\textbf{Status:}Verified true.
-=======
-		\\\textbf{Formula:} $[true*.PickupWafer(R3,A1)] <true*.\\PlaceWafer(R3,Lamp)>true$ \\\textbf{Status:}Verified true.
-		\\
-		\\\textbf{Formula:} $[true*.PickupWafer(R3,A2)] <true*.\\PlaceWafer(R3,Lamp)>true$ \\\textbf{Status:}Verified true.
->>>>>>> eeef9b20a14bc83f4fdd4e8e56c3e40b2f51c63b
 		%%%
 		%9
 		\item The Inner Robot (R3) will only pickup a \textbf{finished} i.e. printed wafer from the Lamp (L). \textbf{[Safety]}
@@ -382,6 +335,12 @@
 			\\PlaceWafer(R1, O1)] false $
 			\\\textbf{Status:}Verified true.
 			
+			
+			\item The doors should not get jammed. \textbf{[Safety]}
+			\item \textbf{Formula:} $[true^* . Requst(R1, I1) .\overline{PickupWafer(R1, A1)}^* . 
+			\\PlaceWafer(R1, O1)] false $
+			\\\textbf{Status:}Verified true.
+			
 		\end{enumerate}
 		%[true* .PickupWafer(R1, I1) .(!PickupWafer(R1, A1))* . PlaceWafer(R1, O1)] false 
 		%[true* .PickupWafer(R2, I2) .(!PickupWafer(R2, A2))* . PlaceWafer(R2, O2)] false 
@@ -411,22 +370,17 @@
 		\item The Airlocks don't have any wafer already present in them. All of the Doors of both the Airlocks are closed.
 		\item The Lamp does not have any wafer present on it.
 	\end{itemize} 
-	The Input The system currently has 87 levels, 1740 states and 3776 transitions.
+	The Input The system currently has 89 levels, 2079 states and 4740 transitions.
 	\subsection{Restrictions and Extensions}
-	We have however, restricted the controllers to only control and interact with one half of the symmetrical system. This implies that the IO Handlers and Airlock Controllers only interact with a single robot (R1 or R2), single pair of Input and Output stack (I1,O1 or I2,O2), Airlocks (AL1 or AL2) and the corresponding pair of doors (DO1,DI1 or DO2,DI2). This simplifies the system to a great extent and helps in it's modelling.
+	The system restricts the controllers to only control and interact with one half of the symmetrical system. This implies that the IO Handlers and Airlock Controllers only interact with a single robot (R1 or R2), single pair of Input and Output stack (I1,O1 or I2,O2), Airlocks (AL1 or AL2) and the corresponding pair of doors (DO1,DI1 or DO2,DI2). This simplifies the system to a great extent and helps in it's modelling.
 	\\
-<<<<<<< HEAD
-	\\There is a caveat that this simplification will reduce the throughput of the system. This happens when one of the Stacks no longer have wafers present but the other pair of stacks still do. 
+	\\There is a caveat though. This simplification will reduce the throughput of the system. This happens when one of the Stacks no longer have wafers present but the other pair of stacks still do. 
 	\\
 	\\Hence, as an extension, we have considered the possibility of the stacks being replenished. This ensures that the Robots continuously check the Input and Output stack till they are in a state where the system can proceed. Instead of dealing with the number of wafers present in the stacks, we have abstracted that away to a binary state of the stacks, that is, are usable or not. Usable here indicates different meanings for Input and Output stacks. For the Input stack we check if the stacks are Empty or Non-Empty. For the output stacks the check is performed to determine if they are Full or Not-Full. This ensures that if at any point of time the stacks are replenished (input) or cleared (output) the system will continue to work. 
 	\\
 	\\Thus, We have considered the case when the output stacks are emptied once they are full and the case when the input stacks are replenished. Our system loops around the check for the stacks to return to a workable state (Input not empty and Output not full)
 	\\
 	\\
-=======
-	\\There is a caveat that this simplification will reduce the throughput of the system. This happens when one of the Stacks no longer have wafers present but the other pair of stacks still do. Hence, as an extension, we have considered the possibility of modelling a system which will have the flexibility to move the robots to different stacks and hence increase the throughput. 
-	We have considered the case when the output stacks are emptied once they are full and the case when the input stacks are replenished. Our system loops around the check for the stacks to return to a workable state (Input not empty and Output not full)
->>>>>>> eeef9b20a14bc83f4fdd4e8e56c3e40b2f51c63b
 	\begin{figure}[ht]
 		\centering
 		\includegraphics[width=\textwidth, height=8cm]{3D-Model.png}
@@ -454,11 +408,8 @@
 	The method used for formal verification of the system requirements presented in Section 2 is converting the model to PBES and then verifying each Modal $\mu$ Formula individually. The formulae for Modal $\mu$ Calculus presented in Section 5 have been verified individually and each of the formula holds true for the model presented.
 	\subsection{Visualizations}
 	The visual representations provide an additional guide to verify that the system is, indeed, deadlock free. Figure \ref{fig:ltsview-1} shows the system when visualized with LTSView tool. The figure represents the states and transitions present in the model. Figure \ref{fig:deadlockfree} shows the model when marked for deadlocks. The absence of red dots confirms that the system is deadlock free.
-<<<<<<< HEAD
 	\\
 	\\
-=======
->>>>>>> eeef9b20a14bc83f4fdd4e8e56c3e40b2f51c63b
 	\begin{figure}[ht]
 		\centering
 		\begin{minipage}{0.45\textwidth}
@@ -546,6 +497,7 @@
 	\\
 	\\
 	\\\textbf{proc} IOHandler1(Operation : OperationType, Cycle : CycleType) = 
+	\\
 	\\((Cycle == Input) \&\& (Operation == Get)) -$>$ CheckIPStackState(IP1,Empty)
 	\\.IOHandler1(Operation = Get)
 	\\
@@ -564,12 +516,24 @@
 	\\+ ((Cycle == Output) \&\& (Operation == Get)) -$>$ receiveWaferPresence(AL1,Finished).receiveDoorState(DO1,Closed).sendDoorRequest(DO1,Open)
 	.receiveDoorState(DO1,Open).Move(R1,A1).PickupWafer(R1,A1).IOHandler1(Operation = Put)
 	\\
+	\\+ ((Cycle == Input) \&\& (Operation == Put)) -$>$ receiveError(DO1)
+	\\.sendDoorRequest(DO1,Open).IOHandler1(Operation = Put)
+	\\+ ((Cycle == Output) \&\& (Operation == Get)) -$>$ receiveError(DO1)
+	\\.sendDoorRequest(DO1,Open).IOHandler1(Operation = Get)
+	\\
+	\\+ ((Cycle == Output) \&\& (Operation == Get)) -$>$ receiveWaferPresence(AL2,NoWafer).IOHandler1(Operation = Get)
+	\\
+	\\+ ((Cycle == Output) \&\& (Operation == Get)) -$>$ (receiveWaferPresence(AL1,Finished).((receiveDoorState(DO1,Closed).sendDoorRequest(DO1,Open)
+	\\.IOHandler1(Operation = Get)) + (receiveDoorState(DO1,Open).Move(R1,A1)
+	\\.PickupWafer(R1,A1).IOHandler1(Operation = Put))))
+	\\
 	\\+ ((Cycle == Output) \&\& (Operation == Put)) -$>$ CheckOPStackState(OP1,Full)
 	\\.IOHandler1(Operation = Put)
 	\\+ ((Cycle == Output) \&\& (Operation == Put)) -$>$ CheckOPStackState(OP1,NonFull)
 	\\.Move(R1,O1).PlaceWafer(R1,O1).IOHandler1(Cycle = Input, Operation = Get);
 	\\
 	\\IOHandler2(Operation : OperationType, Cycle : CycleType) =
+	\\
 	\\((Cycle == Input) \&\& (Operation == Get)) -$>$ CheckIPStackState(IP2,Empty)
 	\\.IOHandler2(Operation = Get)
 	\\+ ((Cycle == Input) \&\& (Operation == Get)) -$>$ CheckIPStackState(IP2,NonEmpty)
@@ -579,10 +543,16 @@
 	\\+ ((Cycle == Input) \&\& (Operation == Put)) -$>$ receiveDoorState(DO2,Open)
 	\\.Move(R2,A2).PlaceWafer(R2,A2).sendWaferStatus(AL2,New).IOHandler2(Cycle = Output, Operation = Get)
 	\\
+	\\+ ((Cycle == Input) \&\& (Operation == Put)) -$>$ receiveError(DO2)
+	\\.sendDoorRequest(DO2,Open).IOHandler2(Operation = Put)
+	\\+ ((Cycle == Output) \&\& (Operation == Get)) -$>$ receiveError(DO2)
+	\\.sendDoorRequest(DO2,Open).IOHandler2(Operation = Get)
+	\\
 	\\+ ((Cycle == Output) \&\& (Operation == Get)) -$>$ receiveWaferPresence(AL2,NoWafer).IOHandler2(Operation = Get)
-	\\+ ((Cycle == Output) \&\& (Operation == Get)) -$>$ receiveWaferPresence(AL2,Finished).receiveDoorState(DO2,Closed).sendDoorRequest(DO2,Open)
-	.receiveDoorState(DO2,Open)
-	\\.Move(R2,A2).PickupWafer(R2,A2).IOHandler2(Operation = Put)
+	\\
+	\\+ ((Cycle == Output) \&\& (Operation == Get)) -$>$ (receiveWaferPresence(AL2,Finished).((receiveDoorState(DO2,Closed).sendDoorRequest(DO2,Open)
+	\\.IOHandler2(Operation = Get)) + (receiveDoorState(DO2,Open).Move(R2,A2)
+	\\.PickupWafer(R2,A2).IOHandler2(Operation = Put))))
 	\\
 	\\+ ((Cycle == Output) \&\& (Operation == Put)) -$>$ CheckOPStackState(OP2,Full)
 	\\.IOHandler2(Operation = Put)
@@ -590,7 +560,8 @@
 	\\.Move(R2,O2).PlaceWafer(R2,O2).IOHandler2(Cycle = Input, Operation = Get);
 	\\
 	\\AirlockChamber1Controller(WaferPresence : WaferType, OuterDoorState : DoorState, InnerDoorState : DoorState) =
-	((OuterDoorState == Closed) \&\& (InnerDoorState == Open)) -$>$ receiveDoorRequest(DO1,Open)
+	\\
+	\\((OuterDoorState == Closed) \&\& (InnerDoorState == Open)) -$>$ receiveDoorRequest(DO1,Open)
 	\\.AirlockChamber1Controller(InnerDoorState = Open)
 	\\
 	\\+ ((OuterDoorState == Closed) \&\& (InnerDoorState == Closed)) -$>$ receiveDoorRequest(DO1,Open)
@@ -599,6 +570,14 @@
 	\\.AirlockChamber1Controller(OuterDoorState = Open)
 	\\+ ((OuterDoorState == Closed) \&\& (InnerDoorState == Closed)) -$>$ receiveDoorRequest(DI1,Open)
 	\\.OpenDoor(DI1).AirlockChamber1Controller(InnerDoorState = Open)
+	\\
+	\\+ ((OuterDoorState == Closed) \&\& (InnerDoorState == Closed)) -$>$ receiveDoorRequest(DO1,Open).sendError(DO1).AirlockChamber1Controller()
+	\\
+	\\+ ((OuterDoorState == Closed) \&\& (InnerDoorState == Closed)) -$>$ receiveDoorRequest(DI1,Open).sendError(DI1).AirlockChamber1Controller()
+	\\
+	\\+ ((OuterDoorState == Closed) \&\& (InnerDoorState == Open)) -$>$ receiveDoorRequest(DO1,Open).sendError(DO1).AirlockChamber1Controller()
+	\\
+	\\+ ((OuterDoorState == Open) \&\& (InnerDoorState == Closed)) -$>$ receiveDoorRequest(DI1,Open).sendError(DI2).AirlockChamber1Controller()
 	\\
 	\\+ ((OuterDoorState == Open) \&\& (InnerDoorState == Closed)) -$>$ receiveWaferStatus(AL1,New).CloseDoor(DO1)
 	\\.AirlockChamber1Controller(WaferPresence = New, OuterDoorState = Closed)
@@ -609,14 +588,25 @@
 	\\+ sendWaferPresence(AL1,WaferPresence).AirlockChamber1Controller();
 	\\
 	\\AirlockChamber2Controller(WaferPresence : WaferType, OuterDoorState : DoorState, InnerDoorState : DoorState) =
-	((OuterDoorState == Closed) \&\& (InnerDoorState == Open)) -$>$ receiveDoorRequest(DO2,Open)
-	\\.AirlockChamber2Controller(InnerDoorState = Open)
-	\\+ ((OuterDoorState == Closed) \&\& (InnerDoorState == Closed)) -$>$ receiveDoorRequest(DO2,Open)
-	\\.OpenDoor(DO2).AirlockChamber2Controller(OuterDoorState = Open)
-	\\+ ((OuterDoorState == Open) \&\& (InnerDoorState == Closed)) -$>$ receiveDoorRequest(DI2,Open)
+	\\
+	\\((OuterDoorState == Closed) \&\& (InnerDoorState == Open)) -$>$ 
+	\\receiveDoorRequest(DO2,Open).AirlockChamber2Controller(InnerDoorState = Open)
+	\\+ ((OuterDoorState == Closed) \&\& (InnerDoorState == Closed)) -$>$ 
+	\\receiveDoorRequest(DO2,Open).OpenDoor(DO2)
 	\\.AirlockChamber2Controller(OuterDoorState = Open)
-	\\+ ((OuterDoorState == Closed) \&\& (InnerDoorState == Closed)) -$>$ receiveDoorRequest(DI2,Open)
-	\\.OpenDoor(DI2).AirlockChamber2Controller(InnerDoorState = Open)
+	\\+ ((OuterDoorState == Open) \&\& (InnerDoorState == Closed)) -$>$ \\receiveDoorRequest(DI2,Open)
+	\\.AirlockChamber2Controller(OuterDoorState = Open)
+	\\+ ((OuterDoorState == Closed) \&\& (InnerDoorState == Closed)) -$>$ 
+	\\receiveDoorRequest(DI2,Open).OpenDoor(DI2)
+	\\.AirlockChamber2Controller(InnerDoorState = Open)
+	\\
+	\\+ ((OuterDoorState == Closed) \&\& (InnerDoorState == Closed)) -$>$ receiveDoorRequest(DO2,Open).sendError(DO2).AirlockChamber2Controller()
+	\\
+	\\+ ((OuterDoorState == Closed) \&\& (InnerDoorState == Closed)) -$>$ receiveDoorRequest(DI2,Open).sendError(DI2).AirlockChamber2Controller()
+	\\
+	\\+ ((OuterDoorState == Closed) \&\& (InnerDoorState == Open)) -$>$ receiveDoorRequest(DO2,Open).sendError(DO2).AirlockChamber2Controller()
+	\\
+	\\+ ((OuterDoorState == Open) \&\& (InnerDoorState == Closed)) -$>$ receiveDoorRequest(DI2,Open).sendError(DI2).AirlockChamber2Controller()
 	\\
 	\\+ ((OuterDoorState == Open) \&\& (InnerDoorState == Closed)) -$>$ receiveWaferStatus(AL2,New).CloseDoor(DO2)
 	\\.AirlockChamber2Controller(WaferPresence = New, OuterDoorState = Closed)
@@ -632,23 +622,30 @@
 	\\+ ((Cycle == Input) \&\& (CurrentAirlock == AL1)) -$>$ receiveDoorState(DI1,Closed)
 	\\.sendDoorRequest(DI1,Open).LampWaferHandler(CurrentAirlock = AL1)
 	\\+ ((Cycle == Input) \&\& (CurrentAirlock == AL1)) -$>$ receiveDoorState(DI1,Open)
-	\\.Move(R3,A1).PickupWafer(R3,A1).Move(R3,Lamp).PlaceWafer(R3,Lamp).LampWaferHandler(Cycle = Output)
+	\\.Move(R3,A1).PickupWafer(R3,A1).Move(R3,Lamp).PlaceWafer(R3,Lamp)
+	\\.LampWaferHandler(Cycle = Output)
+	\\
+	\\ + ((Cycle == Input) \&\& (CurrentAirlock == AL1)) -$>$ receiveError(DI1)
+	\\.sendDoorRequest(DI1,Open).LampWaferHandler(CurrentAirlock = AL1)
+	\\
+	\\ + ((Cycle == Input) \&\& (CurrentAirlock == AL2)) -$>$ receiveError(DI2)
+	\\.sendDoorRequest(DI2,Open).LampWaferHandler(CurrentAirlock = AL2)
 	\\
 	\\+ ((Cycle == Output) \&\& (CurrentAirlock == AL1)) -$>$ CheckLampState(Incomplete).LampWaferHandler(Cycle = Output)
 	\\
 	\\+ ((Cycle == Output) \&\& (CurrentAirlock == AL1)) -$>$ CheckLampState(Complete).Move(R3,Lamp).PickupWafer(R3,Lamp)
-	\\.Move(R3,A1).PlaceWafer(R3,A1).sendWaferStatus(AL1,Finished).LampWaferHandler(Cycle = Input, CurrentAirlock = None)
+	\\.Move(R3,A1).PlaceWafer(R3,A1).sendWaferStatus(AL1,Finished)
+	\\.LampWaferHandler(Cycle = Input, CurrentAirlock = None)
 	\\
 	\\+ ((Cycle == Input) \&\& (CurrentAirlock == None)) -$>$ receiveWaferPresence(AL2,New).LampWaferHandler(CurrentAirlock = AL2)
 	\\
 	\\+ ((Cycle == Input) \&\& (CurrentAirlock == AL2)) -$>$ receiveDoorState(DI2,Closed)
 	\\.sendDoorRequest(DI2,Open).LampWaferHandler(CurrentAirlock = AL2)
 	\\
-	\\+ ((Cycle == Input) \&\& (CurrentAirlock == AL2)) -$>$ receiveDoorState(DI2,Open)\\.Move(R3,A2).PickupWafer(R3,A2).Move(R3,Lamp).PlaceWafer(R3,Lamp).LampWaferHandler(Cycle = Output)
+	\\+ ((Cycle == Input) \&\& (CurrentAirlock == AL2)) -$>$ receiveDoorState(DI2,Open)\\.Move(R3,A2).PickupWafer(R3,A2).Move(R3,Lamp).PlaceWafer(R3,Lamp)
+	\\.LampWaferHandler(Cycle = Output)
 	\\
 	\\+ ((Cycle == Output) \&\& (CurrentAirlock == AL2)) -$>$ CheckLampState(Incomplete).LampWaferHandler(Cycle = Output)
-	\\
-	\\
 	\\
 	\\
 	\\+ ((Cycle == Output) \&\& (CurrentAirlock == AL2)) -$>$ CheckLampState(Complete).Move(R3,Lamp).PickupWafer(R3,Lamp).Move(R3,A2).PlaceWafer(R3,A2)
@@ -666,6 +663,7 @@
 		\\						 OpenDoor,
 		\\						 CloseDoor,
 		\\
+		\\                       commError,	
 		\\						 commDoorState,
 		\\						 commDoorRequest,
 		\\						 commWaferStatus,
@@ -675,7 +673,8 @@
 	\\						{receiveDoorState $|$ sendDoorState -$>$ commDoorState,
 		\\						receiveDoorRequest $|$ sendDoorRequest -$>$ commDoorRequest,
 		\\	  				 	receiveWaferStatus $|$ sendWaferStatus -$>$ commWaferStatus,
-		\\				 	   receiveWaferPresence $|$ sendWaferPresence -$>$ commWaferPresence},
+		\\				 	   receiveWaferPresence $|$ sendWaferPresence -$>$ commWaferPresence
+		\\ receiveError $|$ sendError -$>$ commError },
 	\\
 	\\						 IOHandler1(Get, Input) $|$ $|$ IOHandler2(Get, Input) $|$ $|$ AirlockChamber1Controller(NoWafer, Closed, Closed) $|$ $|$ AirlockChamber2Controller(NoWafer, Closed, Closed) $|$ $|$ LampWaferHandler(Input,None)
 	\\					 ));
