@@ -60,6 +60,9 @@ Clone the repository on to your machine, install mcrl2 and run the Makefile as i
 ## Authors
 
 * **Suryansh Sharma** - [TU Delft](https://github.com/evil-scientist)
+* **Suhail Nogd** - [TU Delft](https://github.com/SuhailN)
+* **Snehal Jauhri** - [TU Delft](https://github.com/sjauhri)
+* **Apoorva Arora** - [TU Delft](https://github.com/apoorvaarora79)
 
 The list of [contributors](https://github.com/evil-scientist/system-validation-project/contributors) who participated in this project.
 
