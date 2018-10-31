@@ -1,6 +1,6 @@
 ## Wafer Production System : Modelling and Verification
 
-Present here are files created as part of the System Validation project for Q1 2018-19 by @evil0-scientist, @ .
+Present here are files created as part of the System Validation project for Q1 2018-19 by @evil-scientist and team.
 The aim of the project is to design, verify and test a controller for Industrial transfer system for silicon wafers
 
 ## Getting Started
