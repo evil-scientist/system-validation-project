@@ -5,10 +5,11 @@
 \usepackage{listings}% http://ctan.org/pkg/listings
 \newcommand\descitem[1]{\item{\bfseries #1}}
 \begin{document}
-	
-	\title{System Validation Project Report}
+	\begin{titlepage}
+	\title{System Validation [IN4387] \\Project Report}
 	\author{
-		Suryansh Sharma \\ 
+	    Group 1
+		\\Suryansh Sharma \\ 
 		\texttt{S.sharma-13@student.tudelft.nl}
 		\and 
 		Snehal Jauhri \\
@@ -20,10 +21,18 @@
 		Apoorva Arora\\
 		\texttt{A.Arora-1@student.tudelft.nl} 
 	}
-	
 	\date {\today}
+	\clearpage
 	\maketitle
+    \begin{figure}[ht]
+		\centerline{
+			\includegraphics[width=0.55\textwidth, ]{cover.png}}
+	\end{figure}
+	
+    \thispagestyle{empty}
+	\end{titlepage}
 	\newpage
+	
 	\tableofcontents
 	
 	\newpage
@@ -390,13 +399,12 @@
 	\\There is a caveat though. This simplification will reduce the throughput of the system. This happens when one of the Stacks no longer have wafers present but the other pair of stacks still do. 
 	\\
 	\\Hence, as an extension, we have considered the possibility of the stacks being replenished. This ensures that the Robots continuously check the Input and Output stack till they are in a state where the system can proceed. Instead of dealing with the number of wafers present in the stacks, we have abstracted that away to a binary state of the stacks, that is, are usable or not. Usable here indicates different meanings for Input and Output stacks. For the Input stack we check if the stacks are Empty or Non-Empty. For the output stacks the check is performed to determine if they are Full or Not-Full. This ensures that if at any point of time the stacks are replenished (input) or cleared (output) the system will continue to work. 
-	\\
-	\\Thus, We have considered the case when the output stacks are emptied once they are full and the case when the input stacks are replenished. Our system loops around the check for the stacks to return to a workable state (Input not empty and Output not full)
-	\\
+	\par Thus, We have considered the case when the output stacks are emptied once they are full and the case when the input stacks are replenished. Our system loops around the check for the stacks to return to a workable state (Input not empty and Output not full)	
+	\par Another extension we came up with was a condition where the door failed to open after a  request from the IO Handler or the Lamp Wafer Handler. We added an error communication from the Airlock Controller to the requester in this case and modeled our system to retry opening the door in such a case. This guards against a deadlock due to cases such as the door being jammed while opening etc.
 	\\
 	\begin{figure}[ht]
 		\centering
-		\includegraphics[width=\textwidth, height=8cm]{3D-Model.png}
+		\includegraphics[width=\textwidth, height=6cm]{3D-Model.png}
 		\caption{LTSView of the System}
 		\label{fig:ltsview}
 	\end{figure}
@@ -439,7 +447,11 @@
 	\end{figure}
 	\newpage
 	\section{Conclusion and Future Work}
-	As part of the given assignment, we have modelled a Wafer production system as described in the assignment prompt. This project consisted of multiple phases. In the first phase the system components were determined and requirements were formalized. In the second phase the interactions between the systems and the communications between different controllers were defined. Based on the system components along with the formulated requirements and interactions an architecture was developed. The third phase involved modelling with the mcrl2 tool. In the fourth phase requirements were translated into $\mu$-calculus Calculus. In the fifth phase the model was verified by translating the $\mu$-calculus Calculus from phase 4 into Modal $\mu$-Code. We feel there is a good scope to extend the system to increase the throughput and decrease the wafer transfer time. This can be done by allowing each of the robots( R1, R2) to access each of the stacks and airlocks. This would eliminate (reduce) the waiting time of the outer robots at the airlocks for a finished wafer.But this would mean increased complexity of the system. To speed up the system further, the robots can be allowed to handle two wafers at a time. This can be done by modelling the arms/hands of the robots. These extensions to the system were thought of during the project and can be the future scope of the project. 
+	As part of the given assignment, we have modelled a Wafer production system as described in the assignment prompt. This project consisted of multiple phases. 
+	\\
+	\\In the first phase the system components were determined and requirements were formalized. In the second phase the interactions between the systems and the communications between different controllers were defined. Based on the system components along with the formulated requirements and interactions an architecture was developed. The third phase involved modelling with the mcrl2 tool. In the fourth phase requirements were translated into $\mu$-calculus Calculus. In the fifth phase the model was verified by translating the $\mu$-calculus Calculus from phase 4 into Modal $\mu$-Code. 
+	\\
+	\\We feel there is a good scope to extend the system to increase the throughput and decrease the wafer transfer time. This can be done by allowing each of the robots( R1, R2) to access each of the stacks and airlocks. This would eliminate (reduce) the waiting time of the outer robots at the airlocks for a finished wafer.But this would mean increased complexity of the system. To speed up the system further, the robots can be allowed to handle two wafers at a time. This can be done by modelling the arms/hands of the robots. These extensions to the system were thought of during the project and can be the future scope of the project. 
 	\newpage
 	\appendix
 	\section{Code: mcrl2}

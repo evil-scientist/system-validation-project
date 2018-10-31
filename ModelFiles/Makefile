@@ -1,6 +1,5 @@
 
 FILES = \
-	WPS_original.lts \
 	WPS_e.lts
 
 TESTS = \
@@ -35,14 +34,11 @@ TESTS = \
 all: $(FILES)
 tests: $(TESTS)
 
-graph: WPS_original.graph
-graph-e: WPS_e.graph
+graph: WPS_e.graph
 
-sim: WPS_original.sim
-sim-e: WPS_e.sim
+sim: WPS_e.sim
 
-view: WPS_original.view
-view-e: WPS_e.view
+view: WPS_e.view
 
 %.lps: %.mcrl2
 	mcrl22lps $< $@
@@ -50,8 +46,6 @@ view-e: WPS_e.view
 %.lts: %.lps
 	lps2lts $< $@
 
-WPS_original.lts: WPS_original.lps
-	lps2lts -rjittyc -v $< $@
 WPS_e.lts: WPS_e.lps
 	lps2lts -rjittyc -v $< $@
 
