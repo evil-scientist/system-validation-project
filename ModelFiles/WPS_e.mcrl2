@@ -95,7 +95,6 @@ IOHandler1(Operation : OperationType, Cycle : CycleType) =
 
 + ((Cycle == Output) && (Operation == Get)) -> (receiveWaferPresence(AL1,Finished).((receiveDoorState(DO1,Closed).sendDoorRequest(DO1,Open).IOHandler1(Operation = Get)) + (receiveDoorState(DO1,Open).Move(R1,A1).PickupWafer(R1,A1).IOHandler1(Operation = Put))))
 
-
 %Check -----------------------------------------------------------------------------------------
 + ((Cycle == Output) && (Operation == Put)) -> CheckOPStackState(OP1,Full).IOHandler1(Operation = Put)
 
