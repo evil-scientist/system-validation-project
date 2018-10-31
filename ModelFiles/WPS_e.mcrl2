@@ -80,7 +80,7 @@ IOHandler1(Operation : OperationType, Cycle : CycleType) =
 
 + ((Cycle == Input) && (Operation == Put)) -> receiveDoorState(DO1,Closed).sendDoorRequest(DO1,Open).IOHandler1(Operation = Put)
 
-%%%%-----------------CHECKING ERROR----------------------------------
+%%%%-----------------GETTING ERROR----------------------------------
 + ((Cycle == Input) && (Operation == Put)) -> receiveError(DO1).sendDoorRequest(DO1,Open).IOHandler1(Operation = Put)
 
 + ((Cycle == Output) && (Operation == Get)) -> receiveError(DO1).sendDoorRequest(DO1,Open).IOHandler1(Operation = Get)
@@ -116,7 +116,7 @@ IOHandler2(Operation : OperationType, Cycle : CycleType) =
 + ((Cycle == Input) && (Operation == Put)) -> receiveDoorState(DO2,Open).Move(R2,A2).PlaceWafer(R2,A2).sendWaferStatus(AL2,Unprocessed).IOHandler2(Cycle = Output, Operation = Get)
 
 
-%%%%-----------------CHECKING ERROR----------------------------------
+%%%%-----------------GETTING ERROR----------------------------------
 + ((Cycle == Input) && (Operation == Put)) -> receiveError(DO2).sendDoorRequest(DO2,Open).IOHandler2(Operation = Put)
 
 + ((Cycle == Output) && (Operation == Get)) -> receiveError(DO2).sendDoorRequest(DO2,Open).IOHandler2(Operation = Get)
@@ -130,7 +130,6 @@ IOHandler2(Operation : OperationType, Cycle : CycleType) =
 
 + ((Cycle == Output) && (Operation == Get)) -> (receiveWaferPresence(AL2,Finished).((receiveDoorState(DO2,Closed).sendDoorRequest(DO2,Open).IOHandler2(Operation = Get)) + (receiveDoorState(DO2,Open).Move(R2,A2).PickupWafer(R2,A2).IOHandler2(Operation = Put))))
 
-%+ ((Cycle == Output) && (Operation == Get)) -> receiveWaferPresence(AL2,Finished).receiveDoorState(DO2,Open).Move(R2,A2).PickupWafer(R2,A2).IOHandler2(Operation = Put)
 %Check -----------------------------------------------------------------------------------------
 + ((Cycle == Output) && (Operation == Put)) -> CheckOPStackState(OP2,Full).IOHandler2(Operation = Put)
 
@@ -146,7 +145,7 @@ AirlockChamber1Controller(WaferPresence : WaferType, OuterDoorState : DoorState,
 
 + ((OuterDoorState == Closed) && (InnerDoorState == Closed)) -> receiveDoorRequest(DO1,Open).OpenDoor(DO1).AirlockChamber1Controller(OuterDoorState = Open)
 
-%%%%CHECKING ERROR%%%%
+%%%%%%%%-----------------SENDING ERROR----------------------------------
 + ((OuterDoorState == Closed) && (InnerDoorState == Closed)) -> receiveDoorRequest(DO1,Open).sendError(DO1).AirlockChamber1Controller()
 
 + ((OuterDoorState == Closed) && (InnerDoorState == Closed)) -> receiveDoorRequest(DI1,Open).sendError(DI1).AirlockChamber1Controller()
@@ -187,7 +186,7 @@ AirlockChamber2Controller(WaferPresence : WaferType, OuterDoorState : DoorState,
 
 + ((OuterDoorState == Closed) && (InnerDoorState == Closed)) -> receiveDoorRequest(DI2,Open).OpenDoor(DI2).AirlockChamber2Controller(InnerDoorState = Open)
 
-%%%%CHECKING ERROR%%%%
+%%%%-----------------SENDING ERROR----------------------------------
 + ((OuterDoorState == Closed) && (InnerDoorState == Closed)) -> receiveDoorRequest(DO2,Open).sendError(DO2).AirlockChamber2Controller()
 
 + ((OuterDoorState == Closed) && (InnerDoorState == Closed)) -> receiveDoorRequest(DI2,Open).sendError(DI2).AirlockChamber2Controller()
@@ -196,7 +195,7 @@ AirlockChamber2Controller(WaferPresence : WaferType, OuterDoorState : DoorState,
 
 + ((OuterDoorState == Open) && (InnerDoorState == Closed)) -> receiveDoorRequest(DI2,Open).sendError(DI2).AirlockChamber2Controller()
 
-%%%-----------------------------------
+%%%-----------------------------------------------------------------
 
 %Check -----------------------------------------------------------------------------------------
 + ((OuterDoorState == Open) && (InnerDoorState == Closed)) -> receiveWaferStatus(AL2,Unprocessed).CloseDoor(DO2).AirlockChamber2Controller(WaferPresence = Unprocessed, OuterDoorState = Closed)
@@ -222,7 +221,7 @@ LampWaferHandler(Cycle : CycleType, CurrentAirlock : AirlockID) =
 
 + ((Cycle == Input) && (CurrentAirlock == AL1)) -> receiveDoorState(DI1,Open).Move(R3,A1).PickupWafer(R3,A1).Move(R3,Lamp).PlaceWafer(R3,Lamp).LampWaferHandler(Cycle = Output)
 
-%%%%-----------------CHECKING ERROR----------------------------------
+%%%%-----------------GETTING ERROR----------------------------------
 + ((Cycle == Input) && (CurrentAirlock == AL1)) -> receiveError(DI1).sendDoorRequest(DI1,Open).LampWaferHandler(CurrentAirlock = AL1)
 
 + ((Cycle == Input) && (CurrentAirlock == AL2)) -> receiveError(DI2).sendDoorRequest(DI2,Open).LampWaferHandler(CurrentAirlock = AL2)
