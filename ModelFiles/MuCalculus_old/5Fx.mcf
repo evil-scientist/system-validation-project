@@ -1,2 +1,0 @@
-[true*] forall d : DestinationID.[MoveTo(I1).(MoveTo(d)* && PlaceWafer)] false
-
